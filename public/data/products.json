@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "bamboo-plant-pot",
+    "title": "Big Bamboo Household Standing Plant Pot",
+    "price": "2,300",
+    "category": "Home & Garden",
+    "images": [
+      "/images/big-red.png",
+      "/images/big-yellow.png",
+      "/images/big-white.png"
+    ],
+    "extraImage": "/images/b-port.jpg",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "description": "This beautiful Big Bamboo Pot is perfect for both indoor and outdoor settings. Handcrafted for elegance and durability."
+  },
+  {
+    "slug": "wall-decor",
+    "title": "Bamboo Wall Hanging Decor",
+    "price": "1,800",
+    "category": "Home Decor",
+    "images": [
+      "/images/b-g1.png",
+      "/images/b-g2.png",
+      "/images/b-g3.png"
+    ],
+    "extraImage": "/images/b-port1.jpg",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "description": "Elevate your walls with eco-friendly bamboo hanging art. Perfect for homes, kitchens, bedrooms, and offices."
+  }
+] 
