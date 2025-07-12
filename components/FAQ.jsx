@@ -71,7 +71,7 @@ const FAQSection = () => {
               </motion.div>
             </div>
 
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {openIndex === index && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}

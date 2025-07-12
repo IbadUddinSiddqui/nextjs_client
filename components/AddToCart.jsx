@@ -15,6 +15,8 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 
+const SHOPIFY_DOMAIN = "ecobambo.com";
+
 const AddToCart = ({ product, selectedVariant }) => {
   const [quantity, setQuantity] = useState(1);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,6 +30,34 @@ const AddToCart = ({ product, selectedVariant }) => {
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };
+
+  const handleAddToCart = () => {
+    if (!selectedVariant) {
+      alert('Please select a variant first');
+      return;
+    }
+    
+    if (!selectedVariant.id) {
+      alert('Variant information is missing. Please try refreshing the page.');
+      return;
+    }
+    
+    try {
+      // Shopify variant ID is the last part after 'gid://shopify/ProductVariant/'
+      const shopifyVariantId = selectedVariant.id.split('/').pop();
+      if (!shopifyVariantId) {
+        alert('Invalid variant ID. Please try refreshing the page.');
+        return;
+      }
+      const cartUrl = `https://${SHOPIFY_DOMAIN}/cart/${shopifyVariantId}:${quantity}`;
+      window.location.href = cartUrl;
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Error adding to cart. Please try again.');
+    }
+  };
+
+  const handleOrderNow = handleAddToCart;
 
   return (
     <>
@@ -54,12 +84,18 @@ const AddToCart = ({ product, selectedVariant }) => {
 
         {/* Add to Cart & Order Now Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          <button className="bg-black text-[#B8860B] py-3 px-4 hover:text-white rounded flex items-center justify-center gap-2 w-full transition-transform duration-200 hover:scale-105">
+          <button 
+            onClick={handleAddToCart}
+            className="bg-black text-[#B8860B] py-3 px-4 hover:text-white rounded flex items-center justify-center gap-2 w-full transition-transform duration-200 hover:scale-105"
+          >
             <FaShoppingCart />
             Add to Cart
           </button>
 
-          <button className="border border-[#B8860B] bg-black hover:text-white text-[#B8860B] py-3 px-4 rounded flex items-center justify-center gap-2 w-full animate-float">
+          <button 
+            onClick={handleOrderNow}
+            className="border border-[#B8860B] bg-black hover:text-white text-[#B8860B] py-3 px-4 rounded flex items-center justify-center gap-2 w-full animate-float"
+          >
             <FaShoppingBag />
             Order Now
           </button>
@@ -271,7 +307,8 @@ Bamboohandicrafts, Near PSO Petrol Pump Chakian, Shop Number 35, Karkhane Wali A
 We are happy to assist you! </p>
           </div>
         </div>
-      )}
+      )
+      }
     </>
   );
 };

@@ -1,14 +1,10 @@
-/* Copied from src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* TextSlider Styles */
 .text-slider-wrapper {
   overflow: hidden;
   white-space: nowrap;
-  width: 100%;
-  padding: 10px 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 15px 0;
+  background-color: #000000;
 }
 
 .text-slider-track {
@@ -23,7 +19,7 @@
   font-size: 20px;
   font-weight: 600;
   font-family: DM Sans, sans-serif;
-  color: #000000;
+  color: #FFD700; /* Golden color */
   margin-right: 24px;
   white-space: nowrap;
 }
@@ -32,6 +28,7 @@
   width: 22px;
   height: 22px;
   margin-left: 12px;
+  filter: brightness(0) saturate(100%) invert(83%) sepia(31%) saturate(638%) hue-rotate(359deg) brightness(103%) contrast(107%); /* Make icon golden */
 }
 
 /* 🔁 New keyframe for right direction */
@@ -42,20 +39,6 @@
   100% {
     transform: translateX(0%);
   }
-}
-
-/* Tutorial Section Marquee Animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 20s linear infinite;
 }
 
 /* 🔽 Responsive Adjustments */
@@ -72,7 +55,7 @@
   }
 
   .text-slider-wrapper {
-    padding: 6px 0;
+    padding: 10px 0;
   }
 }
 
@@ -87,4 +70,4 @@
     height: 12px;
     margin-left: 6px;
   }
-}
+} 

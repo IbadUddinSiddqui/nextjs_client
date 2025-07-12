@@ -3,43 +3,85 @@ import Typewriter from "typewriter-effect";
 import { FiShoppingBag } from "react-icons/fi";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-
-const products = [
-  {
-    title: "Bamboo Hanging Art" ,
-     description: "Eco-friendly wall decor with a natural rustic feel perfect for any space.",
-    image: "/images/f-slide1.png",
-  },
-  {
-    title: "Indoor Plant Pot",
-    description: "Elegant handcrafted bamboo pot for modern interiors and gardens.",
-    image: "/images/f-slide2.png",
-  },
-  {
-    title: "Hanging Swing Chair",
-    description: "Comfortable swing chair with bamboo elements, perfect for outdoors.",
-    image: "/images/f-slide3.png",
-  },
-  {
-    title: "Bubble Hanging Chair",
-    description: "Modern clear bubble chair that fits perfectly in minimalistic homes.",
-    image: "/images/f-slide4.png",
-  },
-  {
-    title: "Wooden Plant Stand",
-    description: "Space-saving wooden stand for indoor and outdoor use.",
-    image: "/images/f-slide5.png",
-  },
-  {
-    title: "Bamboo Floor Lamp",
-    description: "Ambient bamboo lighting piece that enhances earthy aesthetics.",
-    image: "/images/f-slide6.png",
-  },
-];
+import Link from "next/link";
+import { shopifyFetch } from "../lib/shopify";
 
 const FSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // GraphQL query to fetch products
+  const PRODUCTS_QUERY = `
+    query GetPopularProducts($first: Int!) {
+      products(first: $first, sortKey: BEST_SELLING) {
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+            images(first: 1) {
+              edges {
+                node {
+                  src
+                  altText
+                }
+              }
+            }
+            variants(first: 1) {
+              edges {
+                node {
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+            tags
+            productType
+          }
+        }
+      }
+    }
+  `;
+
+  // Fetch products from Shopify
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await shopifyFetch({
+          query: PRODUCTS_QUERY,
+          variables: { first: 12 },
+        });
+        
+        const fetchedProducts = data.products.edges.map(edge => ({
+          id: edge.node.id,
+          title: edge.node.title,
+          handle: edge.node.handle,
+          description: edge.node.description,
+          image: edge.node.images.edges[0]?.node.src || "/images/placeholder.jpg",
+          altText: edge.node.images.edges[0]?.node.altText || edge.node.title,
+          price: edge.node.variants.edges[0]?.node.priceV2.amount || "N/A",
+          currency: edge.node.variants.edges[0]?.node.priceV2.currencyCode || "",
+          tags: edge.node.tags,
+          productType: edge.node.productType
+        }));
+        
+        setProducts(fetchedProducts);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Dynamically detect screen size
   useEffect(() => {
@@ -67,6 +109,27 @@ const FSlider = () => {
   };
 
   const visibleItems = products.slice(currentIndex, currentIndex + itemsPerPage);
+
+  if (loading) {
+    return (
+      <section className="bg-gray-50 py-12 px-4 relative">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading popular products...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="bg-gray-50 py-12 px-4 relative">
+        <div className="text-center text-red-600">
+          <p>Error loading products: {error}</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-gray-50 py-12 px-4 relative">
@@ -113,59 +176,100 @@ const FSlider = () => {
 
       {/* Product Slider with AnimatePresence */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           {visibleItems.map((product, index) => (
             <motion.div
-              key={product.image} // unique per product
+              key={product.id}
               className="rounded-xl overflow-hidden shadow group relative transition"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Mobile arrows (inside image) */}
-              <div className="relative h-56 w-full overflow-hidden group">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-full object-cover"
-                />
+              {/* Product Image with Link */}
+              <Link href={`/products/${product.handle}`}>
+                <div className="relative h-56 w-full overflow-hidden group cursor-pointer">
+                  <img
+                    src={product.image}
+                    alt={product.altText}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
 
-                {/* Mobile buttons on image */}
-                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 sm:hidden z-10">
-                  <button
-                    onClick={handlePrev}
-                    className="bg-white/70 text-black p-1 rounded-full shadow"
-                    disabled={currentIndex === 0}
-                  >
-                    <FaChevronLeft />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="bg-white/70 text-black p-1 rounded-full shadow"
-                    disabled={currentIndex + itemsPerPage >= products.length}
-                  >
-                    <FaChevronRight />
-                  </button>
+                  {/* Mobile buttons on image */}
+                  <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 sm:hidden z-10">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePrev();
+                      }}
+                      className="bg-white/70 text-black p-1 rounded-full shadow"
+                      disabled={currentIndex === 0}
+                    >
+                      <FaChevronLeft />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNext();
+                      }}
+                      className="bg-white/70 text-black p-1 rounded-full shadow"
+                      disabled={currentIndex + itemsPerPage >= products.length}
+                    >
+                      <FaChevronRight />
+                    </button>
+                  </div>
+
+                  {/* Add to Cart button */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button 
+                      className="bg-black text-white px-4 py-1 rounded-[20px] text-sm flex items-center gap-2 hover:bg-white hover:text-black border hover:border-black"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        // Add to cart functionality can be implemented here
+                      }}
+                    >
+                      <FiShoppingBag className="text-base" />
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
+              </Link>
 
-                {/* Add to Cart button */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-300">
-                  <button className="bg-black text-white px-4 py-1 rounded-[20px] text-sm flex items-center gap-2 hover:bg-white hover:text-black border hover:border-black">
-                    <FiShoppingBag className="text-base" />
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-
-              {/* Description */}
+              {/* Product Info */}
               <div className="p-3">
-                <p className="text-sm text-gray-800 line-clamp-1">{product.description}</p>
+                <Link href={`/products/${product.handle}`}>
+                  <h3 className="text-sm font-semibold text-gray-800 mb-1 line-clamp-1 hover:text-blue-600 transition-colors">
+                    {product.title}
+                  </h3>
+                </Link>
+                <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                  {product.description}
+                </p>
+                <p className="text-sm font-bold text-green-600">
+                  {product.currency} {product.price}
+                </p>
+                {product.productType && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    {product.productType}
+                  </p>
+                )}
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
       </div>
+
+      {/* Show more products button */}
+      {products.length > 0 && (
+        <div className="text-center mt-8">
+          <Link 
+            href="/"
+            className="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            View All Products
+          </Link>
+        </div>
+      )}
     </section>
   );
 };

@@ -1,41 +1,83 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Node modules and build
+node_modules/
+dist/
+.next/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# testing
-/coverage
+# Data analysis and extraction scripts
+extract-4-products-tutorials.js
+analyze-products.js
+analyze-specific-products.js
+analyze-specific-products-from-data.js
+analyze-ui-templates.js
+api-data-overview.js
+check-api-consistency.js
+check-specific-products.js
+comprehensive-product-query.js
+count-slugs.js
+create-product-data-json.js
+deep-pattern-and-video-search.js
+deep-video-search.js
+fetch-all-products.js
+fetch-products.js
+search-tutorial-data.js
+test-api.js
+test-products.js
+fetch-tutorial-data.js
+extract-tutorial-content.js
+extract-tutorial-content-advanced.js
+create-dynamic-tutorial-system.js
+create-tutorial-component.js
 
-# next.js
-/.next/
-/out/
+# Data analysis and extraction outputs
+extracted-tutorial-*.json
+extracted-4-products-tutorials.json
+slug-analysis.json
+ui-template-analysis.json
+all-products.json
+complete-product-data.json
+products.json
+tutorial-data.json
+react-component-data.json
+react-component-data-advanced.json
+extracted-tutorial-data.json
+extracted-tutorial-data-advanced.json
+clean-tutorial-data.json
+product-handles.txt
 
-# production
-/build
+# Documentation and summaries
+tutorial-system-summary.md
+template-assignment-summary.md
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Logs and temporary files
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+lerna-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# vercel
-.vercel
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Build outputs
+out/
+build/
