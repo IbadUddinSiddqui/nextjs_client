@@ -269,12 +269,7 @@ export default function ProductPage() {
       {/* Related Products Section */}
       <RelatedProducts currentProduct={product} />
 
-      {/* Dynamic Tutorial Section - Only shows for specific products */}
-      <DynamicTutorialSection 
-        productHandle={product.handle} 
-        productTitle={product.title}
-        showPromotions={true}
-      />
+     
 
       {/* Additional Sections */}
       <PromoBanner />
