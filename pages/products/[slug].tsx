@@ -13,6 +13,7 @@ import FSlider from "../../components/FSlider";
 import FeatureHighlights from "../../components/FeatureHighlights";
 import RelatedProducts from "../../components/RelatedProducts";
 import { FaShippingFast } from "react-icons/fa";
+import DownloadGuide from "../../components/GuideImage";
 
 interface ProductImage {
   src: string;
@@ -100,6 +101,17 @@ export default function ProductPage() {
 
   useEffect(() => {
     if (!slug) return;
+    // Redirect if not one of the 4 special slugs
+    const specialSlugs = [
+      "large-bamboo-standing-plant-pot-unique-affordable",
+      "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot",
+      "1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas",
+      "small-bamboo-hanging-with-stand-stylish-home-wall-art-decor"
+    ];
+    if (!specialSlugs.includes(typeof slug === "string" ? slug : "")) {
+      window.location.href = "https://ecobambo.com/products/large-bamboo-standing-plant-pot-unique-affordable";
+      return;
+    }
     setLoading(true);
     shopifyFetch({
       query: PRODUCT_QUERY,
@@ -191,7 +203,7 @@ export default function ProductPage() {
 
   return (
     <div className="w-full max-w-[100vw] overflow-x-hidden">
-      {/* Top Product Banner Image for Tutorial Products Only */}
+      {/* Top Product Banner Image for Special Products Only */}
       {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
           <img
@@ -232,7 +244,8 @@ export default function ProductPage() {
           />
         </div>
       )}
-
+      {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
+      
       {/* Main Product Detail Section */}
       <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {/* Left - ImageSlider */}
@@ -306,8 +319,16 @@ export default function ProductPage() {
             {/* Add to Cart Component */}
             <AddToCart product={productData} selectedVariant={selectedVariant} />
           </div>
+          
         </div>
       </div>
+      {["large-bamboo-standing-plant-pot-unique-affordable", "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot", "1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas", "small-bamboo-hanging-with-stand-stylish-home-wall-art-decor"].includes(product.handle) && (
+        <>
+          <DynamicTutorialSection productHandle={product.handle} productTitle={product.title} />
+          <DownloadGuide />
+        </>
+      )}
+
 
       {/* Accordion Section */}
       <Accordion />

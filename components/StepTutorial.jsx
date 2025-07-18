@@ -48,7 +48,7 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
             width: isVisible ? 28 : 20,
             height: isVisible ? 28 : 20,
             fontSize: "0.75rem",
-            color: "#B8860B",
+            color: "rgb(184,134,11,1)",
           }}
         >
           {index + 1}

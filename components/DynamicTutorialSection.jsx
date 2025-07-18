@@ -47,7 +47,7 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
             width: isVisible ? 28 : 20,
             height: isVisible ? 28 : 20,
             fontSize: "0.75rem",
-            color: "#B8860B",
+            color: "rgb(184,134,11,1)",
           }}
         >
           {step.step}
@@ -276,7 +276,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
   };
 
   return (
-    <div className="tutorial-section">
+    <div className="tutorial-section -mb-36">
       {/* Video Section - Matching original VideoPlayer design */}
         {tutorialData.video && (
         <div className="max-w-5xl mx-auto px-4 py-12 text-center">
@@ -344,22 +344,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
         )}
 
       {/* Promotional Banner - Polished Design */}
-        {showPromotions && tutorialData.promotions && tutorialData.promotions.length > 0 && (
-        <div className="bg-gradient-to-r from-black via-gray-900 to-black text-amber-400 py-6 px-8 rounded-2xl mx-4 mb-8  border border-amber-500/20">
-          <div className="flex items-center justify-center space-x-12 overflow-hidden">
-              {tutorialData.promotions.map((promotion, index) => (
-              <div key={index} className="flex-shrink-0 animate-marquee group">
-                <span className="text-lg font-semibold tracking-wide group-hover:text-amber-300 transition-colors duration-300">
-                  {promotion}
-                </span>
-                <span className="mx-6 text-amber-500 text-xl font-bold">•</span>
-                </div>
-              ))}
-            </div>
-          {/* Subtle glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent rounded-2xl pointer-events-none"></div>
-          </div>
-        )}
+      
     </div>
   );
 };

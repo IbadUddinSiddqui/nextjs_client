@@ -48,18 +48,18 @@ const DownloadGuide = () => {
       {/* 📖 Read Urdu Button */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="inline-block px-5 py-3 mb-5 text-[#B8860B] rounded-lg bg-black hover:text-black hover:bg-[#B8860B] font-bold"
+        className="inline-block px-5 py-3 mb-5 text-[rgb(184,134,11,1)] rounded-lg bg-black hover:text-black hover:bg-[rgb(184,134,11,1)] font-bold"
       >
-        👁️ Urdu ma read kare
+        👁️ Read in Urdu
       </button>
       <br />
 
       {/* 📥 Download Button */}
       <button
         onClick={handleDownload}
-        className="px-5 py-3 bg-black text-[#B8860B] rounded-lg hover:text-black hover:bg-[#B8860B] transition font-bold"
+        className="px-5 py-3 bg-black text-[rgb(184,134,11,1)] rounded-lg hover:text-black hover:bg-[rgb(184,134,11,1)] transition font-bold"
       >
-        📥 Download image
+        📥 Download 
       </button>
 
       {/* ✅ Modal for Image Preview */}

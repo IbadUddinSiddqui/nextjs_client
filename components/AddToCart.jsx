@@ -86,7 +86,7 @@ const AddToCart = ({ product, selectedVariant }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
           <button 
             onClick={handleAddToCart}
-            className="bg-black text-[#B8860B] py-3 px-4 hover:text-white rounded flex items-center justify-center gap-2 w-full transition-transform duration-200 hover:scale-105"
+            className="bg-black text-[rgb(184,134,11,1)] py-3 px-4 hover:text-white rounded flex items-center justify-center gap-2 w-full transition-transform duration-200 hover:scale-105"
           >
             <FaShoppingCart />
             Add to Cart
@@ -94,7 +94,7 @@ const AddToCart = ({ product, selectedVariant }) => {
 
           <button 
             onClick={handleOrderNow}
-            className="border border-[#B8860B] bg-black hover:text-white text-[#B8860B] py-3 px-4 rounded flex items-center justify-center gap-2 w-full animate-float"
+            className="border border-[rgb(184,134,11,1)] bg-black hover:text-white text-[rgb(184,134,11,1)] py-3 px-4 rounded flex items-center justify-center gap-2 w-full animate-float"
           >
             <FaShoppingBag />
             Order Now
@@ -160,7 +160,7 @@ const AddToCart = ({ product, selectedVariant }) => {
                   href="https://www.tiktok.com/@ecobambo0?_t=ZS-8vPdrvheMRW&_r=1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#B8860B] hover:text-white"
+                  className="text-[rgb(184,134,11,1)] hover:text-white"
                 >
                   <FaTiktok />
                 </a>
