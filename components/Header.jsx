@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import HeaderAnnouncementSlider from "./HeaderAnnouncementSlider";
 
 const menu = [
   {
@@ -80,10 +81,10 @@ export default function Header() {
   return (
     <>
       {/* Utility Bar */}
-      <div className="w-full bg-[#B8860B] border-b h-12  border-[rgba(184,134,11,0.15)]">
-        <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1">
-          {/* Social Icons */}
-          <ul className="flex gap-4 items-center mt-3">
+      <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
+        <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
+          {/* Social Icons - always left */}
+          <ul className="hidden lg:flex gap-4 items-center h-full">
             {socialLinks.map((s) => (
               <li key={s.label}>
                 <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
@@ -92,11 +93,12 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          {/* Announcement Placeholder */}
+          {/* Announcement Slider - always centered */}
           <div className="flex-1 flex justify-center">
-            {/* You can add an announcement message or carousel here if needed */}
+            <HeaderAnnouncementSlider />
           </div>
-          <div className="w-32" /> {/* Spacer for symmetry */}
+          {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
+          <div className="w-8" />
         </div>
       </div>
       {/* Existing Header */}
