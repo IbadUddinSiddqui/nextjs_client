@@ -143,7 +143,20 @@ export default function ProductPage() {
   if (error) return <div className="p-10 text-center text-red-600">Error: {error}</div>;
 
   // Transform Shopify data to match original structure
-  const images = product.images.edges.map(edge => edge.node.src);
+  let images;
+  if (product.handle === "large-bamboo-standing-plant-pot-unique-affordable") {
+    images = [
+      "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
+    ];
+  } else {
+    images = product.images.edges.map(edge => edge.node.src);
+    if (product.handle === "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot") {
+      images.push(
+        "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/13_95a2bf96-f58a-4587-862e-1d0b56fb5b21.png?v=1744532370",
+        "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/12_8843d7d3-1909-4806-9a81-c201189113eb.png?v=1744532287"
+      );
+    }
+  }
   const price = product.variants.edges[0]?.node.priceV2.amount || "N/A";
   const currency = product.variants.edges[0]?.node.priceV2.currencyCode || "";
   
@@ -165,6 +178,12 @@ export default function ProductPage() {
     description: product.description
   };
 
+  if (product.handle === "large-bamboo-standing-plant-pot-unique-affordable") {
+    productData.images = [
+      "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
+    ];
+  }
+
   const handleColorClick = (variant: any) => {
     setSelectedVariant(variant);
     setCurrentImage(variant.image);
@@ -173,11 +192,41 @@ export default function ProductPage() {
   return (
     <div className="w-full max-w-[100vw] overflow-x-hidden">
       {/* Top Product Banner Image for Tutorial Products Only */}
-      {TUTORIAL_PRODUCT_HANDLES.includes(product.handle) && (
+      {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
           <img
-            src={product.images.edges[bannerImageIndex]?.node.src}
-            alt={`${product.title} - Image ${bannerImageIndex + 1}`}
+            src="https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
+            alt="Product Banner"
+            className="w-full max-w-6xl h-auto max-h-[500px] object-contain rounded-xl shadow-lg border border-gray-200 transition-opacity duration-500"
+            style={{ objectPosition: 'center' }}
+          />
+        </div>
+      )}
+      {product.handle === "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot" && (
+        <div className="w-full flex justify-center bg-white pt-6 pb-2">
+          <img
+            src={["https://cdn.shopify.com/s/files/1/0605/7974/1763/files/13_95a2bf96-f58a-4587-862e-1d0b56fb5b21.png?v=1744532370","https://cdn.shopify.com/s/files/1/0605/7974/1763/files/12_8843d7d3-1909-4806-9a81-c201189113eb.png?v=1744532287"][bannerImageIndex % 2]}
+            alt={`Product Banner ${bannerImageIndex + 1}`}
+            className="w-full max-w-6xl h-auto max-h-[500px] object-contain rounded-xl shadow-lg border border-gray-200 transition-opacity duration-500"
+            style={{ objectPosition: 'center' }}
+          />
+        </div>
+      )}
+      {product.handle === "1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas" && (
+        <div className="w-full flex justify-center bg-white pt-6 pb-2">
+          <img
+            src={["https://cdn.shopify.com/s/files/1/0605/7974/1763/files/Untitled_design_6_94ceb65e-b8c9-4128-b800-9173ba5feaa0.png?v=1744435517","https://cdn.shopify.com/s/files/1/0605/7974/1763/files/8_0a80f77e-9933-4cf1-aed1-5a8d5da34a38.png?v=1743162714"][bannerImageIndex % 2]}
+            alt={`Product Banner ${bannerImageIndex + 1}`}
+            className="w-full max-w-6xl h-auto max-h-[500px] object-contain rounded-xl shadow-lg border border-gray-200 transition-opacity duration-500"
+            style={{ objectPosition: 'center' }}
+          />
+        </div>
+      )}
+      {product.handle === "small-bamboo-hanging-with-stand-stylish-home-wall-art-decor" && (
+        <div className="w-full flex justify-center bg-white pt-6 pb-2">
+          <img
+            src={["https://cdn.shopify.com/s/files/1/0605/7974/1763/files/11_4b7b2887-7c74-4d79-9e97-4fdc85bd90ce.png?v=1743659676","https://cdn.shopify.com/s/files/1/0605/7974/1763/files/10_08f6a637-e80b-47a1-b610-5772f9cd6db0.png?v=1744431063"][bannerImageIndex % 2]}
+            alt={`Product Banner ${bannerImageIndex + 1}`}
             className="w-full max-w-6xl h-auto max-h-[500px] object-contain rounded-xl shadow-lg border border-gray-200 transition-opacity duration-500"
             style={{ objectPosition: 'center' }}
           />
