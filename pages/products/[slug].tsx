@@ -245,7 +245,7 @@ export default function ProductPage() {
         </div>
       )}
       {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
-      
+
       {/* Main Product Detail Section */}
       <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {/* Left - ImageSlider */}

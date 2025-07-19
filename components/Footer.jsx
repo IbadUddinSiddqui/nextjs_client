@@ -18,9 +18,9 @@ const Footer = () => {
   }
 
   return (
-    <div className="bg-black p-4 sm:p-6 lg:p-8 font-sans">
+    <div className="bg-black px-0 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 font-sans text-left">
       {/* Main footer container */}
-      <div className="eco-form-container bg-black shadow-lg rounded-xl p-6 md:p-10 flex flex-col lg:flex-row lg:space-x-10 max-w-7xl mx-auto mb-8">
+      <div className="eco-form-container bg-black shadow-lg rounded-xl p-6 md:p-10 flex flex-col lg:flex-row lg:space-x-10 max-w-7xl mx-auto mb-8 text-left">
         {/* Left Side: Map and Contact Information */}
         <div className="eco-form-left lg:w-1/2 mb-8 lg:mb-0">
           {/* Google Map Embed */}
@@ -36,7 +36,7 @@ const Footer = () => {
             href="https://www.google.com/maps/place/Eco+bambo/@32.3554315,73.044287,17z"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[rgb(184,134,11,1)] hover:underline font-medium mb-6 block text-center underline" // Keep text-center for this link
+            className="text-[rgb(184,134,11,1)] hover:underline font-medium mb-6 block underline text-left"
           >
             View on Google Maps
           </a>
@@ -54,20 +54,18 @@ const Footer = () => {
                 <p className="text-[rgb(184,134,11,1)] text-left">Eco Bambo, Karkhane wali abadi, Near PSO pump petrol, Nazd Ali Niaz Sweet, Chakian, Phularwan, Bhalwal 40410, Pakistan</p>
               </div>
             </div>
-
-            <div className="eco-divider h-px bg-gray-700 w-full"></div>
-
+            {/* Divider - hide on mobile */}
+            <div className="eco-divider h-px bg-gray-700 w-full hidden md:block"></div>
             {/* Email */}
-            <div className="eco-info-box flex items-start space-x-3">
+            <div className="eco-info-box text-left ml-0 flex items-start space-x-3">
               <i className="fas fa-envelope text-amber-400 text-xl mt-1"></i>
               <div>
                 <h4 className="text-lg font-semibold text-white text-left">Email</h4>
                 <p><a href="mailto:ecobambooarts@gmail.com" className="text-[rgb(184,134,11,1)] hover:underline underline">ecobambooarts@gmail.com</a></p>
               </div>
             </div>
-
-            <div className="eco-divider h-px bg-gray-700 w-full"></div>
-
+            {/* Divider - hide on mobile */}
+            <div className="eco-divider h-px bg-gray-700 w-full hidden md:block"></div>
             {/* Phone */}
             <div className="eco-info-box flex items-start space-x-3">
               <i className="fab fa-whatsapp text-amber-400 text-xl mt-1"></i>
@@ -76,9 +74,8 @@ const Footer = () => {
                 <p><a href="tel:+923416995870" className="text-[rgb(184,134,11,1)] hover:underline underline">+92 (3416995870)</a></p>
               </div>
             </div>
-
-            <div className="eco-divider h-px bg-gray-700 w-full"></div>
-
+            {/* Divider - hide on mobile */}
+            <div className="eco-divider h-px bg-gray-700 w-full hidden md:block"></div>
             {/* Company Opening and Closing Hours */}
             <div className="eco-info-box flex items-start space-x-3">
               <i className="fas fa-clock text-amber-400 text-xl mt-1"></i>
@@ -135,7 +132,7 @@ const Footer = () => {
       </div>
 
       {/* New Footer Section */}
-      <footer className="footer bg-black text-white py-12 px-4 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto">
+      <footer className="footer bg-black text-white py-12 px-0 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto text-left">
         <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-left"> {/* Added text-left here */}
           {/* Outdoor Bamboo Structures */}
           <div className="footer-block text-left">
@@ -218,7 +215,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright and Policies */}
-        <div className="footer__content-bottom text-left pt-8 border-t border-gray-700"> {/* Added text-left here */}
+        <div className="footer__content-bottom text-left pt-8 border-t border-gray-700">
           <div className="footer__content-bottom-wrapper max-w-6xl mx-auto">
             <div className="footer__payment mb-4">
               <span className="sr-only">Payment methods</span>

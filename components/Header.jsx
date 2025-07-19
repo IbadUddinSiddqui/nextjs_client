@@ -83,6 +83,26 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showGoldBar, setShowGoldBar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 10) {
+        setShowGoldBar(true);
+        setLastScrollY(window.scrollY);
+        return;
+      }
+      if (window.scrollY < lastScrollY) {
+        setShowGoldBar(true); // scrolling up
+      } else if (window.scrollY > lastScrollY) {
+        setShowGoldBar(false); // scrolling down
+      }
+      setLastScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,7 +154,7 @@ export default function Header() {
             aria-label="Close search overlay"
           />
           {/* Black header overlay with search bar */}
-          <div className="w-full h-2 flex items-center justify-center bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
+          <div className="w-full h-2 flex items-center justify-center  bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
             <form onSubmit={handleSearchSubmit} className="flex items-center w-full max-w-2xl px-4">
               <input
                 type="search"
@@ -163,28 +183,43 @@ export default function Header() {
       ) : (
         <>
           {/* Utility Bar */}
-          <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
-            <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
-              {/* Social Icons - always left */}
-              <ul className="hidden lg:flex gap-4 items-center h-full">
-                {socialLinks.map((s) => (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
-                      {s.icon}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              {/* Announcement Slider - always centered */}
-              <div className="flex-1 flex justify-center">
-                <HeaderAnnouncementSlider />
+          {showGoldBar && (
+            <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)] fixed top-0 left-0 z-[60] transition-all duration-300">
+              <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
+                {/* Social Icons - always left */}
+                <ul className="hidden lg:flex gap-4 items-center h-full">
+                  {socialLinks.map((s) => (
+                    <li key={s.label}>
+                      <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
+                        {s.icon}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                {/* Announcement Slider - always centered */}
+                <div className="flex-1 flex justify-center">
+                  <HeaderAnnouncementSlider />
+                </div>
+                {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
+                <div className="w-8" />
               </div>
-              {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
-              <div className="w-8" />
             </div>
-          </div>
+          )}
           {/* Existing Header */}
-          <header className="sticky top-0 z-50 w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)]" style={{backgroundAttachment: 'fixed', fontFamily: 'Jost, sans-serif', fontStyle: 'normal', fontWeight: 400, letterSpacing: '0.06rem', lineHeight: 'calc(1 + 0.8 / 1.0)', fontSize: '0.5rem', height: '3rem'}}>
+          <header
+            className="fixed w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)] z-50 transition-all duration-300"
+            style={{
+              top: showGoldBar ? '3rem' : '0',
+              backgroundAttachment: 'fixed',
+              fontFamily: 'Jost, sans-serif',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              letterSpacing: '0.06rem',
+              lineHeight: 'calc(1 + 0.8 / 1.0)',
+              fontSize: '0.5rem',
+              height: '3rem',
+            }}
+          >
             {/* Mobile/Tablet Header Layout */}
             <div className="flex md:flex lg:hidden items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
               {/* Hamburger Menu */}
@@ -218,9 +253,6 @@ export default function Header() {
                 <button onClick={() => setShowSearch(true)} className="hover:text-[rgb(184,134,11,1)]" aria-label="Search">
                   <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
                 </button>
-                <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
-                  <svg className="w-4 h-4 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-                </Link>
                 <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
                   <svg className="w-8 h-8 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
                 </Link>
