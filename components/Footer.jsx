@@ -25,11 +25,11 @@ const Footer = () => {
         <div className="eco-form-left lg:w-1/2 mb-8 lg:mb-0">
           {/* Google Map Embed */}
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.721621062956!2d73.04428697548633!3d32.355431473842685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3921bf006fcc3de3%3A0x3643630eda44aab0!2sEco%20bambo!5e1!3m2!1sen!2str!4v1746090563049!5m2!1sen!2str"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.721621062956!2d73.04428697548633!3d32.355431473842685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3921bf006fcc3de3%3A0x3643630eda44aab0!2sEco%20bambo!5e1!3m2!1sen!2str!4v1746090563049!5m2!1sen!2str&zoomcontrol=0&controls=0&disableDefaultUI=1"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
-            className="rounded-xl mb-4 w-full h-[400px]" // No change here, keep it centered by default with w-full
+            className="rounded-xl mb-4 w-full h-[200px]"
           ></iframe>
           {/* Link to Google Maps */}
           <a
@@ -133,7 +133,7 @@ const Footer = () => {
 
       {/* New Footer Section */}
       <footer className="footer bg-black text-white py-12 px-0 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto text-left">
-        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-left"> {/* Added text-left here */}
+        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-left ml-4 md:ml-0"> {/* Added text-left here */}
           {/* Outdoor Bamboo Structures */}
           <div className="footer-block text-left">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
