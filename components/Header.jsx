@@ -81,6 +81,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,158 +95,225 @@ export default function Header() {
   // Helper to determine active menu item (for demo, only Home is active)
   const isActive = (href) => href === "/";
 
+  // Add this handler for the search form
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchTerm.trim()) {
+      const shopifySearchUrl = `https://ecobambo.com/search?q=${encodeURIComponent(searchTerm.trim())}`;
+      window.location.href = shopifySearchUrl;
+    }
+  };
+
   return (
     <>
-      {/* Utility Bar */}
-      <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
-        <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
-          {/* Social Icons - always left */}
-          <ul className="hidden lg:flex gap-4 items-center h-full">
-            {socialLinks.map((s) => (
-              <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
-                  {s.icon}
-                </a>
-              </li>
-            ))}
-          </ul>
-          {/* Announcement Slider - always centered */}
-          <div className="flex-1 flex justify-center">
-            <HeaderAnnouncementSlider />
-          </div>
-          {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
-          <div className="w-8" />
-        </div>
-      </div>
-      {/* Existing Header */}
-      <header className="sticky top-0 z-50 w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)]" style={{backgroundAttachment: 'fixed', fontFamily: 'Jost, sans-serif', fontStyle: 'normal', fontWeight: 400, letterSpacing: '0.06rem', lineHeight: 'calc(1 + 0.8 / 1.0)', fontSize: '0.5rem', height: '3rem'}}>
-        {/* Mobile/Tablet Header Layout */}
-        <div className="flex md:flex lg:hidden items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
-          {/* Hamburger Menu */}
-          <button
-            className="p-2 focus:outline-none"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Menu"
-            aria-expanded={mobileMenuOpen}
-            aria-controls="menu-drawer"
-          >
-            {mobileMenuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-7 h-7" viewBox="0 0 18 17"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z" /></svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-7 h-7" viewBox="0 0 18 16"><path fill="currentColor" d="M1 .5a.5.5 0 1 0 0 1h15.71a.5.5 0 0 0 0-1zM.5 8a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1A.5.5 0 0 1 .5 8m0 7a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5" /></svg>
-            )}
-          </button>
-          {/* Centered Logo */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-full pointer-events-none">
-            <Link href="/" className="flex items-center gap-2 pointer-events-auto">
-              <img
-                src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
-                alt="ECO BAMBO"
-                width={160}
-                height={30}
-                className="h-8 w-auto object-contain"
-              />
-            </Link>
-          </div>
-          {/* Right: Search, Account, and Cart Icons (mobile/tablet) */}
-          <div className="flex items-center gap-4 ml-auto md:flex lg:hidden">
-            <Link href={getLinkHref("/search")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Search">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
-            </Link>
-            <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-            </Link>
-            <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
-              <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
-            </Link>
-          </div>
-        </div>
-        {/* Desktop Header Layout (lg and up) */}
-        <div className="hidden lg:flex items-center justify-between max-w-[130rem] px-4 h-full w-full">
-          {/* Logo on the left */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
-              <img
-                src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
-                alt="ECO BAMBO"
-                width={scrolled ? 140 : 220}
-                height={scrolled ? 28 : 44}
-                className={`object-contain transition-all duration-300 h-[${scrolled ? '7' : '11'}vh] w-auto`}
-                loading="eager"
-              />
-            </Link>
-          </div>
-          {/* Menu in the center */}
-          <nav className="flex-1 flex items-center justify-center">
-            <ul className="flex gap-4" style={{ fontSize: '0.7rem' }}>
-              {menu.map((item, idx) =>
-                item.submenu ? (
-                  <li key={item.label} className="relative group">
-                    <button
-                      className="header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs text-[rgb(184,134,11,0.8)] hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] focus:outline-none gap-1 whitespace-nowrap"
-                      style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                      onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
-                      aria-expanded={openSubmenu === idx}
-                      aria-controls={`desktop-submenu-${idx}`}
-                    >
-                      <span>{item.label}</span>
-                      <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
-                    </button>
-                    {openSubmenu === idx && (
-                      <ul
-                        id={`HeaderMenu-MenuList-${idx}`}
-                        className="header__submenu list-menu list-menu--disclosure color-scheme-1 gradient caption-large motion-reduce global-settings-popup absolute left-0 mt-2 w-44 pr-4 rounded-lg shadow-lg z-20 py-2 bg-white border border-[rgba(184,134,11,0.1)]"
-                        role="list"
-                        tabIndex={-1}
-                      >
-                        {item.submenu.map((sub) => (
-                          <li key={sub.label}>
-                            <a
-                              id={`HeaderMenu-${item.label.toLowerCase().replace(/\s/g, '-')}-${sub.label.toLowerCase().replace(/\s/g, '-')}`}
-                              href={getLinkHref(sub.href)}
-                              className="header__menu-item list-menu__item link link--text focus-inset caption-large flex w-full items-center  px-4 py-2 font-dmsans font-medium text-[11px] text-left text-gray-700 rounded focus:outline-none hover:underline hover:decoration-black whitespace-nowrap"
-                            >
-                              {sub.label}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+      {showSearch ? (
+        <>
+          {/* Gold announcement bar stays visible */}
+          <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
+            <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
+              <ul className="hidden lg:flex gap-4 items-center h-full">
+                {socialLinks.map((s) => (
+                  <li key={s.label}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
+                      {s.icon}
+                    </a>
                   </li>
+                ))}
+              </ul>
+              <div className="flex-1 flex justify-center">
+                <HeaderAnnouncementSlider />
+              </div>
+              <div className="w-8" />
+            </div>
+          </div>
+          {/* Translucent gold overlay over the rest of the screen */}
+          <div
+            className="fixed inset-0 z-[99]"
+            style={{ background: 'rgba(184,134,11,0.5)', top: '3rem' }}
+            onClick={() => setShowSearch(false)}
+            aria-label="Close search overlay"
+          />
+          {/* Black header overlay with search bar */}
+          <div className="w-full h-2 flex items-center justify-center bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
+            <form onSubmit={handleSearchSubmit} className="flex items-center w-full max-w-2xl px-4">
+              <input
+                type="search"
+                autoFocus
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="flex-1 px-4 py-2  h-[1.8rem] border-2 rounded text-lg bg-black text-[rgb(184,134,11,1)] border-[rgb(184,134,11,1)] placeholder-[rgb(184,134,11,1)] focus:outline-none"
+                style={{'::placeholder': {color: 'rgb(184,134,11,1)'}}}
+                aria-label="Search"
+              />
+              <button type="submit" className="ml-3 p-2 text-[rgb(184,134,11,1)] hover:text-white" aria-label="Submit search">
+                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowSearch(false)}
+                className="ml-2 p-2 text-[rgb(184,134,11,1)] hover:text-white"
+                aria-label="Close search"
+              >
+                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+              </button>
+            </form>
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Utility Bar */}
+          <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
+            <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
+              {/* Social Icons - always left */}
+              <ul className="hidden lg:flex gap-4 items-center h-full">
+                {socialLinks.map((s) => (
+                  <li key={s.label}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
+                      {s.icon}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {/* Announcement Slider - always centered */}
+              <div className="flex-1 flex justify-center">
+                <HeaderAnnouncementSlider />
+              </div>
+              {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
+              <div className="w-8" />
+            </div>
+          </div>
+          {/* Existing Header */}
+          <header className="sticky top-0 z-50 w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)]" style={{backgroundAttachment: 'fixed', fontFamily: 'Jost, sans-serif', fontStyle: 'normal', fontWeight: 400, letterSpacing: '0.06rem', lineHeight: 'calc(1 + 0.8 / 1.0)', fontSize: '0.5rem', height: '3rem'}}>
+            {/* Mobile/Tablet Header Layout */}
+            <div className="flex md:flex lg:hidden items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
+              {/* Hamburger Menu */}
+              <button
+                className="p-2 focus:outline-none"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Menu"
+                aria-expanded={mobileMenuOpen}
+                aria-controls="menu-drawer"
+              >
+                {mobileMenuOpen ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-7 h-7" viewBox="0 0 18 17"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z" /></svg>
                 ) : (
-                  <li key={item.label}>
-                    <Link
-                      href={getLinkHref(item.href)}
-                      className={`header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs ${item.label === 'Home' ? 'underline decoration-[rgb(184,134,11,1)] text-[rgb(184,134,11,1)] font-bold' : 'text-[rgb(184,134,11,0.8)]'} hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] whitespace-nowrap`}
-                      style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
-          </nav>
-          {/* Icons on the right */}
-          <div className="flex items-center gap-6 ml-auto">
-            <Link href={getLinkHref("/search")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Search">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
-            </Link>
-            <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-            </Link>
-            <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
-              <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
-            </Link>
-          </div>
-        </div>
-
-            
-      
-      </header>
-
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-7 h-7" viewBox="0 0 18 16"><path fill="currentColor" d="M1 .5a.5.5 0 1 0 0 1h15.71a.5.5 0 0 0 0-1zM.5 8a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1A.5.5 0 0 1 .5 8m0 7a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5" /></svg>
+                )}
+              </button>
+              {/* Centered Logo */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-full pointer-events-none">
+                <Link href="/" className="flex items-center gap-2 pointer-events-auto">
+                  <img
+                    src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
+                    alt="ECO BAMBO"
+                    width={160}
+                    height={30}
+                    className="h-8 w-auto object-contain"
+                  />
+                </Link>
+              </div>
+              {/* Right: Search, Account, and Cart Icons (mobile/tablet) */}
+              <div className="flex items-center gap-4 ml-auto pl-7 md:flex lg:hidden">
+                <button onClick={() => setShowSearch(true)} className="hover:text-[rgb(184,134,11,1)]" aria-label="Search">
+                  <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
+                </button>
+                <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
+                  <svg className="w-4 h-4 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
+                </Link>
+                <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
+                  <svg className="w-8 h-8 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
+                </Link>
+              </div>
+            </div>
+            {/* Desktop Header Layout (lg and up) */}
+            <div className="hidden lg:flex items-center justify-between max-w-[130rem] px-4 h-full w-full">
+              {/* Logo on the left */}
+              <div className="flex items-center">
+                <Link href="/" className="flex items-center gap-2">
+                  <img
+                    src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
+                    alt="ECO BAMBO"
+                    width={scrolled ? 140 : 220}
+                    height={scrolled ? 28 : 44}
+                    className={`object-contain transition-all duration-300 h-[${scrolled ? '7' : '11'}vh] w-auto`}
+                    loading="eager"
+                  />
+                </Link>
+              </div>
+              {/* Menu in the center */}
+              <nav className="flex-1 flex items-center justify-center">
+                <ul className="flex gap-4" style={{ fontSize: '0.7rem' }}>
+                  {menu.map((item, idx) =>
+                    item.submenu ? (
+                      <li key={item.label} className="relative group">
+                        <button
+                          className="header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs text-[rgb(184,134,11,0.8)] hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] focus:outline-none gap-1 whitespace-nowrap"
+                          style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
+                          onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
+                          aria-expanded={openSubmenu === idx}
+                          aria-controls={`desktop-submenu-${idx}`}
+                        >
+                          <span>{item.label}</span>
+                          <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
+                        </button>
+                        {openSubmenu === idx && (
+                          <ul
+                            id={`HeaderMenu-MenuList-${idx}`}
+                            className="header__submenu list-menu list-menu--disclosure color-scheme-1 gradient caption-large motion-reduce global-settings-popup absolute left-0 mt-2 w-44 pr-4 rounded-lg shadow-lg z-20 py-2 bg-white border border-[rgba(184,134,11,0.1)]"
+                            role="list"
+                            tabIndex={-1}
+                          >
+                            {item.submenu.map((sub) => (
+                              <li key={sub.label}>
+                                <a
+                                  id={`HeaderMenu-${item.label.toLowerCase().replace(/\s/g, '-')}-${sub.label.toLowerCase().replace(/\s/g, '-')}`}
+                                  href={getLinkHref(sub.href)}
+                                  className="header__menu-item list-menu__item link link--text focus-inset caption-large flex w-full items-center  px-4 py-2 font-dmsans font-medium text-[11px] text-left text-gray-700 rounded focus:outline-none hover:underline hover:decoration-black whitespace-nowrap"
+                                >
+                                  {sub.label}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ) : (
+                      <li key={item.label}>
+                        <Link
+                          href={getLinkHref(item.href)}
+                          className={`header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs ${item.label === 'Home' ? 'underline decoration-[rgb(184,134,11,1)] text-[rgb(184,134,11,1)] font-bold' : 'text-[rgb(184,134,11,0.8)]'} hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] whitespace-nowrap`}
+                          style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </nav>
+              {/* Icons on the right */}
+              <div className="flex items-center gap-6 ml-auto">
+                <button
+                  onClick={() => setShowSearch(true)}
+                  className="hover:text-[rgb(184,134,11,1)]"
+                  aria-label="Search"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
+                </button>
+                <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
+                </Link>
+                <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
+                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
+                </Link>
+              </div>
+            </div>
+          </header>
+        </>
+      )}
       {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
+      {!showSearch && mobileMenuOpen && (
         <div className="fixed inset-0 z-50 bg-black/40">
               <div className="fixed top-0 left-0 w-72 h-full bg-black shadow-lg p-6 overflow-y-auto border-r border-[rgba(184,134,11,0.1)]">
             <div className="flex items-center justify-between mb-6">

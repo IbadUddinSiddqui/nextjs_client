@@ -325,7 +325,7 @@ export default function ProductPage() {
       {["large-bamboo-standing-plant-pot-unique-affordable", "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot", "1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas", "small-bamboo-hanging-with-stand-stylish-home-wall-art-decor"].includes(product.handle) && (
         <>
           <DynamicTutorialSection productHandle={product.handle} productTitle={product.title} />
-          <DownloadGuide />
+          
         </>
       )}
 

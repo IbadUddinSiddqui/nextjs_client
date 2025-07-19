@@ -29,20 +29,20 @@ const Footer = () => {
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
-            className="rounded-xl mb-4 w-full h-[400px]"
+            className="rounded-xl mb-4 w-full h-[400px]" // No change here, keep it centered by default with w-full
           ></iframe>
           {/* Link to Google Maps */}
           <a
             href="https://www.google.com/maps/place/Eco+bambo/@32.3554315,73.044287,17z"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[rgb(184,134,11,1)] hover:underline font-medium mb-6 block text-center underline"
+            className="text-[rgb(184,134,11,1)] hover:underline font-medium mb-6 block text-center underline" // Keep text-center for this link
           >
             View on Google Maps
           </a>
 
           {/* Find Us Heading */}
-          <h3 className="text-2xl font-bold text-white mb-6 text-center lg:text-left">Find us</h3>
+          <h3 className="text-2xl font-bold text-white mb-6 text-left">Find us</h3>
 
           {/* Contact Information Boxes */}
           <div className="eco-contact-info space-y-6">
@@ -50,8 +50,8 @@ const Footer = () => {
             <div className="eco-info-box flex items-start space-x-3">
               <i className="fas fa-map-marker-alt text-amber-400 text-xl mt-1"></i>
               <div>
-                <h4 className="text-lg font-semibold text-white">Location</h4>
-                <p className="text-[rgb(184,134,11,1)]">Eco Bambo, Karkhane wali abadi, Near PSO pump petrol, Nazd Ali Niaz Sweet, Chakian, Phularwan, Bhalwal 40410, Pakistan</p>
+                <h4 className="text-lg font-semibold text-white text-left">Location</h4>
+                <p className="text-[rgb(184,134,11,1)] text-left">Eco Bambo, Karkhane wali abadi, Near PSO pump petrol, Nazd Ali Niaz Sweet, Chakian, Phularwan, Bhalwal 40410, Pakistan</p>
               </div>
             </div>
 
@@ -61,7 +61,7 @@ const Footer = () => {
             <div className="eco-info-box flex items-start space-x-3">
               <i className="fas fa-envelope text-amber-400 text-xl mt-1"></i>
               <div>
-                <h4 className="text-lg font-semibold text-white">Email</h4>
+                <h4 className="text-lg font-semibold text-white text-left">Email</h4>
                 <p><a href="mailto:ecobambooarts@gmail.com" className="text-[rgb(184,134,11,1)] hover:underline underline">ecobambooarts@gmail.com</a></p>
               </div>
             </div>
@@ -72,7 +72,7 @@ const Footer = () => {
             <div className="eco-info-box flex items-start space-x-3">
               <i className="fab fa-whatsapp text-amber-400 text-xl mt-1"></i>
               <div>
-                <h4 className="text-lg font-semibold text-white">Phone</h4>
+                <h4 className="text-lg font-semibold text-white text-left">Phone</h4>
                 <p><a href="tel:+923416995870" className="text-[rgb(184,134,11,1)] hover:underline underline">+92 (3416995870)</a></p>
               </div>
             </div>
@@ -83,9 +83,9 @@ const Footer = () => {
             <div className="eco-info-box flex items-start space-x-3">
               <i className="fas fa-clock text-amber-400 text-xl mt-1"></i>
               <div>
-                <h4 className="text-lg font-semibold text-white">Company Opening and Closing Hours</h4>
-                <p className="text-[rgb(184,134,11,1)]">Mon– to –Sun: 8:00 AM – 6:00 PM</p>
-                <p className="text-[rgb(184,134,11,1)]"><i className="fas fa-times-circle text-red-500 mr-1"></i>Friday: Closed</p>
+                <h4 className="text-lg font-semibold text-white text-left">Company Opening and Closing Hours</h4>
+                <p className="text-[rgb(184,134,11,1)] text-left">Mon– to –Sun: 8:00 AM – 6:00 PM</p>
+                <p className="text-[rgb(184,134,11,1)] text-left"><i className="fas fa-times-circle text-red-500 mr-1"></i>Friday: Closed</p>
               </div>
             </div>
           </div>
@@ -93,9 +93,9 @@ const Footer = () => {
 
         {/* Right Side: Contact Form */}
         <div className="eco-form-right lg:w-1/2">
-          <h3 className="text-xl font-semibold text-white mb-6 leading-relaxed">
+          <h3 className="text-xl font-semibold text-white mb-6 leading-relaxed text-left">
             Want a faster reply? Tap the WhatsApp button to chat directly with our support team.<br />
-            Or fill out this product inquiry form with your details &amp; selected collection. Also, paste the exact product title in the message box — so our team can guide you faster with price, customization &amp; size.
+            Or fill out this product inquiry form with your details & selected collection. Also, paste the exact product title in the message box — so our team can guide you faster with price, customization & size.
           </h3>
 
           <form method="post" action="/contact#contact_form" id="contact_form" acceptCharset="UTF-8" className="space-y-4">
@@ -122,7 +122,7 @@ const Footer = () => {
               <option>Dining Table Set</option>
               <option>Baby Beds</option>
               <option>Kid's Furniture</option>
-              <option>Bamboo Double &amp; Single Beds</option>
+              <option>Bamboo Double & Single Beds</option>
               <option>Bamboo Sofa Set</option>
               <option>Bamboo Swings</option>
               <option>Bamboo Baby Swings</option>
@@ -136,9 +136,9 @@ const Footer = () => {
 
       {/* New Footer Section */}
       <footer className="footer bg-black text-white py-12 px-4 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto">
-        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start">
+        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-left"> {/* Added text-left here */}
           {/* Outdoor Bamboo Structures */}
-          <div className="footer-block">
+          <div className="footer-block text-left">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/bamboo-canopy-in-pakistan/Canopy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Canopy Bliss</Link></li>
@@ -150,7 +150,7 @@ const Footer = () => {
           </div>
 
           {/* Indoor Bamboo Comfort */}
-          <div className="footer-block">
+          <div className="footer-block text-left">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Indoor Bamboo Comfort</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/premium-bamboo-lounge-set-with-cushioned-seating-modern-outdoor-indoor-comfort" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Luxury Sofa Set</Link></li>
@@ -162,8 +162,8 @@ const Footer = () => {
           </div>
 
           {/* Home & Baby Essentials */}
-          <div className="footer-block">
-            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Home &amp; Baby Essentials</strong></h2>
+          <div className="footer-block text-left">
+            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Home & Baby Essentials</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/eco-friendly-bamboo-kids-beds-perfect-for-children/Baby-Beds" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Baby Bamboo Beds - Cribs</Link></li>
               <li><Link href="/collections/1-modern-bamboo-hanging-wall-art-standing-plant-and-flower-pot-stylish-decor-perfect-for-home-garden/Hanging-Walls" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Hanging Walls - Art</Link></li>
@@ -174,21 +174,21 @@ const Footer = () => {
           </div>
 
           {/* Eco Bambo Store Policies */}
-          <div className="footer-block">
+          <div className="footer-block text-left">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Eco Bambo Store Policies</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
-              <li><Link href="/pages/https-www-yourwebsite-com-about-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">About Eco Bambo - Our Story &amp; vision</Link></li>
-              <li><Link href="/policies/shipping-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Shipping &amp; Delivery Policy</Link></li>
-              <li><Link href="/policies/terms-of-service" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Terms &amp; Conditions of Use</Link></li>
-              <li><Link href="/pages/https-www-yourwebsite-com/contact-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Contact &amp; Customer Support</Link></li>
-              <li><Link href="/policies/privacy-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Privacy Policy &amp; Data Protection</Link></li>
-              <li><Link href="/policies/refund-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Refund Policy &amp; Customer Satisfaction</Link></li>
+              <li><Link href="/pages/https-www-yourwebsite-com-about-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">About Eco Bambo - Our Story & vision</Link></li>
+              <li><Link href="/policies/shipping-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Shipping & Delivery Policy</Link></li>
+              <li><Link href="/policies/terms-of-service" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Terms & Conditions of Use</Link></li>
+              <li><Link href="/pages/https-www-yourwebsite-com/contact-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Contact & Customer Support</Link></li>
+              <li><Link href="/policies/privacy-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Privacy Policy & Data Protection</Link></li>
+              <li><Link href="/policies/refund-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Refund Policy & Customer Satisfaction</Link></li>
             </ul>
           </div>
         </div>
 
         {/* Social Media Icons */}
-        <div className="footer-block--newsletter flex justify-center space-x-6 mb-8">
+        <div className="footer-block--newsletter flex justify-start space-x-6 mb-8 text-left">
           <ul className="list-none p-0 flex space-x-6" role="list">
             <li className="list-social__item">
               <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" className="link list-social__link text-[rgb(184,134,11,1)]" aria-label="Facebook">
@@ -218,20 +218,20 @@ const Footer = () => {
         </div>
 
         {/* Copyright and Policies */}
-        <div className="footer__content-bottom text-center pt-8 border-t border-gray-700">
+        <div className="footer__content-bottom text-left pt-8 border-t border-gray-700"> {/* Added text-left here */}
           <div className="footer__content-bottom-wrapper max-w-6xl mx-auto">
             <div className="footer__payment mb-4">
               <span className="sr-only">Payment methods</span>
-              <ul className="list-none p-0 flex justify-center space-x-4">
+              <ul className="list-none p-0 flex justify-start space-x-4 text-left">
                 {/* Add payment method icons here if available */}
               </ul>
             </div>
           </div>
           <div className="footer_content-bottom-wrapper max-w-6xl mx-auto">
-            <div className="footer__copyright caption">
-              <small className="copyright__content">&copy; 2025, <Link href="/" title="" className="text-amber-400 hover:underline underline">ECO BAMBO</Link></small>
+            <div className="footer__copyright caption text-left">
+              <small className="copyright__content">© 2025, <Link href="/" title="" className="text-amber-400 hover:underline underline">ECO BAMBO</Link></small>
               <small className="copyright__content"><a target="_blank" rel="nofollow" href="https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore" className="text-amber-300 hover:underline"> </a></small>
-              <ul className="policies list-none p-0 flex flex-wrap justify-center space-x-4 mt-2">
+              <ul className="policies list-none p-0 flex flex-wrap justify-start space-x-4 mt-2 text-left">
                 <li><small className="copyright__content"><Link href="/policies/privacy-policy" className="text-amber-300 hover:underline underline">Privacy policy</Link></small></li>
                 <li><small className="copyright__content"><Link href="/policies/refund-policy" className="text-amber-300 hover:underline underline">Refund policy</Link></small></li>
                 <li><small className="copyright__content"><Link href="/policies/terms-of-service" className="text-amber-300 hover:underline underline">Terms of service</Link></small></li>
@@ -246,4 +246,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

@@ -276,7 +276,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
   };
 
   return (
-    <div className="tutorial-section -mb-36">
+    <div className="tutorial-section ">
       {/* Video Section - Matching original VideoPlayer design */}
         {tutorialData.video && (
         <div className="max-w-5xl mx-auto px-4 py-12 text-center">
