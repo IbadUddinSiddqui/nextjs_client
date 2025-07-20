@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import HeaderAnnouncementSlider from "./HeaderAnnouncementSlider";
-
+import Image from "next/image";
 const menu = [
   {
     label: "Home",
@@ -154,7 +154,7 @@ export default function Header() {
             aria-label="Close search overlay"
           />
           {/* Black header overlay with search bar */}
-          <div className="w-full h-2 flex items-center justify-center  bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
+          <div className="w-full h-2 flex items-center justify-center   bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
             <form onSubmit={handleSearchSubmit} className="flex items-center w-full max-w-2xl px-4">
               <input
                 type="search"
@@ -183,8 +183,8 @@ export default function Header() {
       ) : (
         <>
           {/* Utility Bar */}
-          {showGoldBar && (
-            <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)] fixed top-0 left-0 z-[60] transition-all duration-300">
+          {showGoldBar && !(mobileMenuOpen && !showSearch) && (
+            <div className="w-full bg-[#B8860B]  flex items-center border-b h-12 border-[rgba(184,134,11,0.15)] fixed top-0 left-0 z-[60] transition-all duration-300">
               <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
                 {/* Social Icons - always left */}
                 <ul className="hidden lg:flex gap-4 items-center h-full">
@@ -207,9 +207,9 @@ export default function Header() {
           )}
           {/* Existing Header */}
           <header
-            className="fixed w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)] z-50 transition-all duration-300"
+            className="fixed w-full  block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)] z-50 transition-all duration-300"
             style={{
-              top: showGoldBar ? '3rem' : '0',
+              top: showGoldBar && !(mobileMenuOpen && !showSearch) ? '3rem' : '0',
               backgroundAttachment: 'fixed',
               fontFamily: 'Jost, sans-serif',
               fontStyle: 'normal',
@@ -221,7 +221,7 @@ export default function Header() {
             }}
           >
             {/* Mobile/Tablet Header Layout */}
-            <div className="flex md:flex lg:hidden items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
+            <div className="flex md:flex lg:hidden  items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
               {/* Hamburger Menu */}
               <button
                 className="p-2 focus:outline-none"
@@ -239,12 +239,12 @@ export default function Header() {
               {/* Centered Logo */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-full pointer-events-none">
                 <Link href="/" className="flex items-center gap-2 pointer-events-auto">
-                  <img
-                    src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
+                  <Image
+                    src="/logo.png"
                     alt="ECO BAMBO"
-                    width={160}
-                    height={30}
-                    className="h-8 w-auto object-contain"
+                    width={150}
+                    height={100}
+                    className="object-contain"
                   />
                 </Link>
               </div>
@@ -264,11 +264,11 @@ export default function Header() {
               <div className="flex items-center">
                 <Link href="/" className="flex items-center gap-2">
                   <img
-                    src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
+                    src="/logo.png"
                     alt="ECO BAMBO"
-                    width={scrolled ? 140 : 220}
-                    height={scrolled ? 28 : 44}
-                    className={`object-contain transition-all duration-300 h-[${scrolled ? '7' : '11'}vh] w-auto`}
+                    width={140}
+                    height={100}
+                    className="object-contain"
                     loading="eager"
                   />
                 </Link>
@@ -346,16 +346,16 @@ export default function Header() {
       )}
       {/* Mobile Menu Drawer */}
       {!showSearch && mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-black/40">
-          <div className="fixed top-0 z-50000 left-0 w-72 h-full bg-white shadow-lg p-6 overflow-y-auto border-r border-[rgba(184,134,11,0.1)] flex flex-col">
+        <div className="fixed inset-0 z-40 bg-black/40" style={{top: showGoldBar ? '3rem' : '0'}}>
+          <div className="fixed top-0 z-50 left-0 w-72 h-full bg-white shadow-lg p-6 overflow-y-auto border-r border-[rgba(184,134,11,0.1)] flex flex-col" style={{top: showGoldBar ? '3rem' : '0'}}>
             <div className="flex items-center justify-between mb-6">
               <Link href="/" className="flex items-center gap-2">
                 <img
-                  src="https://ecobambo.com/cdn/shop/files/Untitled_design_15.png?v=1743799787&width=200"
+                  src="/logo.png"
                   alt="ECO BAMBO"
-                  width={160}
-                  height={30}
-                  className="h-8 w-auto object-contain"
+                  width={100}
+                  height={50}
+                  className="object-contain"
                 />
               </Link>
               <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu" className="p-2">
@@ -425,7 +425,7 @@ export default function Header() {
             </div>
           </div>
           {/* Overlay click closes menu */}
-          <div className="fixed inset-0 z-40" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-0 z-40" style={{top: showGoldBar ? '3rem' : '0'}} onClick={() => setMobileMenuOpen(false)} />
         </div>
       )}
     </>

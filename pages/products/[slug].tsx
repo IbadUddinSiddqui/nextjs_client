@@ -328,13 +328,14 @@ export default function ProductPage() {
           
         </>
       )}
+      
+      {/* Text Slider */}
+      <TextSlider />
 
 
       {/* Accordion Section */}
       <Accordion />
 
-      {/* Text Slider */}
-      <TextSlider />
 
       {/* Related Products Section */}
       <RelatedProducts currentProduct={product} />
