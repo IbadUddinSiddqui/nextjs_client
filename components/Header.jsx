@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import HeaderAnnouncementSlider from "./HeaderAnnouncementSlider";
 import Image from "next/image";
+
 const menu = [
   {
     label: "Home",
@@ -79,12 +80,17 @@ function getLinkHref(href) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [openSubmenu, setOpenSubmenu] = useState(null); // Desktop submenu state
   const [scrolled, setScrolled] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [showGoldBar, setShowGoldBar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Mobile sidebar specific states
+  const [activeMobileSubmenuIndex, setActiveMobileSubmenuIndex] = useState(null); // Tracks which submenu is currently open in mobile
+  const [mobileMenuTransitionDirection, setMobileMenuTransitionDirection] = useState(''); // 'forward' or 'backward' for animation
+  const [tempMobileSubmenuIndex, setTempMobileSubmenuIndex] = useState(null); // Used to hold submenu index during backward transition
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,16 +118,36 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Helper to determine active menu item (for demo, only Home is active)
-  const isActive = (href) => href === "/";
-
-  // Add this handler for the search form
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     if (searchTerm.trim()) {
       const shopifySearchUrl = `https://ecobambo.com/search?q=${encodeURIComponent(searchTerm.trim())}`;
       window.location.href = shopifySearchUrl;
     }
+  };
+
+  // Function to open mobile submenu
+  const openMobileSubmenu = (index) => {
+    setMobileMenuTransitionDirection('forward');
+    setTempMobileSubmenuIndex(index); // Set the index immediately for forward
+    setTimeout(() => {
+      setActiveMobileSubmenuIndex(index); // Actual active state after transition starts
+      setMobileMenuTransitionDirection(''); // Clear direction after transition
+      setTempMobileSubmenuIndex(null); // Clear temp index
+    }, 50); // Small delay to ensure `forward` class is applied before `activeMobileSubmenuIndex` changes
+  };
+
+  // Function to go back to main mobile menu
+  const goBackToMainMenu = () => {
+    setMobileMenuTransitionDirection('backward');
+    setTempMobileSubmenuIndex(activeMobileSubmenuIndex); // Keep the submenu content rendered during backward animation
+    setActiveMobileSubmenuIndex(null); // Immediately move the active state for the main menu to appear
+
+    // This timeout will clear the temporary submenu content after the animation
+    setTimeout(() => {
+      setMobileMenuTransitionDirection(''); // Reset animation direction
+      setTempMobileSubmenuIndex(null); // Clear temporary submenu content
+    }, 300); // Match this duration to your CSS transition duration
   };
 
   return (
@@ -132,15 +158,15 @@ export default function Header() {
           <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
             <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
               <ul className="hidden lg:flex gap-4 items-center h-full">
-            {socialLinks.map((s) => (
-              <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
-                  {s.icon}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex-1 flex justify-center">
+                {socialLinks.map((s) => (
+                  <li key={s.label}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
+                      {s.icon}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex-1 flex justify-center">
                 <HeaderAnnouncementSlider />
               </div>
               <div className="w-8" />
@@ -154,7 +180,7 @@ export default function Header() {
             aria-label="Close search overlay"
           />
           {/* Black header overlay with search bar */}
-          <div className="w-full h-2 flex items-center justify-center   bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
+          <div className="w-full h-2 flex items-center justify-center bg-black border-b border-[rgba(184,134,11,0.08)] sticky top-12 left-0 z-[100]" style={{minHeight: '2.2rem'}}>
             <form onSubmit={handleSearchSubmit} className="flex items-center w-full max-w-2xl px-4">
               <input
                 type="search"
@@ -162,7 +188,7 @@ export default function Header() {
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="flex-1 px-4 py-2  h-[1.8rem] border-2 rounded text-lg bg-black text-[rgb(184,134,11,1)] border-[rgb(184,134,11,1)] placeholder-[rgb(184,134,11,1)] focus:outline-none"
+                className="flex-1 px-4 py-2 h-[1.8rem] border-2 rounded text-lg bg-black text-[rgb(184,134,11,1)] border-[rgb(184,134,11,1)] placeholder-[rgb(184,134,11,1)] focus:outline-none"
                 style={{'::placeholder': {color: 'rgb(184,134,11,1)'}}}
                 aria-label="Search"
               />
@@ -202,10 +228,10 @@ export default function Header() {
                 </div>
                 {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
                 <div className="w-8" />
-        </div>
-      </div>
+              </div>
+            </div>
           )}
-      {/* Existing Header */}
+          {/* Existing Header */}
           <header
             className="fixed w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)] z-50 transition-all duration-300"
             style={{
@@ -221,19 +247,27 @@ export default function Header() {
             }}
           >
             {/* Mobile/Tablet Header Layout */}
-            <div className="flex md:flex lg:hidden  items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
+            <div className="flex md:flex lg:hidden items-center justify-between max-w-[130rem] px-4 h-full w-full relative">
               {/* Hamburger Menu */}
               <button
                 className="p-2 focus:outline-none"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={() => {
+                  setMobileMenuOpen(!mobileMenuOpen);
+                  // Reset mobile submenu state when opening/closing main mobile menu
+                  if (mobileMenuOpen) {
+                    setActiveMobileSubmenuIndex(null);
+                    setMobileMenuTransitionDirection('');
+                    setTempMobileSubmenuIndex(null); // Ensure temp is also reset
+                  }
+                }}
                 aria-label="Menu"
                 aria-expanded={mobileMenuOpen}
                 aria-controls="menu-drawer"
               >
                 {mobileMenuOpen ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-7 h-7" viewBox="0 0 18 17"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-5 h-7" viewBox="0 0 18 17"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z" /></svg>
                 ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-7 h-7" viewBox="0 0 18 16"><path fill="currentColor" d="M1 .5a.5.5 0 1 0 0 1h15.71a.5.5 0 0 0 0-1zM.5 8a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1A.5.5 0 0 1 .5 8m0 7a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="w-5 h-7" viewBox="0 0 18 16"><path fill="currentColor" d="M1 .5a.5.5 0 1 0 0 1h15.71a.5.5 0 0 0 0-1zM.5 8a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1A.5.5 0 0 1 .5 8m0 7a.5.5 0 0 1 .5-.5h15.71a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5" /></svg>
                 )}
               </button>
               {/* Centered Logo */}
@@ -242,7 +276,7 @@ export default function Header() {
                   <Image
                     src="/logo.png"
                     alt="ECO BAMBO"
-                    width={150}
+                    width={70}
                     height={100}
                     className="object-contain"
                   />
@@ -251,10 +285,10 @@ export default function Header() {
               {/* Right: Search, Account, and Cart Icons (mobile/tablet) */}
               <div className="flex items-center gap-4 ml-auto pl-7 md:flex lg:hidden">
                 <button onClick={() => setShowSearch(true)} className="hover:text-[rgb(184,134,11,1)]" aria-label="Search">
-                  <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
                 </button>
                 <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
-                  <svg className="w-8 h-8 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
+                  <svg className="w-10 h-10 md:w-12 md:h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
                 </Link>
               </div>
             </div>
@@ -276,54 +310,54 @@ export default function Header() {
               {/* Menu in the center */}
               <nav className="flex-1 flex items-center justify-center">
                 <ul className="flex gap-4" style={{ fontSize: '0.7rem' }}>
-          {menu.map((item, idx) =>
-            item.submenu ? (
-                    <li key={item.label} className="relative group">
-                <button
+                  {menu.map((item, idx) =>
+                    item.submenu ? (
+                      <li key={item.label} className="relative group">
+                        <button
                           className="header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs text-[rgb(184,134,11,0.8)] hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] focus:outline-none gap-1 whitespace-nowrap"
-                        style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                  onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
-                        aria-expanded={openSubmenu === idx}
-                        aria-controls={`desktop-submenu-${idx}`}
-                >
-                        <span>{item.label}</span>
-                        <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
-                </button>
-                {openSubmenu === idx && (
-                        <ul
+                          style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
+                          onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
+                          aria-expanded={openSubmenu === idx}
+                          aria-controls={`desktop-submenu-${idx}`}
+                        >
+                          <span>{item.label}</span>
+                          <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
+                        </button>
+                        {openSubmenu === idx && (
+                          <ul
                             id={`HeaderMenu-MenuList-${idx}`}
                             className="header__submenu list-menu list-menu--disclosure color-scheme-1 gradient caption-large motion-reduce global-settings-popup absolute left-0 mt-2 w-44 pr-4 rounded-lg shadow-lg z-20 py-2 bg-white border border-[rgba(184,134,11,0.1)]"
                             role="list"
                             tabIndex={-1}
-                        >
-                          {item.submenu.map((sub) => (
-                        <li key={sub.label}>
+                          >
+                            {item.submenu.map((sub) => (
+                              <li key={sub.label}>
                                 <a
                                   id={`HeaderMenu-${item.label.toLowerCase().replace(/\s/g, '-')}-${sub.label.toLowerCase().replace(/\s/g, '-')}`}
                                   href={getLinkHref(sub.href)}
-                                  className="header__menu-item list-menu__item link link--text focus-inset caption-large flex w-full items-center  px-4 py-2 font-dmsans font-medium text-[11px] text-left text-gray-700 rounded focus:outline-none hover:underline hover:decoration-black whitespace-nowrap"
-                              >
-                            {sub.label}
+                                  className="header__menu-item list-menu__item link link--text focus-inset caption-large flex w-full items-center px-4 py-2 font-dmsans font-medium text-[11px] text-left text-gray-700 rounded focus:outline-none hover:underline hover:decoration-black whitespace-nowrap"
+                                >
+                                  {sub.label}
                                 </a>
-                        </li>
-                      ))}
-                    </ul>
-                      )}
-                    </li>
-                  ) : (
-                    <li key={item.label}>
-                      <Link
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ) : (
+                      <li key={item.label}>
+                        <Link
                           href={getLinkHref(item.href)}
                           className={`header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs ${item.label === 'Home' ? 'underline decoration-[rgb(184,134,11,1)] text-[rgb(184,134,11,1)] font-bold' : 'text-[rgb(184,134,11,0.8)]'} hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] whitespace-nowrap`}
-                        style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                      >
-                {item.label}
-              </Link>
-                    </li>
-            )
-          )}
-              </ul>
-        </nav>
+                          style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </nav>
               {/* Icons on the right */}
               <div className="flex items-center gap-6 ml-auto">
                 <button
@@ -334,70 +368,88 @@ export default function Header() {
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
                 </button>
                 <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-          </Link>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
+                </Link>
                 <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
-          </Link>
-        </div>
-      </div>
-      </header>
+                </Link>
+              </div>
+            </div>
+          </header>
         </>
       )}
       {/* Mobile Menu Drawer */}
       {!showSearch && mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-black/40" style={{top: '3rem'}}>
           <div className="fixed top-0 z-50 left-0 w-72 h-full bg-white shadow-lg p-6 overflow-y-auto border-r border-[rgba(184,134,11,0.1)] flex flex-col" style={{top: '3rem'}}>
-            <nav className="flex-1">
-              <ul className="flex flex-col gap-1 text-black">
-                {menu.map((item, idx) =>
-                  item.submenu ? (
-                    <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
-                      <button
-                            className="w-full text-left px-2 py-2 font-dmsans text-sm font-semibold text-black hover:text-[#B8860B] hover:underline hover:decoration-[#B8860B] flex items-center justify-between whitespace-nowrap"
-                            style={{fontFamily: 'DM Sans, sans-serif', fontWeight: 600}}
-                        onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
-                            aria-expanded={openSubmenu === idx}
-                            aria-controls={`mobile-submenu-${idx}`}
-                      >
+            <nav className="flex-1 relative overflow-x-hidden">
+              <div className="w-full h-full relative">
+                {/* Main menu */}
+                <div
+                  className={`absolute top-0 left-0 w-full transition-transform duration-300
+                    ${mobileMenuTransitionDirection === 'forward' ? '-translate-x-full' : (mobileMenuTransitionDirection === 'backward' ? 'translate-x-0' : (activeMobileSubmenuIndex !== null ? '-translate-x-full' : 'translate-x-0'))}`}
+                  style={{ zIndex: activeMobileSubmenuIndex === null ? 2 : 1 }}
+                >
+                  <ul className="flex flex-col gap-1 text-black">
+                    {menu.map((item, idx) =>
+                      item.submenu ? (
+                        <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
+                          <button
+                            className="w-full text-left px-2 py-2 font-dmsans text-sm font-semibold text-black flex items-center justify-between whitespace-nowrap"
+                            style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600 }}
+                            onClick={() => openMobileSubmenu(idx)}
+                          >
                             <span>{item.label}</span>
-                        {/* Right arrow icon */}
-                        <span className="ml-1">&rarr;</span>
-                      </button>
-                      {openSubmenu === idx && (
-                            <ul
-                              id={`HeaderMenu-MenuList-mobile-${idx}`}
-                              className="header__submenu list-menu list-menu--disclosure color-scheme-1 gradient caption-large motion-reduce global-settings-popup ml-4 mt-1 border-l border-[rgba(184,134,11,0.1)] pl-2 bg-white rounded-lg shadow-lg py-2 w-44 pr-4"
-                              role="list"
-                              tabIndex={-1}
-                            >
-                          {item.submenu.map((sub) => (
-                            <li key={sub.label}>
-                                  <a
-                                    id={`HeaderMenu-${item.label.toLowerCase().replace(/\s/g, '-')}-${sub.label.toLowerCase().replace(/\s/g, '-')}`}
-                                    href={getLinkHref(sub.href)}
-                                    className="header__menu-item list-menu__item link link--text focus-inset caption-large flex w-full items-center justify-center px-4 py-2 font-dmsans font-medium text-[12px] text-black rounded focus:outline-none hover:underline hover:decoration-black whitespace-nowrap"
-                                  >
-                                {sub.label}
-                                  </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ) : (
-                    <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
+                            <span className="ml-1">→</span>
+                          </button>
+                        </li>
+                      ) : (
+                        <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
                           <Link
                             href={getLinkHref(item.href)}
-                            className={`block px-2 py-2 font-dmsans text-sm font-semibold text-black hover:text-[#FFD700] hover:underline hover:decoration-[#FFD700] whitespace-nowrap`}
+                            className="block px-2 py-2 font-dmsans text-sm font-semibold text-black whitespace-nowrap"
                             style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600 }}
+                            onClick={() => setMobileMenuOpen(false)} // Close menu on direct link click
                           >
-                        {item.label}
-                      </Link>
-                    </li>
-                  )
-                )}
-              </ul>
+                            {item.label}
+                          </Link>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+                {/* Submenu */}
+                <div
+                  className={`absolute top-0 left-0 w-full transition-transform duration-300
+                    ${mobileMenuTransitionDirection === 'forward' ? 'translate-x-0' : (mobileMenuTransitionDirection === 'backward' ? 'translate-x-full' : (activeMobileSubmenuIndex !== null ? 'translate-x-0' : 'translate-x-full'))}`}
+                  style={{ zIndex: activeMobileSubmenuIndex !== null ? 2 : 1 }}
+                >
+                  {(activeMobileSubmenuIndex !== null || tempMobileSubmenuIndex !== null) && (
+                    <div>
+                      <button
+                        className="mb-4 text-black font-semibold flex items-center mt-12"
+                        onClick={goBackToMainMenu}
+                      >
+                        <span className="mr-2">←</span> Back
+                      </button>
+                      <ul className="flex flex-col gap-1 text-black">
+                        {(menu[activeMobileSubmenuIndex !== null ? activeMobileSubmenuIndex : tempMobileSubmenuIndex]?.submenu || []).map((sub) => (
+                          <li key={sub.label}>
+                            <a
+                              href={getLinkHref(sub.href)}
+                              className="block px-2 py-2 font-dmsans text-sm font-semibold text-black whitespace-nowrap"
+                              style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600 }}
+                              onClick={() => setMobileMenuOpen(false)} // Close menu on submenu link click
+                            >
+                              {sub.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
             </nav>
             {/* Account and Cart icons at the bottom */}
             <div className="flex items-center gap-4 mt-8 pt-4 border-t border-gray-200 justify-center w-full mb-12">
@@ -410,10 +462,10 @@ export default function Header() {
               </a>
             </div>
           </div>
-          {/* Overlay click closes menu */}
-          <div className="fixed inset-0 z-40" style={{top: '3rem'}} onClick={() => setMobileMenuOpen(false)} />
+          {/* Overlay click closes menu and resets submenu */}
+          <div className="fixed inset-0 z-40" style={{top: '3rem'}} onClick={() => { setMobileMenuOpen(false); setActiveMobileSubmenuIndex(null); setMobileMenuTransitionDirection(''); setTempMobileSubmenuIndex(null);}} />
         </div>
       )}
     </>
   );
-} 
+}

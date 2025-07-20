@@ -34,8 +34,8 @@ const ImageSlider = ({ images, currentImage, setCurrentImage }) => {
   };
 
   return (
-      <div className="w-full flex flex-col items-center px-0 sm:px-0">
-<div className="relative w-full sm:w-[650px] ml-4 sm:ml-0 mr-4 sm:mr-9 h-[400px] sm:h-[600px] overflow-hidden rounded-xl">
+      <div className="w-full flex flex-col items-center md:ml-6 px-0 sm:px-0">
+<div className="relative w-full sm:w-[650px] md:w-[400px]  ml-4 sm:ml-0 mr-4 sm:mr-9 h-[400px] sm:h-[600px] overflow-hidden rounded-xl">
 
       {/* ✅ Main Large Image */}
         <img
