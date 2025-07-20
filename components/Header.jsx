@@ -209,7 +209,7 @@ export default function Header() {
           <header
             className="fixed w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)] z-50 transition-all duration-300"
             style={{
-              top: '3rem',
+              top: showGoldBar ? '3rem' : '0',
               backgroundAttachment: 'fixed',
               fontFamily: 'Jost, sans-serif',
               fontStyle: 'normal',
@@ -352,7 +352,7 @@ export default function Header() {
               <ul className="flex flex-col gap-1 text-black">
                 {menu.map((item, idx) =>
                   item.submenu ? (
-                    <li key={item.label}>
+                    <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
                       <button
                             className="w-full text-left px-2 py-2 font-dmsans text-sm font-semibold text-black hover:text-[#B8860B] hover:underline hover:decoration-[#B8860B] flex items-center justify-between whitespace-nowrap"
                             style={{fontFamily: 'DM Sans, sans-serif', fontWeight: 600}}
@@ -386,7 +386,7 @@ export default function Header() {
                       )}
                     </li>
                   ) : (
-                    <li key={item.label}>
+                    <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
                           <Link
                             href={getLinkHref(item.href)}
                             className={`block px-2 py-2 font-dmsans text-sm font-semibold text-black hover:text-[#FFD700] hover:underline hover:decoration-[#FFD700] whitespace-nowrap`}
@@ -400,7 +400,7 @@ export default function Header() {
               </ul>
             </nav>
             {/* Account and Cart icons at the bottom */}
-            <div className="flex items-center gap-4 mt-8 pt-4 border-t border-gray-200 justify-center w-full">
+            <div className="flex items-center gap-4 mt-8 pt-4 border-t border-gray-200 justify-center w-full mb-12">
               <a href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")}
                 className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" rel="nofollow" aria-label="Account">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
