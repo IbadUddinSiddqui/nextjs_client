@@ -11,6 +11,7 @@ import FSlider from "../components/FSlider";
 import FeatureHighlights from "../components/FeatureHighlights";
 import CategoryProducts from "../components/CategoryProducts";
 import { shopifyFetch } from "../lib/shopify";
+import Head from 'next/head';
 
 interface ProductImage {
   src: string;
@@ -107,70 +108,75 @@ export default function Home() {
   console.log('📋 Products array:', products);
 
   return (
-    <div>
-      {/* 🔹 Top Banner Slider */}
-      <ImageSlider 
-        images={[
-          "/images/big-red.png",
-          "/images/big-yellow.png",
-          "/images/big-white.png"
-        ]} 
-        currentImage={currentImage}
-        setCurrentImage={setCurrentImage}
-      />
+    <>
+      <Head>
+        <title>Eco Bamboo - ECO BAMBOO</title>
+      </Head>
+      <div>
+        {/* 🔹 Top Banner Slider */}
+        <ImageSlider 
+          images={[
+            "/images/big-red.png",
+            "/images/big-yellow.png",
+            "/images/big-white.png"
+          ]} 
+          currentImage={currentImage}
+          setCurrentImage={setCurrentImage}
+        />
 
-      {/* 🔹 Page Heading */}
-      <h1 className="text-2xl font-bold text-center mt-6">
-        Welcome to Our Product Collection
-      </h1>
+        {/* 🔹 Page Heading */}
+        <h1 className="text-2xl font-bold text-center mt-6">
+          Welcome to Our Product Collection
+        </h1>
 
-      {/* 🔹 Product Cards */}
-      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map((product) => (
-          <div key={product.id} className="border rounded-lg p-4 hover:shadow transition flex flex-col">
-            <Link href={`/products/${product.handle}`}>
-              <img
-                src={product.images.edges[0]?.node.src || "/images/placeholder.jpg"}
-                alt={product.images.edges[0]?.node.altText || product.title}
-                className="w-full h-48 object-cover rounded mb-3"
-              />
-              <h2 className="text-lg font-semibold">{product.title}</h2>
-              <p className="text-green-600 font-bold">
-                {product.variants.edges[0]?.node.priceV2.currencyCode} {product.variants.edges[0]?.node.priceV2.amount}
-              </p>
-            </Link>
-          </div>
-        ))}
+        {/* 🔹 Product Cards */}
+        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <div key={product.id} className="border rounded-lg p-4 hover:shadow transition flex flex-col">
+              <Link href={`/products/${product.handle}`}>
+                <img
+                  src={product.images.edges[0]?.node.src || "/images/placeholder.jpg"}
+                  alt={product.images.edges[0]?.node.altText || product.title}
+                  className="w-full h-48 object-cover rounded mb-3"
+                />
+                <h2 className="text-lg font-semibold">{product.title}</h2>
+                <p className="text-green-600 font-bold">
+                  {product.variants.edges[0]?.node.priceV2.currencyCode} {product.variants.edges[0]?.node.priceV2.amount}
+                </p>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* 🔹 Category-based Product Sections */}
+        <CategoryProducts 
+          category={{ type: "productType", value: "Plant Pot" }}
+          title="Bamboo Plant Pots"
+          limit={4}
+        />
+        
+        <CategoryProducts 
+          category={{ type: "productType", value: "Wall Art" }}
+          title="Bamboo Wall Art"
+          limit={4}
+        />
+        
+        <CategoryProducts 
+          category={{ type: "productType", value: "Furniture" }}
+          title="Bamboo Furniture"
+          limit={4}
+        />
+
+        {/* 🔹 Additional Components for Home Page */}
+        <ProductDetail />
+        <VideoPlayer />
+        <StepTutorial />
+        <PromoBanner />
+        <Reviews />
+        <FAQSection />
+        <FSlider />
+        <FeatureHighlights />
       </div>
-
-      {/* 🔹 Category-based Product Sections */}
-      <CategoryProducts 
-        category={{ type: "productType", value: "Plant Pot" }}
-        title="Bamboo Plant Pots"
-        limit={4}
-      />
-      
-      <CategoryProducts 
-        category={{ type: "productType", value: "Wall Art" }}
-        title="Bamboo Wall Art"
-        limit={4}
-      />
-      
-      <CategoryProducts 
-        category={{ type: "productType", value: "Furniture" }}
-        title="Bamboo Furniture"
-        limit={4}
-      />
-
-      {/* 🔹 Additional Components for Home Page */}
-      <ProductDetail />
-      <VideoPlayer />
-      <StepTutorial />
-      <PromoBanner />
-      <Reviews />
-      <FAQSection />
-      <FSlider />
-      <FeatureHighlights />
-    </div>
+    </>
   );
 }
