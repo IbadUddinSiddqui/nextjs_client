@@ -14,6 +14,11 @@ import FeatureHighlights from "../../components/FeatureHighlights";
 import RelatedProducts from "../../components/RelatedProducts";
 import { FaShippingFast } from "react-icons/fa";
 import DownloadGuide from "../../components/GuideImage";
+import Head from "next/head";
+
+function toTitleCase(str: string) {
+  return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+}
 
 interface ProductImage {
   src: string;
@@ -189,7 +194,11 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="w-full max-w-[100vw] overflow-x-hidden p-3 mt-24">
+    <>
+      <Head>
+        <title>{toTitleCase(product.title)}</title>
+      </Head>
+      <div className="w-full max-w-[100vw] overflow-x-hidden p-3 mt-24">
       {/* Top Product Banner Image for Special Products Only */}
       {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
@@ -332,5 +341,6 @@ export default function ProductPage() {
       <FSlider />
       <FeatureHighlights />
     </div>
+    </>
   );
 } 
