@@ -309,6 +309,8 @@ export default function ProductPage() {
           
         </div>
       </div>
+      {/* Text Slider - moved here to appear just after the product */}
+      <TextSlider />
       {["large-bamboo-standing-plant-pot-unique-affordable", "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot", "1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas", "small-bamboo-hanging-with-stand-stylish-home-wall-art-decor"].includes(product.handle) && (
         <>
           <DynamicTutorialSection productHandle={product.handle} productTitle={product.title} />
@@ -316,10 +318,6 @@ export default function ProductPage() {
         </>
       )}
       
-      {/* Text Slider */}
-      <TextSlider />
-
-
       {/* Accordion Section */}
       <Accordion />
 

@@ -272,7 +272,7 @@ export default function Header() {
               </button>
               {/* Centered Logo */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-full pointer-events-none">
-                <Link href="/" className="flex items-center gap-2 pointer-events-auto">
+                <a href="https://ecobambo.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 pointer-events-auto">
                   <Image
                     src="/logo.png"
                     alt="ECO BAMBO"
@@ -280,7 +280,7 @@ export default function Header() {
                     height={100}
                     className="object-contain"
                   />
-                </Link>
+                </a>
               </div>
               {/* Right: Search, Account, and Cart Icons (mobile/tablet) */}
               <div className="flex items-center gap-4 ml-auto pl-7 md:flex lg:hidden">
@@ -296,7 +296,7 @@ export default function Header() {
             <div className="hidden lg:flex items-center justify-between max-w-[130rem] px-4 h-full w-full">
               {/* Logo on the left */}
               <div className="flex items-center">
-                <Link href="/" className="flex items-center gap-2">
+                <a href="https://ecobambo.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <img
                     src="/logo.png"
                     alt="ECO BAMBO"
@@ -305,7 +305,7 @@ export default function Header() {
                     className="object-contain"
                     loading="eager"
                   />
-                </Link>
+                </a>
               </div>
               {/* Menu in the center */}
               <nav className="flex-1 flex items-center justify-center">

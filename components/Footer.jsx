@@ -126,16 +126,16 @@ const Footer = () => {
             </select>
 
             <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 mb-2 focus:outline-none focus:border-amber-400 placeholder:text-white"></textarea>
-            <button type="submit" className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-semibold px-6 py-2 rounded shadow hover:from-amber-400 hover:to-yellow-500 transition-all">BOOK NOW →</button>
+            <button type="submit" className=" text-black font-semibold px-6 py-2 rounded shadow bg-amber-400 transition-all">BOOK NOW →</button>
           </form>
         </div>
       </div>
 
       {/* New Footer Section */}
-      <footer className="footer bg-black text-white py-12 px-0 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto text-left">
-        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-left ml-4 md:ml-0"> {/* Added text-left here */}
+      <footer className="footer bg-black text-white py-12 px-0 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto text-center">
+        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1  md:grid-cols-4 gap-8 mb-8 items-center text-center ml-4 md:ml-0"> {/* Added text-left here */}
           {/* Outdoor Bamboo Structures */}
-          <div className="footer-block text-left">
+          <div className="footer-block text-left ml-4 md:ml-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/bamboo-canopy-in-pakistan/Canopy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Canopy Bliss</Link></li>
@@ -147,7 +147,7 @@ const Footer = () => {
           </div>
 
           {/* Indoor Bamboo Comfort */}
-          <div className="footer-block text-left">
+          <div className="footer-block text-left ml-4 md:ml-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Indoor Bamboo Comfort</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/premium-bamboo-lounge-set-with-cushioned-seating-modern-outdoor-indoor-comfort" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Luxury Sofa Set</Link></li>
@@ -159,7 +159,7 @@ const Footer = () => {
           </div>
 
           {/* Home & Baby Essentials */}
-          <div className="footer-block text-left">
+          <div className="footer-block text-left ml-4 md:ml-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Home & Baby Essentials</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/eco-friendly-bamboo-kids-beds-perfect-for-children/Baby-Beds" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Baby Bamboo Beds - Cribs</Link></li>
@@ -171,7 +171,7 @@ const Footer = () => {
           </div>
 
           {/* Eco Bambo Store Policies */}
-          <div className="footer-block text-left">
+          <div className="footer-block text-left ml-4 md:ml-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Eco Bambo Store Policies</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/pages/https-www-yourwebsite-com-about-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">About Eco Bambo - Our Story & vision</Link></li>
@@ -185,7 +185,7 @@ const Footer = () => {
         </div>
 
         {/* Social Media Icons */}
-        <div className="footer-block--newsletter flex justify-start space-x-6 mb-8 text-left">
+        <div className="footer-block--newsletter flex  justify-center items-center space-x-6 mb-8 text-left">
           <ul className="list-none p-0 flex space-x-6" role="list">
             <li className="list-social__item">
               <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" className="link list-social__link text-[rgb(184,134,11,1)]" aria-label="Facebook">

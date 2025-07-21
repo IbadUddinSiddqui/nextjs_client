@@ -12,6 +12,9 @@ const ImageSlider = ({ images, currentImage, setCurrentImage }) => {
   const [zoom, setZoom] = useState(1);
   const thumbnailRef = useRef(null);
   const modalThumbRef = useRef(null);
+  // Touch swipe state
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
 
   const currentIndex = images.findIndex((img) => img === currentImage);
 
@@ -33,16 +36,40 @@ const ImageSlider = ({ images, currentImage, setCurrentImage }) => {
     }
   };
 
+  // Touch event handlers for swipe
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+    setTouchEndX(null);
+  };
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchEndX === null) return;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) handleNext(); // swipe left
+      else handlePrev(); // swipe right
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   return (
       <div className="w-full flex flex-col items-center md:ml-6 px-0 sm:px-0">
-<div className="relative w-full sm:w-[650px] md:w-[400px]  ml-4 sm:ml-0 mr-4 sm:mr-9 h-[400px] sm:h-[600px] overflow-hidden rounded-xl">
+<div
+  className="relative w-full sm:w-[650px] ml-4 sm:ml-0 mr-4 sm:mr-9 h-[400px] sm:h-[600px] overflow-hidden rounded-xl"
+  onTouchStart={handleTouchStart}
+  onTouchMove={handleTouchMove}
+  onTouchEnd={handleTouchEnd}
+>
 
       {/* ✅ Main Large Image */}
         <img
           src={currentImage}
           alt="Main Product"
           onClick={() => setIsModalOpen(true)}
-          className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300"
+          className="w-full h-full object-cover md:w-[400px] md:ml-24 lg:w-[550px] cursor-zoom-in transition-transform duration-300"
         />
 
         <button
