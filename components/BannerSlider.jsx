@@ -27,7 +27,7 @@ const BannerSlider = () => {
   };
 
   return (
-    <div className="w-full flex justify-center bg-gradient-to-r from-gray-100 to-gray-200 py-10">
+    <div className="w-full flex  justify-center bg-gradient-to-r from-gray-100 to-gray-200 py-10">
       <div className="relative w-[80%] h-[400px] overflow-hidden rounded-xl shadow-lg bg-white">
         <div
           key={currentIndex} // this forces re-render animation

@@ -158,15 +158,15 @@ export default function Header() {
           <div className="w-full bg-[#B8860B] flex items-center border-b h-12 border-[rgba(184,134,11,0.15)]">
             <div className="max-w-[130rem] mx-auto flex items-center justify-between px-4 py-1 w-full h-12 items-center">
               <ul className="hidden lg:flex gap-4 items-center h-full">
-                {socialLinks.map((s) => (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
-                      {s.icon}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex-1 flex justify-center">
+            {socialLinks.map((s) => (
+              <li key={s.label}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80">
+                  {s.icon}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex-1 flex justify-center">
                 <HeaderAnnouncementSlider />
               </div>
               <div className="w-8" />
@@ -228,10 +228,10 @@ export default function Header() {
                 </div>
                 {/* Right Spacer for symmetry (optional, can be empty or used for other icons) */}
                 <div className="w-8" />
-              </div>
-            </div>
+        </div>
+      </div>
           )}
-          {/* Existing Header */}
+      {/* Existing Header */}
           <header
             className="fixed w-full block border-b border-[rgba(184,134,11,0.08)] bg-black text-[rgb(184,134,11,1)] z-50 transition-all duration-300"
             style={{
@@ -310,54 +310,54 @@ export default function Header() {
               {/* Menu in the center */}
               <nav className="flex-1 flex items-center justify-center">
                 <ul className="flex gap-4" style={{ fontSize: '0.7rem' }}>
-                  {menu.map((item, idx) =>
-                    item.submenu ? (
-                      <li key={item.label} className="relative group">
-                        <button
+          {menu.map((item, idx) =>
+            item.submenu ? (
+                    <li key={item.label} className="relative group">
+                <button
                           className="header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs text-[rgb(184,134,11,0.8)] hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] focus:outline-none gap-1 whitespace-nowrap"
-                          style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                          onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
-                          aria-expanded={openSubmenu === idx}
-                          aria-controls={`desktop-submenu-${idx}`}
-                        >
-                          <span>{item.label}</span>
-                          <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
-                        </button>
-                        {openSubmenu === idx && (
-                          <ul
+                        style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
+                  onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
+                        aria-expanded={openSubmenu === idx}
+                        aria-controls={`desktop-submenu-${idx}`}
+                >
+                        <span>{item.label}</span>
+                        <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
+                </button>
+                {openSubmenu === idx && (
+                        <ul
                             id={`HeaderMenu-MenuList-${idx}`}
                             className="header__submenu list-menu list-menu--disclosure color-scheme-1 gradient caption-large motion-reduce global-settings-popup absolute left-0 mt-2 w-44 pr-4 rounded-lg shadow-lg z-20 py-2 bg-white border border-[rgba(184,134,11,0.1)]"
                             role="list"
                             tabIndex={-1}
-                          >
-                            {item.submenu.map((sub) => (
-                              <li key={sub.label}>
+                        >
+                          {item.submenu.map((sub) => (
+                        <li key={sub.label}>
                                 <a
                                   id={`HeaderMenu-${item.label.toLowerCase().replace(/\s/g, '-')}-${sub.label.toLowerCase().replace(/\s/g, '-')}`}
                                   href={getLinkHref(sub.href)}
                                   className="header__menu-item list-menu__item link link--text focus-inset caption-large flex w-full items-center px-4 py-2 font-dmsans font-medium text-[11px] text-left text-gray-700 rounded focus:outline-none hover:underline hover:decoration-black whitespace-nowrap"
-                                >
-                                  {sub.label}
+                              >
+                            {sub.label}
                                 </a>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </li>
-                    ) : (
-                      <li key={item.label}>
-                        <Link
+                        </li>
+                      ))}
+                    </ul>
+                      )}
+                    </li>
+                  ) : (
+                    <li key={item.label}>
+                      <Link
                           href={getLinkHref(item.href)}
                           className={`header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs ${item.label === 'Home' ? 'underline decoration-[rgb(184,134,11,1)] text-[rgb(184,134,11,1)] font-bold' : 'text-[rgb(184,134,11,0.8)]'} hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] whitespace-nowrap`}
-                          style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </nav>
+                        style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
+                      >
+                {item.label}
+              </Link>
+                    </li>
+            )
+          )}
+              </ul>
+        </nav>
               {/* Icons on the right */}
               <div className="flex items-center gap-6 ml-auto">
                 <button
@@ -368,14 +368,14 @@ export default function Header() {
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M11.03 11.68A5.784 5.784 0 1 1 2.85 3.5a5.784 5.784 0 0 1 8.18 8.18m.26 1.12a6.78 6.78 0 1 1 .72-.7l5.4 5.4a.5.5 0 1 1-.71.7z" clipRule="evenodd" /></svg>
                 </button>
                 <Link href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")} className="hover:text-[rgb(184,134,11,1)]" rel="nofollow" aria-label="Account">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-                </Link>
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
+          </Link>
                 <Link href={getLinkHref("/cart")} className="hover:text-[rgb(184,134,11,1)]" aria-label="Cart">
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
-                </Link>
-              </div>
-            </div>
-          </header>
+          </Link>
+        </div>
+      </div>
+      </header>
         </>
       )}
       {/* Mobile Menu Drawer */}
@@ -391,19 +391,19 @@ export default function Header() {
                   style={{ zIndex: activeMobileSubmenuIndex === null ? 2 : 1 }}
                 >
                   <ul className="flex flex-col gap-1 text-black">
-                    {menu.map((item, idx) =>
-                      item.submenu ? (
+                {menu.map((item, idx) =>
+                  item.submenu ? (
                         <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
-                          <button
+                      <button
                             className="w-full text-left px-2 py-2 font-dmsans text-sm font-semibold text-black flex items-center justify-between whitespace-nowrap"
                             style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600 }}
                             onClick={() => openMobileSubmenu(idx)}
-                          >
+                      >
                             <span>{item.label}</span>
                             <span className="ml-1">→</span>
-                          </button>
-                        </li>
-                      ) : (
+                      </button>
+                    </li>
+                  ) : (
                         <li key={item.label} className={idx === 0 ? 'mt-12' : ''}>
                           <Link
                             href={getLinkHref(item.href)}
@@ -411,12 +411,12 @@ export default function Header() {
                             style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600 }}
                             onClick={() => setMobileMenuOpen(false)} // Close menu on direct link click
                           >
-                            {item.label}
-                          </Link>
-                        </li>
-                      )
-                    )}
-                  </ul>
+                        {item.label}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
                 </div>
                 {/* Submenu */}
                 <div
@@ -456,8 +456,8 @@ export default function Header() {
               <div className="flex items-center gap-4">
                 <a href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")}
                   className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" rel="nofollow" aria-label="Account">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-                </a>
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
+              </a>
                 <a href={getLinkHref("/cart")} className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" aria-label="Cart">
                   <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
                 </a>
@@ -478,4 +478,4 @@ export default function Header() {
       )}
     </>
   );
-}
+} 

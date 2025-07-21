@@ -133,10 +133,10 @@ const Footer = () => {
 
       {/* New Footer Section */}
       <footer className="footer bg-black text-white py-12 px-0 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto text-center">
-        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1  md:grid-cols-4 gap-8 mb-8 items-center text-center ml-4 md:ml-0"> {/* Added text-left here */}
+        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-center ml-4 md:ml-0">
           {/* Outdoor Bamboo Structures */}
-          <div className="footer-block text-left ml-4 md:ml-0">
-            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
+          <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
+            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#b8860b] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/bamboo-canopy-in-pakistan/Canopy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Canopy Bliss</Link></li>
               <li><Link href="/collections/bamboo-house-luxury/House" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo House Retreat</Link></li>
@@ -147,8 +147,8 @@ const Footer = () => {
           </div>
 
           {/* Indoor Bamboo Comfort */}
-          <div className="footer-block text-left ml-4 md:ml-0">
-            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Indoor Bamboo Comfort</strong></h2>
+          <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
+            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#b8860b] mb-4"><strong>Indoor Bamboo Comfort</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/premium-bamboo-lounge-set-with-cushioned-seating-modern-outdoor-indoor-comfort" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Luxury Sofa Set</Link></li>
               <li><a href="https://ecobambo.com/collections/bamboo-single-kid-bed" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo luxe Beds</a></li>
@@ -159,8 +159,8 @@ const Footer = () => {
           </div>
 
           {/* Home & Baby Essentials */}
-          <div className="footer-block text-left ml-4 md:ml-0">
-            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Home & Baby Essentials</strong></h2>
+          <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
+            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#b8860b] mb-4"><strong>Home & Baby Essentials</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/collections/eco-friendly-bamboo-kids-beds-perfect-for-children/Baby-Beds" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Baby Bamboo Beds - Cribs</Link></li>
               <li><Link href="/collections/1-modern-bamboo-hanging-wall-art-standing-plant-and-flower-pot-stylish-decor-perfect-for-home-garden/Hanging-Walls" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Hanging Walls - Art</Link></li>
@@ -171,8 +171,8 @@ const Footer = () => {
           </div>
 
           {/* Eco Bambo Store Policies */}
-          <div className="footer-block text-left ml-4 md:ml-0">
-            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#d4af37] mb-4"><strong>Eco Bambo Store Policies</strong></h2>
+          <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
+            <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#b8860b] mb-4"><strong>Eco Bambo Store Policies</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
               <li><Link href="/pages/https-www-yourwebsite-com-about-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">About Eco Bambo - Our Story & vision</Link></li>
               <li><Link href="/policies/shipping-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Shipping & Delivery Policy</Link></li>
@@ -225,10 +225,10 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer_content-bottom-wrapper max-w-6xl mx-auto">
-            <div className="footer__copyright caption text-left">
+            <div className="footer__copyright caption text-center md:text-left flex flex-col items-center md:items-start">
               <small className="copyright__content">© 2025, <Link href="/" title="" className="text-amber-400 hover:underline underline">ECO BAMBO</Link></small>
               <small className="copyright__content"><a target="_blank" rel="nofollow" href="https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore" className="text-amber-300 hover:underline"> </a></small>
-              <ul className="policies list-none p-0 flex flex-wrap justify-start space-x-4 mt-2 text-left">
+              <ul className="policies list-none p-0 flex flex-wrap justify-center md:justify-start space-x-4 mt-2 text-center md:text-left">
                 <li><small className="copyright__content"><Link href="/policies/privacy-policy" className="text-amber-300 hover:underline underline">Privacy policy</Link></small></li>
                 <li><small className="copyright__content"><Link href="/policies/refund-policy" className="text-amber-300 hover:underline underline">Refund policy</Link></small></li>
                 <li><small className="copyright__content"><Link href="/policies/terms-of-service" className="text-amber-300 hover:underline underline">Terms of service</Link></small></li>

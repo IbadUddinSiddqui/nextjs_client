@@ -79,10 +79,10 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
           index % 2 === 0 ? "order-2 md:order-2" : "order-2 md:order-1"
         }`}
       >
-        <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 text-black leading-snug">
+        <h3 className="text-[16px] font-bold mb-3 text-[#3D3434] leading-snug font-[Jost,sans-serif]">
           {step.title}
         </h3>
-        <p className="text-md font- sm:text-2xl md:text-[22px] text-black leading-[1.3] px-3">
+        <p className="text-[16px] text-[#3D3434] leading-[1.3] px-3 font-[Jost,sans-serif]">
           {step.description}
         </p>
       </motion.div>
@@ -309,7 +309,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
     <div className="tutorial-section ">
       {/* Video Section - Matching original VideoPlayer design */}
         {tutorialData.video && (
-        <div className="max-w-5xl mx-auto px-4 py-12 text-center">
+        <div className="w-full py-12 text-center">
           {/* Title with Framer Motion animation */}
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -343,7 +343,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
 
       {/* Step-by-Step Tutorial - Matching original StepTutorial design */}
         {tutorialData.steps && tutorialData.steps.length > 0 && (
-        <section ref={stepsSectionRef} className="pt-10 pb-0 sm:py-10 w-full max-w-6xl mx-auto px-4 sm:px-3 relative">
+        <section ref={stepsSectionRef} className="pt-10 pb-0 sm:py-10 w-full relative">
           {/* Title with animation and spacing */}
           <motion.h2
             initial={{ y: -50, opacity: 0 }}

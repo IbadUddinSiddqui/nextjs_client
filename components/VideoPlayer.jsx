@@ -28,7 +28,7 @@ const VideoPlayer = () => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12 text-center">
+    <div className="w-full py-12 text-center">
       {/* Title with Framer Motion animation */}
       <motion.h2
         ref={titleRef}

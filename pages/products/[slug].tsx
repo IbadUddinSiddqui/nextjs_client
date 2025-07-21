@@ -189,7 +189,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="w-full max-w-[100vw] overflow-x-hidden mt-24">
+    <div className="w-full max-w-[100vw] overflow-x-hidden p-3 mt-24">
       {/* Top Product Banner Image for Special Products Only */}
       {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
@@ -234,7 +234,7 @@ export default function ProductPage() {
       {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
 
       {/* Main Product Detail Section */}
-      <div className="w-full max-w-7xl  mx-auto px-2 sm:px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      <div className="w-full max-w-7xl mx-auto py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 px-0">
         {/* Left - ImageSlider */}
         <ImageSlider
           images={productData.images}
@@ -309,7 +309,9 @@ export default function ProductPage() {
           
         </div>
       </div>
-      {/* Text Slider - moved here to appear just after the product */}
+      {/* Accordion Section - moved here to appear just after the product */}
+      <Accordion />
+      {/* Text Slider - moved down */}
       <TextSlider />
       {["large-bamboo-standing-plant-pot-unique-affordable", "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot", "1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas", "small-bamboo-hanging-with-stand-stylish-home-wall-art-decor"].includes(product.handle) && (
         <>
@@ -317,10 +319,6 @@ export default function ProductPage() {
           
         </>
       )}
-      
-      {/* Accordion Section */}
-      <Accordion />
-
 
       {/* Related Products Section */}
       <RelatedProducts currentProduct={product} />

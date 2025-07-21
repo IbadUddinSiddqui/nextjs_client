@@ -147,11 +147,11 @@ const AddToCart = ({ product, selectedVariant }) => {
                 <FaFacebookF />
               </a>
               <a href="https://www.instagram.com/ecobambo0?igsh=a3dpZ3NiY2R6d3Uw&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black hover:text-[#B8860B]">
-                <FaInstagram />
-              </a>
+                  <FaInstagram />
+                </a>
               <a href="https://www.tiktok.com/@ecobambo0?_t=ZS-8uYnW51R4Sb&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-black hover:text-[#B8860B]">
-                <FaTiktok />
-              </a>
+                  <FaTiktok />
+                </a>
               <a href="https://www.youtube.com/channel/UCMEfaztIY2KxW6fFh_J8zmw" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-black hover:text-[#B8860B]">
                 <FaYoutube />
               </a>
@@ -166,8 +166,8 @@ const AddToCart = ({ product, selectedVariant }) => {
               onMouseLeave={() => setShowDesktopShare(false)}
             >
               <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-black hover:text-[#B8860B]">
-                <FaFacebookF />
-              </a>
+                  <FaFacebookF />
+                </a>
               <a href="https://www.instagram.com/ecobambo0?igsh=a3dpZ3NiY2R6d3Uw&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black hover:text-[#B8860B]">
                 <FaInstagram />
               </a>
@@ -175,15 +175,15 @@ const AddToCart = ({ product, selectedVariant }) => {
                 <FaTiktok />
               </a>
               <a href="https://www.youtube.com/channel/UCMEfaztIY2KxW6fFh_J8zmw" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-black hover:text-[#B8860B]">
-                <FaYoutube />
-              </a>
+                  <FaYoutube />
+                </a>
               <a href="https://wa.me/923416995870" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-black hover:text-[#B8860B]">
                 <FaWhatsapp />
-              </a>
-            </div>
+                </a>
+              </div>
           </div>
         </div>
-
+ 
         {/* Guarantee Safe Checkout */}
         <div className="flex flex-wrap items-center justify-between rounded-md px-4 py-3 mt-4 ">
           <div className="flex items-center gap-2">
