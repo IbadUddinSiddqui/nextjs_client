@@ -12,6 +12,8 @@ const FSlider = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
 
   // GraphQL query to fetch products
   const PRODUCTS_QUERY = `
@@ -108,6 +110,25 @@ const FSlider = () => {
     );
   };
 
+  // Touch event handlers for swipe
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+    setTouchEndX(null);
+  };
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchEndX === null) return;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) handleNext(); // swipe left
+      else handlePrev(); // swipe right
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   const visibleItems = products.slice(currentIndex, currentIndex + itemsPerPage);
 
   if (loading) {
@@ -175,7 +196,12 @@ const FSlider = () => {
       </div>
 
       {/* Product Slider with AnimatePresence */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <AnimatePresence mode="sync">
           {visibleItems.map((product, index) => (
             <motion.div
