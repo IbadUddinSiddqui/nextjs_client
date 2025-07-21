@@ -263,7 +263,7 @@ const FSlider = () => {
       {products.length > 0 && (
         <div className="text-center mt-8">
           <Link 
-            href="/"
+            href="https://ecobambo.com/collections"
             className="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
           >
             View All Products

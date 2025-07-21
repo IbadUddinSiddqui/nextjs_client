@@ -262,6 +262,8 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
   const tutorialData = tutorialDatabase[productHandle];
   const [visibleSteps, setVisibleSteps] = useState({});
   const [isMuted, setIsMuted] = useState(true);
+  const stepsSectionRef = useRef(null);
+  const [stemFill, setStemFill] = useState(0); // 0 to 1
 
   // If no tutorial data exists for this product, don't render anything
   if (!tutorialData) {
@@ -274,6 +276,34 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
       return { ...prev, [index]: isVisible };
     });
   };
+
+  // Scroll progress for stem fill
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!stepsSectionRef.current) return;
+      const rect = stepsSectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalHeight = rect.height;
+      // Calculate how much of the section is in view
+      let progress = 0;
+      // Make the fill faster by increasing the sensitivity
+      // Instead of dividing by (windowHeight + totalHeight), divide by (totalHeight * 0.6) for a faster fill
+      const fastFactor = 0.9;
+      if (rect.top >= windowHeight) progress = 0;
+      else if (rect.bottom <= 0) progress = 1;
+      else {
+        progress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (totalHeight * fastFactor)));
+      }
+      setStemFill(progress);
+    };
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
 
   return (
     <div className="tutorial-section ">
@@ -313,7 +343,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
 
       {/* Step-by-Step Tutorial - Matching original StepTutorial design */}
         {tutorialData.steps && tutorialData.steps.length > 0 && (
-        <section className="pt-10 pb-0 sm:py-10 w-full max-w-6xl mx-auto px-4 sm:px-3 relative">
+        <section ref={stepsSectionRef} className="pt-10 pb-0 sm:py-10 w-full max-w-6xl mx-auto px-4 sm:px-3 relative">
           {/* Title with animation and spacing */}
           <motion.h2
             initial={{ y: -50, opacity: 0 }}
@@ -327,6 +357,15 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
 
           {/* Center Line (Desktop only) */}
           <div className="absolute left-[calc(50%-1px)] top-[210px] bottom-[170px] w-[2px] bg-gray-300 z-0 hidden md:block" />
+          {/* Black fill overlay */}
+          <div
+            className="absolute left-[calc(50%-1px)] top-[210px] w-[2px] bg-black z-10 hidden md:block transition-all duration-300"
+            style={{
+              height: `calc((100% - 210px - 170px) * ${stemFill})`,
+              minHeight: 0,
+              maxHeight: 'calc(100% - 210px - 170px)',
+            }}
+          />
 
           {/* Steps */}
           <div className="relative z-20">

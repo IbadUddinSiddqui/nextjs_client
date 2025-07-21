@@ -189,7 +189,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="w-full max-w-[100vw] overflow-x-hidden">
+    <div className="w-full max-w-[100vw] overflow-x-hidden mt-24">
       {/* Top Product Banner Image for Special Products Only */}
       {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
@@ -234,7 +234,7 @@ export default function ProductPage() {
       {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
 
       {/* Main Product Detail Section */}
-      <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      <div className="w-full max-w-7xl  mx-auto px-2 sm:px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {/* Left - ImageSlider */}
         <ImageSlider
           images={productData.images}
