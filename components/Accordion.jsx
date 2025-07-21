@@ -99,7 +99,7 @@ Refunds within 10 business days after item inspection.`,
                       <table className="min-w-full text-sm text-gray-700 rounded-lg overflow-hidden">
                         <tbody>
                           {parseSpecification(section.content).map(({ key, value }, idx) => (
-                            <tr key={idx} className="even:bg-gray-100">
+                            <tr key={idx}>
                               <td className="px-4 py-2 font-semibold  w-1/3">{key}</td>
                               <td className="px-4 py-2 ">{value}</td>
                             </tr>

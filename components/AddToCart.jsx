@@ -138,27 +138,26 @@ const AddToCart = ({ product, selectedVariant }) => {
               className="flex items-center gap-2 p-2 text-black rounded-full hover:bg-gray-300"
             >
               <FaShareAlt />
-              <span>Share</span>
-            </button>
-            {/* Social Icons: always visible on mobile, hover/click on desktop */}
-            {/* Mobile: always visible */}
-            <div className={`flex gap-2 mt-2 items-center flex-row lg:hidden ${showShare ? '' : 'hidden'}`}>
-              <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-black hover:text-[#B8860B]">
-                <FaFacebookF />
-              </a>
-              <a href="https://www.instagram.com/ecobambo0?igsh=a3dpZ3NiY2R6d3Uw&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black hover:text-[#B8860B]">
+              {/* Social Icons: always visible on mobile, inline before Share label */}
+              <span className="flex gap-1 lg:hidden ml-1">
+                <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-black hover:text-[#B8860B]">
+                  <FaFacebookF />
+                </a>
+                <a href="https://www.instagram.com/ecobambo0?igsh=a3dpZ3NiY2R6d3Uw&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black hover:text-[#B8860B]">
                   <FaInstagram />
                 </a>
-              <a href="https://www.tiktok.com/@ecobambo0?_t=ZS-8uYnW51R4Sb&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-black hover:text-[#B8860B]">
+                <a href="https://www.tiktok.com/@ecobambo0?_t=ZS-8uYnW51R4Sb&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-black hover:text-[#B8860B]">
                   <FaTiktok />
                 </a>
-              <a href="https://www.youtube.com/channel/UCMEfaztIY2KxW6fFh_J8zmw" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-black hover:text-[#B8860B]">
-                <FaYoutube />
-              </a>
-              <a href="https://wa.me/923416995870" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-black hover:text-[#B8860B]">
-                <FaWhatsapp />
-              </a>
-            </div>
+                <a href="https://www.youtube.com/channel/UCMEfaztIY2KxW6fFh_J8zmw" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-black hover:text-[#B8860B]">
+                  <FaYoutube />
+                </a>
+                <a href="https://wa.me/923416995870" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-black hover:text-[#B8860B]">
+                  <FaWhatsapp />
+                </a>
+              </span>
+              <span>Share</span>
+            </button>
             {/* Desktop: only on hover/click */}
             <div
               className={`hidden lg:flex gap-2 mt-2 items-center flex-row transition-opacity duration-200 ${showDesktopShare || showShare ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}

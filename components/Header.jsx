@@ -312,13 +312,16 @@ export default function Header() {
                 <ul className="flex gap-4" style={{ fontSize: '0.7rem' }}>
           {menu.map((item, idx) =>
             item.submenu ? (
-                    <li key={item.label} className="relative group">
+                    <li key={item.label} className="relative group"
+                      onMouseEnter={() => setOpenSubmenu(idx)}
+                      onMouseLeave={() => setOpenSubmenu(null)}
+                    >
                 <button
                           className="header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs text-[rgb(184,134,11,0.8)] hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] focus:outline-none gap-1 whitespace-nowrap"
                         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                  onClick={() => setOpenSubmenu(openSubmenu === idx ? null : idx)}
-                        aria-expanded={openSubmenu === idx}
-                        aria-controls={`desktop-submenu-${idx}`}
+                  aria-expanded={openSubmenu === idx}
+                  aria-controls={`desktop-submenu-${idx}`}
+                  tabIndex={0}
                 >
                         <span>{item.label}</span>
                         <svg className="icon icon-caret w-3 h-3" viewBox="0 0 10 6"><path fill="currentColor" fillRule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clipRule="evenodd" /></svg>
