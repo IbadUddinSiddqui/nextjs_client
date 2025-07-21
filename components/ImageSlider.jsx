@@ -69,18 +69,18 @@ const ImageSlider = ({ images, currentImage, setCurrentImage }) => {
           src={currentImage}
           alt="Main Product"
           onClick={() => setIsModalOpen(true)}
-          className="w-full h-full object-cover md:w-[400px] md:ml-24 lg:w-[550px] cursor-zoom-in transition-transform duration-300"
+          className="w-full h-full object-cover md:w-[350px] md:ml-36 lg:ml-20 lg:w-[350px] cursor-zoom-in transition-transform duration-300"
         />
 
         <button
           onClick={handlePrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-1 rounded-full hover:bg-black hover:text-white z-10"
+          className="absolute left-2  top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-1 rounded-full hover:bg-black hover:text-white z-10"
         >
           <FaChevronLeft />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-1 rounded-full hover:bg-black hover:text-white z-10"
+          className="absolute right-4  lg:-ml-12 top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-1 rounded-full hover:bg-black hover:text-white z-10"
         >
           <FaChevronRight />
         </button>
