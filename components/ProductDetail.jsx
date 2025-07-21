@@ -92,7 +92,7 @@ const ProductDetail = () => {
                   alt={variant.color}
                   title={variant.color}
                   onClick={() => handleColorClick(variant)}
-                  className={`w-10 h-10 object-cover rounded-full border-2 cursor-pointer ${
+                  className={`w-10 h-10 object-cover bg-white rounded-full border-2 cursor-pointer ${
                     variant.color === selectedVariant.color
                       ? "border-black"
                       : "border-gray-300"

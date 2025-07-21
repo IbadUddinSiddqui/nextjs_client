@@ -452,14 +452,24 @@ export default function Header() {
               </div>
             </nav>
             {/* Account and Cart icons at the bottom */}
-            <div className="flex items-center gap-4 mt-8 pt-4 border-t border-gray-200 justify-center w-full mb-12">
-              <a href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")}
-                className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" rel="nofollow" aria-label="Account">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
-              </a>
-              <a href={getLinkHref("/cart")} className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" aria-label="Cart">
-                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
-              </a>
+            <div className="flex flex-col items-center gap-4 mt-8 pt-4 border-t border-gray-200 justify-center w-full mb-12">
+              <div className="flex items-center gap-4">
+                <a href={getLinkHref("https://shopify.com/60579741763/account?locale=en&region_country=PK")}
+                  className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" rel="nofollow" aria-label="Account">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 18 19"><path fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd" /></svg>
+                </a>
+                <a href={getLinkHref("/cart")} className="p-2 hover:text-[#B8860B] text-black flex items-center justify-center" aria-label="Cart">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 40 40"><path fillRule="evenodd" d="M15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33L28.4 11.8zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1-9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" /></svg>
+                </a>
+              </div>
+              {/* Social Icons Row */}
+              <div className="flex items-center gap-4 mt-4">
+                {socialLinks.map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="hover:opacity-80 text-black">
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
           {/* Overlay click closes menu and resets submenu */}

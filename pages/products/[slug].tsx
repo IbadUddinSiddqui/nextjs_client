@@ -155,19 +155,12 @@ export default function ProductPage() {
   if (error) return <div className="p-10 text-center text-red-600">Error: {error}</div>;
 
   // Transform Shopify data to match original structure
-  let images;
-  if (product.handle === "large-bamboo-standing-plant-pot-unique-affordable") {
-    images = [
-      "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
-    ];
-  } else {
-    images = product.images.edges.map(edge => edge.node.src);
-    if (product.handle === "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot") {
-      images.push(
-        "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/13_95a2bf96-f58a-4587-862e-1d0b56fb5b21.png?v=1744532370",
-        "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/12_8843d7d3-1909-4806-9a81-c201189113eb.png?v=1744532287"
-      );
-    }
+  const images = product.images.edges.map(edge => edge.node.src);
+  if (product.handle === "small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot") {
+    images.push(
+      "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/13_95a2bf96-f58a-4587-862e-1d0b56fb5b21.png?v=1744532370",
+      "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/12_8843d7d3-1909-4806-9a81-c201189113eb.png?v=1744532287"
+    );
   }
   const price = product.variants.edges[0]?.node.priceV2.amount || "N/A";
   const currency = product.variants.edges[0]?.node.priceV2.currencyCode || "";
@@ -189,12 +182,6 @@ export default function ProductPage() {
     })),
     description: product.description
   };
-
-  if (product.handle === "large-bamboo-standing-plant-pot-unique-affordable") {
-    productData.images = [
-      "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
-    ];
-  }
 
   const handleColorClick = (variant: any) => {
     setSelectedVariant(variant);
