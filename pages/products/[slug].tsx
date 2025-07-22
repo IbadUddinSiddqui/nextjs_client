@@ -205,7 +205,7 @@ export default function ProductPage() {
           <img
             src="https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
             alt="Product Banner"
-            className="w-full max-w-6xl h-auto max-h-[500px] object-contain rounded-xl shadow-lg border border-gray-200 transition-opacity duration-500"
+            className="w-[80vw] max-w-7xl h-auto max-h-[600px] object-contain rounded-2xl shadow-2xl border border-gray-200 transition-opacity duration-500"
             style={{ objectPosition: 'center' }}
           />
         </div>
@@ -215,7 +215,7 @@ export default function ProductPage() {
           <img
             src={["https://cdn.shopify.com/s/files/1/0605/7974/1763/files/13_95a2bf96-f58a-4587-862e-1d0b56fb5b21.png?v=1744532370","https://cdn.shopify.com/s/files/1/0605/7974/1763/files/12_8843d7d3-1909-4806-9a81-c201189113eb.png?v=1744532287"][bannerImageIndex % 2]}
             alt={`Product Banner ${bannerImageIndex + 1}`}
-            className="w-full max-w-6xl h-auto max-h-[500px] object-contain rounded-xl shadow-lg border border-gray-200 transition-opacity duration-500"
+            className="w-[90vw] max-w-7xl h-auto max-h-[700px] object-contain rounded-2xl shadow-2xl border border-gray-200 transition-opacity duration-500"
             style={{ objectPosition: 'center' }}
           />
         </div>
@@ -243,16 +243,18 @@ export default function ProductPage() {
       {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
 
       {/* Main Product Detail Section */}
-      <div className="w-full max-w-7xl mx-auto py-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 px-0">
+      <div className="w-full max-w-7xl  mt-12 mx-auto py-6 grid grid-cols-1 md:grid-cols-2  sm:gap-8 px-0">
+       
         {/* Left - ImageSlider */}
         <ImageSlider
           images={productData.images}
           currentImage={currentImage}
           setCurrentImage={setCurrentImage}
+          
         />
 
         {/* Right - Product Info */}
-        <div className="flex flex-col space-y-4">
+        <div className="  flex flex-col space-y-4 w-[100%]">
           {/* Title */}
           <h1 className="text-2xl sm:text-[28px] font-bold text-[#000000] font-albert leading-tight">
             {productData.title}

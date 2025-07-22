@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 const messages = [
   "Welcome to ECO Bambo !",
@@ -7,68 +7,48 @@ const messages = [
   "New style bamboo arrivals"
 ];
 
-const SLIDE_DURATION = 3000; // ms (total time for each message)
-
 export default function HeaderAnnouncementSlider() {
   const [current, setCurrent] = useState(0);
-  const spanRef = useRef();
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setCurrent((prev) => (prev + 1) % messages.length);
-    }, SLIDE_DURATION);
-    // Restart animation by reflowing the span
-    if (spanRef.current) {
-      spanRef.current.style.animation = 'none';
-      // Force reflow
-      void spanRef.current.offsetWidth;
-      spanRef.current.style.animation = `slideInOut ${SLIDE_DURATION}ms linear`;
-    }
-    return () => clearTimeout(timeout);
-  }, [current]);
+  const goPrev = () => {
+    setCurrent((prev) => (prev - 1 + messages.length) % messages.length);
+  };
+  const goNext = () => {
+    setCurrent((prev) => (prev + 1) % messages.length);
+  };
 
   return (
     <div className="w-full h-8 flex items-center justify-center overflow-hidden relative">
+      <button
+        onClick={goPrev}
+        aria-label="Previous announcement"
+        className="px-2 md:px-4 lg:px-8 h-full flex items-center justify-center text-black hover:opacity-70"
+        style={{ background: "transparent", border: "none", fontSize: "1.2rem", cursor: "pointer" }}
+        tabIndex={0}
+      >
+        {'<'}
+      </button>
       <span
-        ref={spanRef}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-center font-semibold"
+        className="px-2 md:px-8 lg:px-16 whitespace-nowrap text-center font-semibold"
         style={{
           color: "#000",
           fontWeight: 350,
           fontSize: "1rem",
           letterSpacing: "0.02em",
           minWidth: 'max-content',
-          animation: `slideInOut ${SLIDE_DURATION}ms linear`,
         }}
       >
-        {messages[current]}
+      <div className="font-semibold">  {messages[current]} </div>
       </span>
-      <style jsx>{`
-        @keyframes slideInOut {
-          0% {
-            transform: translate(-50%, -50%) translateX(-100%);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          20% {
-            transform: translate(-50%, -50%) translateX(-10%);
-            opacity: 1;
-          }
-          80% {
-            transform: translate(-50%, -50%) translateX(-10%);
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(-50%, -50%) translateX(100%);
-            opacity: 0;
-          }
-        }
-      `}</style>
+      <button
+        onClick={goNext}
+        aria-label="Next announcement"
+        className="px-2 md:px-4 lg:px-8 h-full flex items-center justify-center text-black hover:opacity-70"
+        style={{ background: "transparent", border: "none", fontSize: "1.2rem", cursor: "pointer" }}
+        tabIndex={0}
+      >
+        {'>'}
+      </button>
     </div>
   );
 } 

@@ -53,7 +53,7 @@ const TutorialSection = () => {
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
               {tutorialData.video.title}
             </h2>
-            <div className="relative aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg">
+            <div className="relative w-full h-[220px] md:w-[90vw] md:h-[650px] max-w-none mx-auto rounded-lg overflow-hidden shadow-lg">
               <video
                 className="w-full h-full object-cover"
                 controls

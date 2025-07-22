@@ -155,7 +155,7 @@ const FSlider = () => {
   return (
     <section className="bg-gray-50 py-12 px-4 relative">
       {/* Typewriter Title */}
-      <h2 className="text-xl md:text-2xl text-black font-semibold text-center mt-4 mb-1">
+      <h2 className="text-xl md:text-3xl text-black font-semibold text-center mt-4 mb-1">
         <Typewriter
           options={{
             strings: ["Explore Full Collection"],
@@ -168,7 +168,7 @@ const FSlider = () => {
 
       {/* Main Heading */}
       <motion.h3
-        className="text-2xl md:text-3xl text-center font-bold text-gray-800 mb-10"
+        className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -206,14 +206,14 @@ const FSlider = () => {
           {visibleItems.map((product, index) => (
             <motion.div
               key={product.id}
-              className="rounded-xl overflow-hidden shadow group relative transition"
+              className=" overflow-hidden shadow group relative transition"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
             >
               {/* Product Image with Link */}
-              <Link href={`/products/${product.handle}`}>
+              <Link href={`https://ecobambo.com/products/${product.handle}`}>
                 <div className="relative h-56 w-full overflow-hidden group cursor-pointer">
                   <img
                     src={product.image}
@@ -246,7 +246,7 @@ const FSlider = () => {
                   </div>
 
                   {/* Add to Cart button */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-300">
+                  {/* <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-300">
                     <button 
                       className="bg-black text-white px-4 py-1 rounded-[20px] text-sm flex items-center gap-2 hover:bg-white hover:text-black border hover:border-black"
                       onClick={(e) => {
@@ -257,7 +257,7 @@ const FSlider = () => {
                       <FiShoppingBag className="text-base" />
                       Add to Cart
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </Link>
 
@@ -268,17 +268,17 @@ const FSlider = () => {
                     {product.title}
                   </h3>
                 </Link>
-                <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                {/* <p className="text-sm text-gray-600 mb-2 line-clamp-2">
                   {product.description}
                 </p>
                 <p className="text-sm font-bold text-green-600">
                   {product.currency} {product.price}
-                </p>
-                {product.productType && (
+                </p> */}
+                {/* {product.productType && (
                   <p className="text-xs text-gray-500 mt-1">
                     {product.productType}
                   </p>
-                )}
+                )} */}
               </div>
             </motion.div>
           ))}

@@ -56,35 +56,51 @@ const ImageSlider = ({ images, currentImage, setCurrentImage }) => {
   };
 
   return (
-      <div className="w-full flex flex-col items-center md:ml-6 px-0 sm:px-0">
+      <div className="w-full flex flex-col items-center md:ml-6 px-0 sm:px-0 lg:px-[20px] lg:max-w-[calc(100vw-40px)] mx-auto">
 <div
   className="relative w-full sm:w-[650px] ml-4 sm:ml-0 mr-4 sm:mr-9 h-[400px] sm:h-[600px] overflow-hidden rounded-xl"
   onTouchStart={handleTouchStart}
   onTouchMove={handleTouchMove}
   onTouchEnd={handleTouchEnd}
 >
-
-      {/* ✅ Main Large Image */}
-        <img
-          src={currentImage}
-          alt="Main Product"
-          onClick={() => setIsModalOpen(true)}
-          className="w-full h-full object-cover md:w-[350px] md:ml-36 lg:ml-20 lg:w-[350px] cursor-zoom-in transition-transform duration-300"
-        />
-
+  {/* ✅ Main Large Image */}
+  <img
+    src={currentImage}
+    alt="Main Product"
+    onClick={() => setIsModalOpen(true)}
+    className="w-full h-full object-contain md:w-[350px] md:ml-36 lg:w-[500px] lg:ml-20 xl:ml-2 xl:w-[800px] xl:h-[600px] cursor-zoom-in transition-transform duration-300"
+  />
+  {/* Next/Prev buttons at image extremes */}
+  <button
+    onClick={handlePrev}
+    className="absolute left-12 top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-2 rounded-full hover:bg-black hover:text-white z-10"
+    style={{ transform: 'translateY(-50%) translateX(-50%)' }}
+  >
+    <FaChevronLeft />
+  </button>
+  <button
+    onClick={handleNext}
+    className="absolute right-12 top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-2 rounded-full hover:bg-black hover:text-white z-10"
+    style={{ transform: 'translateY(-50%) translateX(50%)' }}
+  >
+    <FaChevronRight />
+  </button>
+</div>
+      {/* Move next/prev buttons below image, centered horizontally
+      <div className="flex justify-center gap-8 mt-2">
         <button
           onClick={handlePrev}
-          className="absolute left-2  top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-1 rounded-full hover:bg-black hover:text-white z-10"
+          className="text-black bg-white/80 text-xs p-2 rounded-full hover:bg-black hover:text-white z-10"
         >
           <FaChevronLeft />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-4  lg:-ml-12 top-1/2 -translate-y-1/2 text-black bg-white/80 text-xs p-1 rounded-full hover:bg-black hover:text-white z-10"
+          className="text-black bg-white/80 text-xs p-2 rounded-full hover:bg-black hover:text-white z-10"
         >
           <FaChevronRight />
         </button>
-      </div>
+      </div> */}
 
       {/* ✅ Thumbnails with Scroll Buttons */}
       <div className="relative w-full max-w-[600px] mt-4">

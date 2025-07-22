@@ -34,7 +34,7 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
   return (
     <div
       ref={ref}
-      className="relative flex flex-col md:flex-row items-center gap-6 mb-20 z-20"
+      className="relative flex flex-col md:flex-row items-center gap-12 md:gap-48 mb-20 z-20"
     >
       {/* Step Number Circle (Only on md and above) */}
       <div className="absolute left-1/2 top-10 transform -translate-x-1/2 z-30 hidden md:flex">
@@ -75,14 +75,14 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
         initial="hidden"
         animate={controls}
         variants={textAnimation}
-        className={`relative z-20 w-full md:w-1/2 ${
+        className={`relative w-[400px] z-20 md:w-1/2 ${
           index % 2 === 0 ? "order-2 md:order-2" : "order-2 md:order-1"
         }`}
       >
-        <h3 className="text-[16px] font-bold mb-3 text-[#3D3434] leading-snug font-[Jost,sans-serif]">
+        <h3 className="text-[24px] font-extrabold mb-3 ml-3 text-[#3D3434] font-[Jost,sans-serif]">
           {step.title}
         </h3>
-        <p className="text-[16px] text-[#3D3434] leading-[1.3] px-3 font-[Jost,sans-serif]">
+        <p className="text-[20px] text-[#3D3434] font-[Jost,sans-serif] leading-[2]">
           {step.description}
         </p>
       </motion.div>
@@ -311,21 +311,18 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
         {tutorialData.video && (
         <div className="w-full py-12 text-center">
           {/* Title with Framer Motion animation */}
+         
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            initial={{ y: -50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-[24px] md:text-[28px] font-bold text-[#000000] font-dm"
+            className="text-xl sm:text-3xl md:text-4xl font-jost text-center text-black mb-10 sm:mb-5"
           >
-              {tutorialData.video.title}
+            {productTitle || 'Product Assembly Guide'} - Watch & Learn!
           </motion.h2>
-
-          {/* Down Arrow Icon */}
-          <div className="text-3xl mt-5 mb-6 animate-bounce">⬇️</div>
-
           {/* Video Player */}
-          <div className="relative pt-[56.25%] w-full rounded-xl overflow-hidden shadow-xl">
+          <div className="relative w-full h-[220px] md:w-[90vw] md:h-[650px] rounded-xl overflow-hidden shadow-xl mx-auto">
               <video
               className="absolute top-0 left-0 w-full h-full object-cover"
                 controls
@@ -345,16 +342,20 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
         {tutorialData.steps && tutorialData.steps.length > 0 && (
         <section ref={stepsSectionRef} className="pt-10 pb-0 sm:py-10 w-full relative">
           {/* Title with animation and spacing */}
+          <div className='text-center'>
           <motion.h2
-            initial={{ y: -50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-xl sm:text-3xl md:text-4xl font-jost text-center text-black mb-10 sm:mb-5"
+            className="text-[24px] md:text-[28px]  text-[#000000] font-dm"
           >
-            {productTitle || 'Product Assembly Guide'} - Watch & Learn!
+              {tutorialData.video.title}
           </motion.h2>
 
+          {/* Down Arrow Icon */}
+          <div className="text-3xl mt-5 mb-6 animate-bounce">⬇️</div>
+          </div>
           {/* Center Line (Desktop only) */}
           <div className="absolute left-[calc(50%-1px)] top-[210px] bottom-[170px] w-[2px] bg-gray-300 z-0 hidden md:block" />
           {/* Black fill overlay */}
@@ -368,7 +369,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
           />
 
           {/* Steps */}
-          <div className="relative z-20">
+          <div className="relative text-[24px] font-semibold z-20 w-[80vw] mx-auto">
               {tutorialData.steps.map((step, index) => (
               <StepItem
                 key={index}

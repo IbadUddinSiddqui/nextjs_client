@@ -18,9 +18,9 @@ const Footer = () => {
   }
 
   return (
-    <div className="bg-black px-0 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 font-sans text-left">
+    <div className="bg-black px-0 py-4 sm:py-6 lg:py-8 font-sans text-left w-full">
       {/* Main footer container */}
-      <div className="eco-form-container bg-black shadow-lg rounded-xl p-6 md:p-10 flex flex-col lg:flex-row lg:space-x-10 max-w-7xl mx-auto mb-8 text-left">
+      <div className="eco-form-container bg-black shadow-lg rounded-xl p-2 md:p-4 flex flex-col lg:flex-row lg:space-x-10 w-full mb-8 text-left">
         {/* Left Side: Map and Contact Information */}
         <div className="eco-form-left lg:w-1/2 mb-8 lg:mb-0">
           {/* Google Map Embed */}
@@ -132,8 +132,8 @@ const Footer = () => {
       </div>
 
       {/* New Footer Section */}
-      <footer className="footer bg-black text-white py-12 px-0 sm:px-6 lg:px-8 rounded-xl shadow-lg max-w-7xl mx-auto text-center">
-        <div className="footer__content-top max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-center ml-4 md:ml-0">
+      <footer className="footer bg-black ml-4 text-white py-12 px-0 w-full rounded-xl shadow-lg text-center">
+        <div className="footer__content-top w-full grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-center">
           {/* Outdoor Bamboo Structures */}
           <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-bold text-[#b8860b] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
@@ -185,6 +185,9 @@ const Footer = () => {
         </div>
 
         {/* Social Media Icons */}
+       
+        {/* Copyright and Policies */}
+
         <div className="footer-block--newsletter flex  justify-center items-center space-x-6 mb-8 text-left">
           <ul className="list-none p-0 flex space-x-6" role="list">
             <li className="list-social__item">
@@ -214,8 +217,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Copyright and Policies */}
-        <div className="footer__content-bottom text-left pt-8 border-t border-gray-700">
+        <div className="footer__content-bottom text-center pt-8 border-t border-gray-700">
           <div className="footer__content-bottom-wrapper max-w-6xl mx-auto">
             <div className="footer__payment mb-4">
               <span className="sr-only">Payment methods</span>
@@ -225,15 +227,17 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer_content-bottom-wrapper max-w-6xl mx-auto">
-            <div className="footer__copyright caption text-center md:text-left flex flex-col items-center md:items-start">
-              <small className="copyright__content">© 2025, <Link href="/" title="" className="text-amber-400 hover:underline underline">ECO BAMBO</Link></small>
-              <small className="copyright__content"><a target="_blank" rel="nofollow" href="https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore" className="text-amber-300 hover:underline"> </a></small>
-              <ul className="policies list-none p-0 flex flex-wrap justify-center md:justify-start space-x-4 mt-2 text-center md:text-left">
-                <li><small className="copyright__content"><Link href="/policies/privacy-policy" className="text-amber-300 hover:underline underline">Privacy policy</Link></small></li>
-                <li><small className="copyright__content"><Link href="/policies/refund-policy" className="text-amber-300 hover:underline underline">Refund policy</Link></small></li>
-                <li><small className="copyright__content"><Link href="/policies/terms-of-service" className="text-amber-300 hover:underline underline">Terms of service</Link></small></li>
-                <li><small className="copyright__content"><Link href="/policies/shipping-policy" className="text-amber-300 hover:underline underline">Shipping policy</Link></small></li>
-                <li><small className="copyright__content"><Link href="/policies/contact-information" className="text-amber-300 hover:underline underline">Contact information</Link></small></li>
+            <div className="footer__copyright caption text-center flex flex-col items-center">
+              
+              <ul className="policies list-none p-0 flex flex-wrap justify-center space-x-4 mt-2 text-center">
+                
+                <li><small className="copyright__content text-amber-300">© 2025, <Link href="/" title="" className="text-amber-300 hover:underline underline">ECO BAMBO.</Link></small>
+                <small className="copyright__content"><a target="_blank" rel="nofollow" href="https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore" className="text-amber-300 hover:underline"> </a></small></li>
+                <li><small className="copyright__content"><Link href="/policies/privacy-policy" className="text-amber-300 hover:underline underline">Privacy policy.</Link></small></li>
+                <li><small className="copyright__content"><Link href="/policies/refund-policy" className="text-amber-300 hover:underline underline">Refund policy.</Link></small></li>
+                <li><small className="copyright__content"><Link href="/policies/terms-of-service" className="text-amber-300 hover:underline underline">Terms of service.</Link></small></li>
+                <li><small className="copyright__content"><Link href="/policies/shipping-policy" className="text-amber-300 hover:underline underline">Shipping policy.</Link></small></li>
+                <li><small className="copyright__content"><Link href="/policies/contact-information" className="text-amber-300 hover:underline underline">Contact information.</Link></small></li>
               </ul>
             </div>
           </div>

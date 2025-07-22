@@ -70,17 +70,17 @@ const PromoBanner = () => {
           <img
             src="/images/b-g1.png"
             alt="Banner 1"
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full  object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <a href="https://ecobambo.vercel.app/products/small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot" target="_blank" rel="noopener noreferrer">
-            <button className="absolute bottom-4 left-4 px-4 py-2 rounded-full bg-gray-800 text-white font-semibold transition-all duration-300 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 group-hover:bg-gray-800 group-hover:text-white text-sm sm:text-base">
+            <button className="absolute bottom-4 left-4 px-2 py-2 rounded-full bg-gray-800 text-white font-semibold transition-all duration-300 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 group-hover:bg-gray-800 group-hover:text-white text-sm sm:text-base">
               Shop Now
             </button>
           </a>
         </motion.div>
 
         {/* Desktop Right Two Images */}
-        <div className="hidden md:flex md:col-span-2 flex-col gap-2 h-[660px]">
+        <div className="hidden md:flex md:col-span-2 flex-col gap-1 h-[660px]">
           {/* Top right image */}
           <motion.div
             custom={1}
@@ -88,7 +88,7 @@ const PromoBanner = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
-            className="relative group h-1/2 overflow-hidden rounded-xl"
+            className="relative group h-[52%] overflow-hidden rounded-xl"
           >
             <img
               src="/images/b-g2.png"
