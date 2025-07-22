@@ -308,8 +308,8 @@ export default function Header() {
                 </a>
               </div>
               {/* Menu in the center */}
-              <nav className="flex-1 flex items-center justify-center">
-                <ul className="flex gap-4" style={{ fontSize: '0.7rem' }}>
+              <nav className="flex-1 flex items-center ml-24 justify-start">
+                <ul className="flex gap-2" style={{ fontSize: '0.7rem' }}>
           {menu.map((item, idx) =>
             item.submenu ? (
                     <li key={item.label} className="relative group"
@@ -319,8 +319,8 @@ export default function Header() {
                 <button
                           className="header__menu-item flex items-center px-4 py-2 font-dmsans font-semibold text-xs text-[rgb(184,134,11,0.8)] hover:text-[rgb(184,134,11,1)] hover:underline hover:decoration-[rgb(184,134,11,1)] focus:outline-none gap-1 whitespace-nowrap"
                         style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}
-                  aria-expanded={openSubmenu === idx}
-                  aria-controls={`desktop-submenu-${idx}`}
+                        aria-expanded={openSubmenu === idx}
+                        aria-controls={`desktop-submenu-${idx}`}
                   tabIndex={0}
                 >
                         <span>{item.label}</span>
