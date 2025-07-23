@@ -132,7 +132,7 @@ const Footer = () => {
       </div>
 
       {/* New Footer Section */}
-      <footer className="footer bg-black ml-4 text-white py-12 px-0 w-full rounded-xl shadow-lg text-center">
+      <footer className="footer bg-black ml-6 text-white py-12 px-0 w-full rounded-xl shadow-lg text-center">
         <div className="footer__content-top w-full grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 items-start text-center">
           {/* Outdoor Bamboo Structures */}
           <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
