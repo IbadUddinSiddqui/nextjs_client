@@ -13,8 +13,7 @@ const TextSlider = () => {
   const renderTextWithIcons = () =>
     textItems.map((text, index) => (
       <div className="text-slide text-black font-bold italic" key={index}>
-        <span className="-ml-2">{text}</span>
-        <div className="w-[30px] p-0 -m-2">
+        <span>{text}</span>
         {index < textItems.length - 1 && (
           <img
             src="/images/s-shine.png"
@@ -22,7 +21,7 @@ const TextSlider = () => {
             className="icon "
             style={{ filter: 'brightness(0) saturate(100%)' }}
           />
-        )}</div>
+        )}
       </div>
     ));
 
