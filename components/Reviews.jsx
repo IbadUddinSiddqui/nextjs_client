@@ -60,7 +60,7 @@ const Reviews = () => {
       {/* Heading */}
 
       <motion.h2
-  className="text-2xl sm:text-3xl md:text-4xl font-albert text-black text-center mb-10 leading-snug"
+ className="text-[20px] sm:text-[22px] md:text-[26px] lg:text-[30px] font-bold text-[#000000] font-dm  text-center mb-10 leading-snug"
   initial={{ opacity: 0, scale: 0.8, y: -50 }}
   whileInView={{ opacity: 1, scale: 1, y: 0 }}
   viewport={{ once: true }}
