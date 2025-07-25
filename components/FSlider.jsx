@@ -155,10 +155,10 @@ const FSlider = () => {
   return (
     <section className="bg-gray-50 py-12 px-4 relative">
       {/* Typewriter Title */}
-      <h2 className="text-xl md:text-3xl text-black font-semibold text-center mt-4 mb-1">
+      <h2 className="text-2xl md:text-4xl text-black font-semibold text-center mt-4 mb-1">
         <Typewriter
           options={{
-            strings: ["Explore Full Collection"],
+            strings: ["Explore Full Collection >"],
             autoStart: true,
             loop: true,
             delay: 50,
@@ -168,7 +168,7 @@ const FSlider = () => {
 
       {/* Main Heading */}
       <motion.h3
-        className="text-xl md:text-4xl text-center font-bold text-gray-800 mb-10"
+        className="text-2xl md:text-5xl text-center font-bold text-gray-800 mb-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

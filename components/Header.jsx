@@ -570,7 +570,7 @@ export default function Header() {
                   aria-label="Search"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-5 h-5 hover:scale-125 transition-transform duration-300"
                     fill="none"
                     viewBox="0 0 18 19"
                   >
@@ -591,7 +591,7 @@ export default function Header() {
                   aria-label="Account"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-5 h-5 hover:scale-125 transition-transform duration-300"
                     fill="currentColor"
                     viewBox="0 0 18 19"
                   >
@@ -608,7 +608,7 @@ export default function Header() {
                   aria-label="Cart"
                 >
                   <svg
-                    className="w-8 h-8 lg:w-12 lg:h-12"
+                    className="w-8 h-8 lg:w-12 lg:h-12 hover:scale-125 transition-transform duration-300"
                     fill="currentColor"
                     viewBox="0 0 40 40"
                   >

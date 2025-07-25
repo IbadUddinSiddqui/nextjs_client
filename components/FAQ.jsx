@@ -36,7 +36,7 @@ const FAQSection = () => {
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
       {/* Title */}
       <motion.h2
-        className="text-[22px] sm:text-[26px] md:text-[30px] font-bold text-center mb-8 text-gray-800"
+       className="text-[20px] sm:text-[22px] md:text-[26px] lg:text-[30px] font-bold text-[#000000] font-dm  text-center mb-10 leading-snug"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}

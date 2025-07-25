@@ -256,7 +256,7 @@ export default function ProductPage() {
         {/* Right - Product Info */}
         <div className="  flex flex-col space-y-4 w-[100%]">
           {/* Title */}
-          <h1 className="text-2xl sm:text-[28px] font-bold text-[#000000] font-albert leading-tight">
+          <h1 className="text-2xl sm:text-[28px] font-bold text-[#000000] font-albert leading-tight mt-5">
             {productData.title}
           </h1>
 

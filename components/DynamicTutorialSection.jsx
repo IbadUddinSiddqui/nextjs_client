@@ -34,9 +34,10 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
   return (
     <div
       ref={ref}
-      className="relative flex flex-col md:flex-row items-center gap-12 md:gap-48 mb-20 z-20"
+      
+      className="relative flex flex-col md:flex-row items-center gap-6 mb-20 z-20 w-full"
     >
-      {/* Step Number Circle (Only on md and above) */}
+      {/* Step Number Circle */}
       <div className="absolute left-1/2 top-10 transform -translate-x-1/2 z-30 hidden md:flex">
         <motion.div
           className="rounded-full bg-black font-bold flex items-center justify-center"
@@ -53,43 +54,41 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
           {step.step}
         </motion.div>
       </div>
+  {/* Image Section */}
+  <motion.div
+    initial="hidden"
+    animate={controls}
+    variants={imageAnimation}
+    className={`w-full md:w-1/2  ${index % 2 === 0 ? "md:order-1" : "md:order-2"}`}
+  >
+    <img
+      src={step.image}
+      alt={step.title}
+      className="w-[600px] h-[450px] md- h-[370px] px-6 max-w-full  rounded-xl"
+    />
+  </motion.div>
 
-      {/* Image */}
-      <motion.div
-        initial="hidden"
-        animate={controls}
-        variants={imageAnimation}
-        className={`relative z-20 w-full md:w-1/2 ${
-          index % 2 === 0 ? "order-1 md:order-1" : "order-1 md:order-2"
-        }`}
-      >
-        <img
-          src={step.image}
-          alt={step.title}
-          className="rounded w-full object-cover pr-4"
-        />
-      </motion.div>
+  {/* Text Section */}
+  <motion.div
+    initial="hidden"
+    animate={controls}
+    variants={textAnimation}
+    className={`w-full md:w-1/2 px-4 md:px-8 text-center md:text-left ${
+      index % 2 === 0 ? "md:order-2" : "md:order-1"
+    }`}
+  >
+    <h3 className=" sm:text-lg text-[18px] md:text-3xl font-dm font-semibold mb-2">
+      {step.title}
+    </h3>
+    <p className="text-[17px] px5 font-jost font-semibold text-[#3D3434] leading-relaxed my-2 ">
 
-      {/* Text */}
-      <motion.div
-        initial="hidden"
-        animate={controls}
-        variants={textAnimation}
-        className={`relative w-[400px] z-20 md:w-1/2 ${
-          index % 2 === 0 ? "order-2 md:order-2" : "order-2 md:order-1"
-        }`}
-      >
-        <h3 className="text-[24px] font-extrabold mb-3 ml-3 text-[#3D3434] font-[Jost,sans-serif]">
-          {step.title}
-        </h3>
-        <p className="text-[20px] text-[#3D3434] font-[Jost,sans-serif] leading-[2]">
-          {step.description}
-        </p>
-      </motion.div>
-    </div>
+      {step.description}
+    </p>
+  </motion.div>
+</div>
+    
   );
-};
-
+ }  
 // Tutorial content database for all 4 products
 const tutorialDatabase = {
   "large-bamboo-standing-plant-pot-unique-affordable": {
@@ -114,13 +113,13 @@ const tutorialDatabase = {
       {
         "step": 3,
         "title": "Step 3: Stabilizing the Flower Stems with Foam",
-        "description": "Finalize your custom floral design by inserting the remaining stems. This flower pot allows you to create a complete arrangement with up to 5–6 flowers. The structure supports each stem evenly, maintaining visual balance. Perfect for tabletops, kitchen corners, or entryways. The handcrafted bamboo design complements modern and rustic interiors. Enjoy decorating freely without any mess or maintenance.",
+        "description": "Finalize your custom floral design by inserting the remaining stems. This flower pot allows you to create a complete arrangement with up to 5 – 6 flowers. The structure supports each stem evenly, maintaining visual balance. Perfect for tabletops, kitchen corners, or entryways. The handcrafted bamboo design complements modern and rustic interiors. Enjoy decorating freely without any mess or maintenance.",
         "image": "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_2baa617f-2e80-4a33-9b18-c4e720e3a6a0.png?v=1743673795"
       },
       {
         "step": 4,
         "title": "Step 4: The Final Touch – A Stylish Display",
-        "description": "Now your bamboo flower pot is ready with a full bouquet. This artistic piece not only enhances the visual appeal of your home but is also ideal for restaurants, offices, and kitchen spaces. Whether placed on a desk or corner shelf, it gives a touch of green without any upkeep. You can easily change flowers based on mood or season. Customize, decorate, and bring nature to your interiors—Order now and transform your space.",
+        "description": "Now your bamboo flower pot is ready with a full bouquet. This artistic piece not only enhances the visual appeal of your home but is also ideal for restaurants, offices, and kitchen spaces. Whether placed on a desk or corner shelf, it gives a touch of green without any upkeep. You can easily change flowers based on mood or season. Customize, decorate, and bring nature to your interiors Order now and transform your space.",
         "image": "https://cdn.shopify.com/s/files/1/0605/7974/1763/files/4_acd518b5-bb47-4046-94ff-7d6d0f7b372d.png?v=1743673843"
       }
     ],
@@ -317,10 +316,12 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-xl sm:text-3xl md:text-4xl font-jost text-center text-black mb-10 sm:mb-5"
-          >
+            className="text-[20px] sm:text-[22px] md:text-[26px] lg:text-[30px] font-bold text-[#000000] font-dm px-4"
+            >
             {productTitle || 'Product Assembly Guide'} - Watch & Learn!
           </motion.h2>
+          <div className="text-3xl mt-5 mb-6 animate-bounce">⬇️</div>
+
           {/* Video Player */}
           <div className="relative w-full h-[220px] md:w-[90vw] md:h-[650px] rounded-xl overflow-hidden shadow-xl mx-auto">
               <video
@@ -343,18 +344,20 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
         <section ref={stepsSectionRef} className="pt-10 pb-0 sm:py-10 w-full relative">
           {/* Title with animation and spacing */}
           <div className='text-center'>
+        
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            initial={{ y: -50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-[24px] md:text-[28px]  text-[#000000] font-dm"
+            className="text-[25px] sm:text-[22px] mb-3 md:text-[26px] lg:text-[30px] font-bold text-[#000000] font-dm px-4"
           >
-              {tutorialData.video.title}
+            {tutorialData.video.title}
+
           </motion.h2>
 
+       
           {/* Down Arrow Icon */}
-          <div className="text-3xl mt-5 mb-6 animate-bounce">⬇️</div>
           </div>
           {/* Center Line (Desktop only) */}
           <div className="absolute left-[calc(50%-1px)] top-[210px] bottom-[170px] w-[2px] bg-gray-300 z-0 hidden md:block" />
@@ -369,7 +372,7 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
           />
 
           {/* Steps */}
-          <div className="relative text-[24px] font-semibold z-20 w-[80vw] mx-auto">
+          <div className="relative  text-[15px]  z-20 w-[90vw] mx-auto">
               {tutorialData.steps.map((step, index) => (
               <StepItem
                 key={index}
