@@ -38,7 +38,7 @@ const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
       className="relative flex flex-col md:flex-row items-center gap-6 mb-20 z-20 w-full"
     >
       {/* Step Number Circle */}
-      <div className="absolute left-1/2 top-10 transform -translate-x-1/2 z-30 hidden md:flex">
+      <div className="absolute left-1/2 -top-1 transform -translate-x-1/2 z-30 hidden md:flex">
         <motion.div
           className="rounded-full bg-black font-bold flex items-center justify-center"
           initial={{ scale: 1 }}
@@ -341,16 +341,16 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
 
       {/* Step-by-Step Tutorial - Matching original StepTutorial design */}
         {tutorialData.steps && tutorialData.steps.length > 0 && (
-        <section ref={stepsSectionRef} className="pt-10 pb-0 sm:py-10 w-full relative">
+        <section ref={stepsSectionRef} className="mt-12 pt-2 pb-0 sm:py-2 w-full relative">
           {/* Title with animation and spacing */}
-          <div className='text-center'>
+          <div className='text-center '>
         
           <motion.h2
             initial={{ y: -50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-[25px] sm:text-[22px] mb-3 md:text-[26px] lg:text-[30px] font-bold text-[#000000] font-dm px-4"
+            className="text-[25px] sm:text-[22px] mb-0 md:mb-6 lg:mb-10 -mt-10 md:text-[26px] lg:text-[30px] font-bold text-[#000000] font-dm px-4"
           >
             {tutorialData.video.title}
 
@@ -360,14 +360,14 @@ const DynamicTutorialSection = ({ productHandle, productTitle, showPromotions = 
           {/* Down Arrow Icon */}
           </div>
           {/* Center Line (Desktop only) */}
-          <div className="absolute left-[calc(50%-1px)] top-[210px] bottom-[170px] w-[2px] bg-gray-300 z-0 hidden md:block" />
+          <div className="absolute left-[calc(50%-1px)] top-[44px] bottom-[170px] w-[2px] bg-gray-300 z-0 hidden md:block" />
           {/* Black fill overlay */}
           <div
-            className="absolute left-[calc(50%-1px)] top-[210px] w-[2px] bg-black z-10 hidden md:block transition-all duration-300"
+            className="absolute left-[calc(50%-1px)] top-[44px] w-[2px] bg-black z-10 hidden md:block transition-all duration-300"
             style={{
-              height: `calc((100% - 210px - 170px) * ${stemFill})`,
+              height: `calc((100% - 44px - 170px) * ${stemFill})`,
               minHeight: 0,
-              maxHeight: 'calc(100% - 210px - 170px)',
+              maxHeight: 'calc(100% - 44px - 170px)',
             }}
           />
 

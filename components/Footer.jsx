@@ -44,106 +44,104 @@ const Footer = () => {
           {/* Find Us Heading */}
           <h3 className="text-xl font-semibold text-white mb-4 text-left">Find us</h3>
 
-<div className="eco-contact-info space-y-6">
-  {/* Location */}
-  <div className="eco-info-box flex items-start space-x-3 pl-2">
-    <i className="fas fa-map-marker-alt text-amber-400 text-xl mt-1"></i>
-    <div>
-      <h4 className="text-base font-semibold text-white text-left">Location</h4>
-      <p className="text-[rgb(184,134,11,1)] text-left text-sm">
-        Eco Bambo, Karkhane wali abadi, Near PSO pump petrol,<br />
-        Nazd Ali Niaz Sweet, Chakian, Phularwan, Bhalwal 40410, Pakistan
-      </p>
-    </div>
-  </div>
+          <div className="eco-contact-info space-y-6">
+            {/* Location */}
+            <div className="eco-info-box flex items-start space-x-3 pl-2">
+              <i className="fas fa-map-marker-alt text-amber-400 text-xl mt-1"></i>
+              <div>
+                <h4 className="text-base font-semibold text-white text-left">Location</h4>
+                <p className="text-[rgb(184,134,11,1)] text-left text-sm">
+                  Eco Bambo, Karkhane wali abadi, Near PSO pump petrol,<br />
+                  Nazd Ali Niaz Sweet, Chakian, Phularwan, Bhalwal 40410, Pakistan
+                </p>
+              </div>
+            </div>
 
-  {/* Email */}
-  <div className="eco-info-box flex items-start space-x-3 pl-2">
-    <i className="fas fa-envelope text-amber-400 text-xl mt-1"></i>
-    <div>
-      <h4 className="text-base font-semibold text-white text-left">Email</h4>
-      <p className="text-[rgb(184,134,11,1)] text-left text-sm">
-        <a href="mailto:ecobambooarts@gmail.com" className="no-underline hover:text-white">
-          ecobambooarts@gmail.com
-        </a>
-      </p>
-    </div>
-  </div>
+            {/* Email */}
+            <div className="eco-info-box flex items-start space-x-3 pl-2">
+              <i className="fas fa-envelope text-amber-400 text-xl mt-1"></i>
+              <div>
+                <h4 className="text-base font-semibold text-white text-left">Email</h4>
+                <p className="text-[rgb(184,134,11,1)] text-left text-sm">
+                  <a href="mailto:ecobambooarts@gmail.com" className="no-underline hover:text-white">
+                    ecobambooarts@gmail.com
+                  </a>
+                </p>
+              </div>
+            </div>
 
-  {/* Phone */}
-  <div className="eco-info-box flex items-start space-x-3 pl-2">
-    <i className="fab fa-whatsapp text-amber-400 text-xl mt-1"></i>
-    <div>
-      <h4 className="text-base font-semibold text-white text-left">Phone</h4>
-      <p className="text-[rgb(184,134,11,1)] text-left text-sm">
-        <a href="tel:+923416995870" className="no-underline hover:text-white">
-          +92 (3416995870)
-        </a>
-      </p>
-    </div>
-  </div>
+            {/* Phone */}
+            <div className="eco-info-box flex items-start space-x-3 pl-2">
+              <i className="fab fa-whatsapp text-amber-400 text-xl mt-1"></i>
+              <div>
+                <h4 className="text-base font-semibold text-white text-left">Phone</h4>
+                <p className="text-[rgb(184,134,11,1)] text-left text-sm">
+                  <a href="tel:+923416995870" className="no-underline hover:text-white">
+                    +92 (3416995870)
+                  </a>
+                </p>
+              </div>
+            </div>
 
-  {/* Company Hours */}
-  <div className="eco-info-box flex items-start space-x-3 pl-2">
-    <i className="fas fa-clock text-amber-400 text-xl mt-1"></i>
-    <div>
-      <h4 className="text-base font-semibold text-white text-left">Opening & Closing Hours</h4>
-      <p className="text-[rgb(184,134,11,1)] text-left text-sm">Mon–Sun: 8:00 AM – 6:00 PM</p>
-      <p className="text-[rgb(184,134,11,1)] text-left text-sm">
-        <i className="fas fa-times-circle text-red-500 mr-1"></i>Friday: Closed
-      </p>
-    </div>
-  </div>
-</div>
-</div>
+            {/* Company Hours */}
+            <div className="eco-info-box flex items-start space-x-3 pl-2">
+              <i className="fas fa-clock text-amber-400 text-xl mt-1"></i>
+              <div>
+                <h4 className="text-base font-semibold text-white text-left">Opening & Closing Hours</h4>
+                <p className="text-[rgb(184,134,11,1)] text-left text-sm">Mon–Sun: 8:00 AM – 6:00 PM</p>
+                <p className="text-[rgb(184,134,11,1)] text-left text-sm">
+                  <i className="fas fa-times-circle text-red-500 mr-1"></i>Friday: Closed
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Right Side: Contact Form */}
         <div className="eco-form-right w-full lg:w-1/2 px-2 sm:px-6 md:px-8">
-  <h3 className="text-lg sm:text-xl font-semibold text-[#cccccc] mb-6  text-left">
-    Want a faster reply? Tap the WhatsApp button to chat directly with our support team.<br />
-    Or fill out this product inquiry form with your details & selected collection. Also, paste the exact product title in the message box — so our team can guide you faster with price, customization & size.
-  </h3>
-  <form method="post" action="/contact#contact_form" id="contact_form" acceptCharset="UTF-8" className="space-y-2 sm:space-y-4">
-    <input type="hidden" name="form_type" value="contact" />
-    <input type="hidden" name="utf8" value="✓" />
+          <h3 className="text-lg sm:text-xl font-semibold text-[#cccccc] mb-6  text-left">
+            Want a faster reply? Tap the WhatsApp button to chat directly with our support team.<br />
+            Or fill out this product inquiry form with your details & selected collection. Also, paste the exact product title in the message box — so our team can guide you faster with price, customization & size.
+          </h3>
+          <form method="post" action="/contact#contact_form" id="contact_form" acceptCharset="UTF-8" className="space-y-2 sm:space-y-4">
+            <input type="hidden" name="form_type" value="contact" />
+            <input type="hidden" name="utf8" value="✓" />
 
-    <input type ="text" name="contact[first_name]" placeholder="First Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
-    
-    <input type="text" name="contact[last_name]" placeholder="Last Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
-    
-    <input type="text" name="contact[location]" placeholder="Your Location*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
-    
-    <input type="text" name="contact[phone]" placeholder="Phone Number*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
-    
-    <input type="email" name="contact[email]" placeholder="Email*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+            <input type="text" name="contact[first_name]" placeholder="First Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
 
-    <select name="contact[collection]" required className="w-full bg-[#181818] text-amber-400 border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400">
-      <option value="" className="text-amber-300">Select Collection</option>
-      <option>Bamboo Flower pot</option>
-      <option>Bamboo Hanging Wall</option>
-      <option>Bamboo House</option>
-      <option>Bamboo Gazebo</option>
-      <option>Bamboo Canopy</option>
-      <option>Bamboo Car garage</option>
-      <option>Bamboo Fences</option>
-      <option>Bamboo Wall Panel</option>
-      <option>Bamboo Pot Stands</option>
-      <option>Dining Table Set</option>
-      <option>Baby Beds</option>
-      <option>Kid's Furniture</option>
-      <option>Bamboo Double & Single Beds</option>
-      <option>Bamboo Sofa Set</option>
-      <option>Bamboo Swings</option>
-      <option>Bamboo Baby Swings</option>
-    </select>
+            <input type="text" name="contact[last_name]" placeholder="Last Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
 
-    <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white"></textarea>
-    <button type="submit" className=" text-black font-semibold px-6 py-2 rounded shadow bg-[#F5C240] transition-all">BOOK NOW →</button>
-  </form>
-</div>
-</div>
+            <input type="text" name="contact[location]" placeholder="Your Location*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
 
-        
+            <input type="text" name="contact[phone]" placeholder="Phone Number*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+
+            <input type="email" name="contact[email]" placeholder="Email*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+
+            <select name="contact[collection]" required className="w-full bg-[#181818] text-amber-400 border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400">
+              <option value="" className="text-amber-300">Select Collection</option>
+              <option>Bamboo Flower pot</option>
+              <option>Bamboo Hanging Wall</option>
+              <option>Bamboo House</option>
+              <option>Bamboo Gazebo</option>
+              <option>Bamboo Canopy</option>
+              <option>Bamboo Car garage</option>
+              <option>Bamboo Fences</option>
+              <option>Bamboo Wall Panel</option>
+              <option>Bamboo Pot Stands</option>
+              <option>Dining Table Set</option>
+              <option>Baby Beds</option>
+              <option>Kid's Furniture</option>
+              <option>Bamboo Double & Single Beds</option>
+              <option>Bamboo Sofa Set</option>
+              <option>Bamboo Swings</option>
+              <option>Bamboo Baby Swings</option>
+            </select>
+
+            <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white"></textarea>
+            <button type="submit" className=" text-black font-semibold px-6 py-2 rounded shadow bg-[#F5C240] transition-all">BOOK NOW →</button>
+          </form>
+        </div>
+      </div>
 
       {/* New Footer Section */}
       <footer className="footer bg-black ml-6 text-white py-12 px-0 w-full rounded-xl shadow-lg text-center">
@@ -200,7 +198,7 @@ const Footer = () => {
 
         {/* Social Media Icons */}
         <div className="footer-block--newsletter flex flex-col sm:flex-row justify-center items-center sm:space-x-6 space-y-4 sm:space-y-0 mb-8 text-left">
-        <ul className="list-none p-0 flex flex-wrap justify-center items-center gap-4 sm:gap-6" role="list">
+          <ul className="list-none p-0 flex flex-wrap justify-center items-center gap-4 sm:gap-6" role="list">
             <li className="list-social__item">
               <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" className="link list-social__link text-[rgb(184,134,11,1)]" aria-label="Facebook">
                 <span className="svg-wrapper"><svg className="icon icon-facebook w-6 h-6" viewBox="0 0 20 20"><path fill="currentColor" d="M18 10.049C18 5.603 14.419 2 10 2s-8 3.603-8 8.049C2 14.067 4.925 17.396 8.75 18v-5.624H6.719v-2.328h2.03V8.275c0-2.017 1.195-3.132 3.023-3.132.874 0 1.79.158 1.79.158v1.98h-1.009c-.994 0-1.303.621-1.303 1.258v1.51h2.219l-.355 2.326H11.25V18c3.825-.604 6.75-3.933 6.75-7.951"></path></svg></span>
@@ -229,7 +227,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__content-bottom text-center pt-8 ">
-        <div className="footer__content-bottom-wrapper max-w-6xl mx-auto">
+          <div className="footer__content-bottom-wrapper max-w-6xl mx-auto">
             <div className="footer__payment mb-4">
               <span className="sr-only">Payment methods</span>
               <ul className="list-none p-0 flex justify-start space-x-4 text-left">
@@ -238,72 +236,40 @@ const Footer = () => {
             </div>
           </div>
 
-    <div className="footer_content-bottom-wrapper max-w-6xl md-mr-3 mx-auto px-4 pl-0">
-  <div className="footer__copyright caption text-center flex flex-col items-center">
-    <ul className="policies list-none p-0 flex flex-wrap  justify-center gap-x-7 gap-y-2 text-center text-[15px] sm:text-base">
-      <li>
-        <small className="copyright__content text-amber-300">
-          © 2025,{" "}
-          <Link href="/" className="text-amber-300 hover:text-amber-400">
-            ECO BAMBO.
-          </Link>
-        </small>
-      </li>
-      <li>
-        <small className="copyright__content">
-          <Link
-            href="/policies/privacy-policy"
-            className="text-amber-300 hover:text-amber-400"
-          >
-            Privacy policy.
-          </Link>
-        </small>
-      </li>
-      <li>
-        <small className="copyright__content">
-          <Link
-            href="/policies/refund-policy"
-            className="text-amber-300 hover:text-amber-400"
-          >
-            Refund policy.
-          </Link>
-        </small>
-      </li>
-      <li>
-        <small className="copyright__content">
-          <Link
-            href="/policies/terms-of-service"
-            className="text-amber-300 hover:text-amber-400"
-          >
-            Terms of service.
-          </Link>
-        </small>
-      </li>
-      <li>
-        <small className="copyright__content">
-          <Link
-            href="/policies/shipping-policy"
-            className="text-amber-300 hover:text-amber-400"
-          >
-            Shipping policy.
-          </Link>
-        </small>
-      </li>
-      <li>
-        <small className="copyright__content">
-          <Link
-            href="/policies/contact-information"
-            className="text-amber-300 hover:text-amber-400"
-          >
-            Contact information.
-          </Link>
-        </small>
-      </li>
-    </ul>
-  </div>
- </div>
- </div>
-
+          <div className="footer_content-bottom-wrapper max-w-6xl md-mr-3 mx-auto px-4 pl-0">
+            <div className="footer__copyright caption text-center flex flex-col items-center w-full">
+              <div className="w-full flex flex-col sm:flex-row sm:justify-center sm:items-center gap-0">
+                {/* Line 1: Copyright */}
+                <div className="w-full flex justify-center mb-1">
+                  <small className="copyright__content text-amber-300">
+                    © 2025, <Link href="/" className="text-amber-300 hover:text-amber-400">ECO BAMBO.</Link>
+                  </small>
+                </div>
+                {/* Line 2: Policies */}
+                <div className="w-full flex flex-wrap justify-center gap-x-4 gap-y-1 mb-1">
+                  <small className="copyright__content">
+                    <Link href="/policies/privacy-policy" className="text-amber-300 hover:text-amber-400">Privacy policy.</Link>
+                  </small>
+                  <small className="copyright__content">
+                    <Link href="/policies/refund-policy" className="text-amber-300 hover:text-amber-400">Refund policy.</Link>
+                  </small>
+                  <small className="copyright__content">
+                    <Link href="/policies/terms-of-service" className="text-amber-300 hover:text-amber-400">Terms of service.</Link>
+                  </small>
+                  <small className="copyright__content">
+                    <Link href="/policies/shipping-policy" className="text-amber-300 hover:text-amber-400">Shipping policy.</Link>
+                  </small>
+                </div>
+                {/* Line 3: Contact info */}
+                <div className="w-full flex justify-center">
+                  <small className="copyright__content">
+                    <Link href="/policies/contact-information" className="text-amber-300 hover:text-amber-400">Contact information.</Link>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

@@ -200,7 +200,7 @@ export default function ProductPage() {
       </Head>
       <div className="w-full max-w-[100vw] overflow-x-hidden p-3 mt-24">
       {/* Top Product Banner Image for Special Products Only */}
-      {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
+      {/* {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
           <img
             src="https://cdn.shopify.com/s/files/1/0605/7974/1763/files/3_72a8fb27-ea97-4d14-a000-482366550b88.png?v=1743105124"
@@ -239,7 +239,7 @@ export default function ProductPage() {
             style={{ objectPosition: 'center' }}
           />
         </div>
-      )}
+      )} */}
       {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
 
       {/* Main Product Detail Section */}
