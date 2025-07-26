@@ -28,6 +28,14 @@ interface ProductImage {
 interface ProductVariant {
   id: string;
   title: string;
+  image?: {
+    src: string;
+    altText?: string;
+  };
+  selectedOptions?: Array<{
+    name: string;
+    value: string;
+  }>;
   priceV2: {
     amount: string;
     currencyCode: string;
@@ -75,6 +83,14 @@ const PRODUCT_QUERY = `
           node {
             id
             title
+            image {
+              src
+              altText
+            }
+            selectedOptions {
+              name
+              value
+            }
             priceV2 {
               amount
               currencyCode
@@ -180,11 +196,14 @@ export default function ProductPage() {
     discount: "15% OFF",
     deliveryEstimate: "Order in the next 23 hour(s) 54 minute(s) to get it between [26_March] and [29_March]",
     images: images,
-    variants: product.variants.edges.map((edge, index) => ({
-      id: edge.node.id,
-      color: edge.node.title,
-      image: images[index] || images[0]
-    })),
+    variants: product.variants.edges.map((edge) => {
+      const colorOption = edge.node.selectedOptions?.find((opt: any) => opt.name.toLowerCase() === 'color');
+      return {
+        id: edge.node.id,
+        color: colorOption ? colorOption.value : edge.node.title,
+        image: edge.node.image?.src || '', // Only use the variant's own image
+      };
+    }),
     description: product.description
   };
 
@@ -298,18 +317,20 @@ export default function ProductPage() {
             <h2 className="font-albert mb-2 text-sm text-black sm:text-base font-semibold">Color</h2>
             <div className="flex flex-wrap gap-2 mb-2">
               {productData.variants.map((variant: any, index: number) => (
-                <img
-                  key={index}
-                  src={variant.image}
-                  alt={variant.color}
-                  title={variant.color}
-                  onClick={() => handleColorClick(variant)}
-                  className={`w-10 h-10 object-cover rounded-full border-2 cursor-pointer ${
-                    variant.color === selectedVariant?.color
-                      ? "border-black"
-                      : "border-gray-300"
-                  }`}
-                />
+                variant.image && (
+                  <img
+                    key={index}
+                    src={variant.image}
+                    alt={variant.color}
+                    title={variant.color}
+                    onClick={() => handleColorClick(variant)}
+                    className={`w-10 h-10 object-cover rounded-full border-2 cursor-pointer ${
+                      variant.color === selectedVariant?.color
+                        ? "border-black"
+                        : "border-gray-300"
+                    }`}
+                  />
+                )
               ))}
             </div>
             <p className="text-sm text-gray-700">{selectedVariant?.color}</p>
