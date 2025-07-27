@@ -217,7 +217,7 @@ export default function ProductPage() {
       <Head>
         <title>{toTitleCase(product.title)}</title>
       </Head>
-      <div className="w-full max-w-[100vw] overflow-x-hidden p-3 mt-24">
+      <div className="w-full max-w-[100vw] overflow-x-hidden p-3 mt-12">
       {/* Top Product Banner Image for Special Products Only */}
       {/* {product.handle === "large-bamboo-standing-plant-pot-unique-affordable" && (
         <div className="w-full flex justify-center bg-white pt-6 pb-2">
@@ -262,7 +262,7 @@ export default function ProductPage() {
       {/* Steps Timeline (DynamicTutorialSection) and DownloadGuide for the 4 special products */}
 
       {/* Main Product Detail Section */}
-      <div className="w-full max-w-7xl  mt-12 mx-auto py-6 grid grid-cols-1 md:grid-cols-2  sm:gap-8 px-0">
+      <div className="w-full max-w-7xl   mx-auto py-6 grid grid-cols-1 md:grid-cols-2  sm:gap-8 px-0">
        
         {/* Left - ImageSlider */}
         <ImageSlider

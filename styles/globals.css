@@ -88,3 +88,21 @@
     margin-left: 6px;
   }
 }
+
+/* Footer form input/textarea: white bg on focus or when filled */
+footer input[type="text"],
+footer input[type="email"],
+footer textarea {
+  transition: background 0.2s, border-color 0.2s;
+}
+footer input[type="text"]:focus,
+footer input[type="email"]:focus,
+footer textarea:focus {
+  background: #fff;
+  border-color: #fff;
+}
+footer input[type="text"]:not(:placeholder-shown),
+footer input[type="email"]:not(:placeholder-shown),
+footer textarea:not(:placeholder-shown) {
+  background: #fff;
+}

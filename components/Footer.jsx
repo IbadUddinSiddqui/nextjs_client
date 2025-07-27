@@ -107,15 +107,15 @@ const Footer = () => {
             <input type="hidden" name="form_type" value="contact" />
             <input type="hidden" name="utf8" value="✓" />
 
-            <input type="text" name="contact[first_name]" placeholder="First Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+            <input type="text" name="contact[first_name]" placeholder="First Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white not-empty:bg-white hover:border-white focus:border-white focus:bg-white focus:text-black" />
 
-            <input type="text" name="contact[last_name]" placeholder="Last Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+            <input type="text" name="contact[last_name]" placeholder="Last Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white not-empty:bg-white hover:border-white focus:border-white focus:bg-white focus:text-black" />
 
-            <input type="text" name="contact[location]" placeholder="Your Location*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+            <input type="text" name="contact[location]" placeholder="Your Location*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white not-empty:bg-white hover:border-white focus:border-white focus:bg-white focus:text-black" />
 
-            <input type="text" name="contact[phone]" placeholder="Phone Number*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+            <input type="text" name="contact[phone]" placeholder="Phone Number*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white not-empty:bg-white hover:border-white focus:border-white focus:bg-white focus:text-black" />
 
-            <input type="email" name="contact[email]" placeholder="Email*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white" />
+            <input type="email" name="contact[email]" placeholder="Email*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white not-empty:bg-white hover:border-white focus:border-white focus:bg-white focus:text-black" />
 
             <select name="contact[collection]" required className="w-full bg-[#181818] text-amber-400 border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400">
               <option value="" className="text-amber-300">Select Collection</option>
@@ -137,7 +137,7 @@ const Footer = () => {
               <option>Bamboo Baby Swings</option>
             </select>
 
-            <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white"></textarea>
+            <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400 placeholder:text-white not-empty:bg-white hover:border-white focus:border-white focus:bg-white focus:text-black"></textarea>
             <button type="submit" className=" text-black font-semibold px-6 py-2 rounded shadow bg-[#F5C240] transition-all">BOOK NOW →</button>
           </form>
         </div>
@@ -150,11 +150,11 @@ const Footer = () => {
           <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-dm text-[17px] font-dm text-[#b8860b] mb-4"><strong>Outdoor Bamboo Structures</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
-              <li><Link href="/collections/bamboo-canopy-in-pakistan/Canopy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Canopy Bliss</Link></li>
-              <li><Link href="/collections/bamboo-house-luxury/House" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo House Retreat</Link></li>
-              <li><Link href="/collections/bamboo-shades-for-carports-ceiling-design-elegant-solutions-of-car-vigo-for-you/garage" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Carport Haven</Link></li>
-              <li><Link href="/collections/premium-bamboo-gazebo/Gazebo" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Gazebo Escape</Link></li>
-              <li><Link href="/collections/bamboo-wall-designs/Walls" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Wall Panels - Decor</Link></li>
+              <li><a href="https://ecobambo.com/collections/bamboo-canopy-in-pakistan/Canopy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Canopy Bliss</a></li>
+              <li><a href="https://ecobambo.com/collections/bamboo-house-luxury/House" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo House Retreat</a></li>
+              <li><a href="https://ecobambo.com/collections/bamboo-shades-for-carports-ceiling-design-elegant-solutions-of-car-vigo-for-you/garage" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Carport Haven</a></li>
+              <li><a href="https://ecobambo.com/collections/premium-bamboo-gazebo/Gazebo" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Gazebo Escape</a></li>
+              <li><a href="https://ecobambo.com/collections/bamboo-wall-designs/Walls" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Wall Panels - Decor</a></li>
             </ul>
           </div>
 
@@ -162,10 +162,10 @@ const Footer = () => {
           <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-dm text-[17px]  text-[#b8860b] mb-4"><strong>Indoor Bamboo Comfort</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
-              <li><Link href="/collections/premium-bamboo-lounge-set-with-cushioned-seating-modern-outdoor-indoor-comfort" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Luxury Sofa Set</Link></li>
+              <li><a href="https://ecobambo.com/collections/premium-bamboo-lounge-set-with-cushioned-seating-modern-outdoor-indoor-comfort" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Luxury Sofa Set</a></li>
               <li><a href="https://ecobambo.com/collections/bamboo-single-kid-bed" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo luxe Beds</a></li>
-              <li><Link href="/collections/premium-bamboo-dining-sets/Chair-&-Table-Set" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Chair Corner</Link></li>
-              <li><Link href="/collections/explore-the-best-bamboo-hanging-chairs-swing-garden-swings-and-rocking-swings-for-every-space/Swings" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Family Swings</Link></li>
+              <li><a href="https://ecobambo.com/collections/premium-bamboo-dining-sets/Chair-&-Table-Set" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Chair Corner</a></li>
+              <li><a href="https://ecobambo.com/collections/explore-the-best-bamboo-hanging-chairs-swing-garden-swings-and-rocking-swings-for-every-space/Swings" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Family Swings</a></li>
               <li><a href="https://ecobambo.com/collections" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">All Eco Bamboo Collections</a></li>
             </ul>
           </div>
@@ -174,10 +174,10 @@ const Footer = () => {
           <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-dm text-[17px] text-[#b8860b] mb-4"><strong>Home & Baby Essentials</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
-              <li><Link href="/collections/eco-friendly-bamboo-kids-beds-perfect-for-children/Baby-Beds" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Baby Bamboo Beds - Cribs</Link></li>
-              <li><Link href="/collections/1-modern-bamboo-hanging-wall-art-standing-plant-and-flower-pot-stylish-decor-perfect-for-home-garden/Hanging-Walls" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Hanging Walls - Art</Link></li>
+              <li><a href="https://ecobambo.com/collections/eco-friendly-bamboo-kids-beds-perfect-for-children/Baby-Beds" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Baby Bamboo Beds - Cribs</a></li>
+              <li><a href="https://ecobambo.com/collections/1-modern-bamboo-hanging-wall-art-standing-plant-and-flower-pot-stylish-decor-perfect-for-home-garden/Hanging-Walls" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Hanging Walls - Art</a></li>
               <li><a href="https://ecobambo.com/collections/premium-bamboo-fence-panels-elegant-fence-wall-garden-fence-idea" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Fence Panels- Decor</a></li>
-              <li><Link href="/collections/1-modern-bamboo-hanging-wall-art-standing-plant-and-flower-pot-stylish-decor-perfect-for-home-garden/Flower-Pot" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Flower Pots- Planters</Link></li>
+              <li><a href="https://ecobambo.com/collections/1-modern-bamboo-hanging-wall-art-standing-plant-and-flower-pot-stylish-decor-perfect-for-home-garden/Flower-Pot" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Bamboo Flower Pots- Planters</a></li>
               <li><a href="https://ecobambo.com/collections/bamboo-kids-chair" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Baby Furniture - Nursery Sets</a></li>
             </ul>
           </div>
@@ -186,12 +186,12 @@ const Footer = () => {
           <div className="footer-block text-left ml-4 md:ml-0 mt-0 pt-0">
             <h2 className="footer-block__heading text-lg lg:text-xl font-dm text-[17px] text-[#b8860b] mb-4"><strong>Eco Bambo Store Policies</strong></h2>
             <ul className="footer-block__details-content list-none p-0">
-              <li><Link href="/pages/https-www-yourwebsite-com-about-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">About Eco Bambo - Our Story & vision</Link></li>
-              <li><Link href="/policies/shipping-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Shipping & Delivery Policy</Link></li>
-              <li><Link href="/policies/terms-of-service" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Terms & Conditions of Use</Link></li>
-              <li><Link href="/pages/https-www-yourwebsite-com/contact-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Contact & Customer Support</Link></li>
-              <li><Link href="/policies/privacy-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Privacy Policy & Data Protection</Link></li>
-              <li><Link href="/policies/refund-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Refund Policy & Customer Satisfaction</Link></li>
+              <li><a href="https://ecobambo.com/pages/https-www-yourwebsite-com-about-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">About Eco Bambo - Our Story & vision</a></li>
+              <li><a href="https://ecobambo.com/policies/shipping-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Shipping & Delivery Policy</a></li>
+              <li><a href="https://ecobambo.com/policies/terms-of-service" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Terms & Conditions of Use</a></li>
+              <li><a href="https://ecobambo.com/pages/https-www-yourwebsite-com/contact-us" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Contact & Customer Support</a></li>
+              <li><a href="https://ecobambo.com/policies/privacy-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Privacy Policy & Data Protection</a></li>
+              <li><a href="https://ecobambo.com/policies/refund-policy" className="link text-base text-[rgb(184,134,11,1)] hover:text-amber-400 underline font-normal">Refund Policy & Customer Satisfaction</a></li>
             </ul>
           </div>
         </div>
@@ -237,33 +237,27 @@ const Footer = () => {
           </div>
 
           <div className="footer_content-bottom-wrapper max-w-6xl md-mr-3 mx-auto px-4 pl-0">
-            <div className="footer__copyright caption text-center flex flex-col items-center w-full">
-              <div className="w-full flex flex-col sm:flex-row sm:justify-center sm:items-center gap-0">
-                {/* Line 1: Copyright */}
-                <div className="w-full flex justify-center mb-1">
+            <div className="footer__copyright caption text-center flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:items-center gap-0 lg:gap-x-4 lg:gap-y-0 text-center">
+              <div className="w-full flex flex-wrap flex-col mb-1 lg:flex-row lg:items-center lg:justify-center lg:gap-x-4 mb-2">
+                <div className="flex flex-row flex-wrap justify-center w-full gap-x-2">
                   <small className="copyright__content text-amber-300">
-                    © 2025, <Link href="/" className="text-amber-300 hover:text-amber-400">ECO BAMBO.</Link>
+                    © 2025, <a href="https://ecobambo.com/" className="text-amber-300 hover:text-amber-400">ECO BAMBO.</a>
+                  </small>
+                  <small className="copyright__content">
+                    <a href="https://ecobambo.com/policies/refund-policy" className="text-amber-300 hover:text-amber-400">Refund policy.</a>
                   </small>
                 </div>
-                {/* Line 2: Policies */}
-                <div className="w-full flex flex-wrap justify-center gap-x-4 gap-y-1 mb-1">
+                <div className="flex flex-row flex-wrap justify-center w-full gap-x-2">
                   <small className="copyright__content">
-                    <Link href="/policies/privacy-policy" className="text-amber-300 hover:text-amber-400">Privacy policy.</Link>
+                    <a href="https://ecobambo.com/policies/terms-of-service" className="text-amber-300 hover:text-amber-400">Terms of service.</a>
                   </small>
                   <small className="copyright__content">
-                    <Link href="/policies/refund-policy" className="text-amber-300 hover:text-amber-400">Refund policy.</Link>
-                  </small>
-                  <small className="copyright__content">
-                    <Link href="/policies/terms-of-service" className="text-amber-300 hover:text-amber-400">Terms of service.</Link>
-                  </small>
-                  <small className="copyright__content">
-                    <Link href="/policies/shipping-policy" className="text-amber-300 hover:text-amber-400">Shipping policy.</Link>
+                    <a href="https://ecobambo.com/policies/shipping-policy" className="text-amber-300 hover:text-amber-400">Shipping policy.</a>
                   </small>
                 </div>
-                {/* Line 3: Contact info */}
-                <div className="w-full flex justify-center">
+                <div className="flex flex-row flex-wrap justify-center w-full gap-x-2">
                   <small className="copyright__content">
-                    <Link href="/policies/contact-information" className="text-amber-300 hover:text-amber-400">Contact information.</Link>
+                    <a href="https://ecobambo.com/policies/contact-information" className="text-amber-300 hover:text-amber-400">Contact information.</a>
                   </small>
                 </div>
               </div>
