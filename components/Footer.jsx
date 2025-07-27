@@ -107,15 +107,15 @@ const Footer = () => {
             <input type="hidden" name="form_type" value="contact" />
             <input type="hidden" name="utf8" value="✓" />
 
-            <input type="text" name="contact[first_name]" placeholder="First Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white not-empty:bg-white hover:border-white" />
+            <input type="text" name="contact[first_name]" placeholder="First Name*" required className="w-full bg-[#181818] text-[rgb(184,134,11,1)] border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white hover:border-white" />
 
-            <input type="text" name="contact[last_name]" placeholder="Last Name*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white not-empty:bg-white hover:border-white" />
+            <input type="text" name="contact[last_name]" placeholder="Last Name*" required className="w-full bg-[#181818] text-[rgb(184,134,11,1)] border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white hover:border-white" />
 
-            <input type="text" name="contact[location]" placeholder="Your Location*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white not-empty:bg-white hover:border-white" />
+            <input type="text" name="contact[location]" placeholder="Your Location*" required className="w-full bg-[#181818] text-[rgb(184,134,11,1)] border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white hover:border-white" />
 
-            <input type="text" name="contact[phone]" placeholder="Phone Number*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white not-empty:bg-white hover:border-white" />
+            <input type="text" name="contact[phone]" placeholder="Phone Number*" required className="w-full bg-[#181818] text-[rgb(184,134,11,1)] border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white hover:border-white" />
 
-            <input type="email" name="contact[email]" placeholder="Email*" required className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white not-empty:bg-white hover:border-white" />
+            <input type="email" name="contact[email]" placeholder="Email*" required className="w-full bg-[#181818] text-[rgb(184,134,11,1)] border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white hover:border-white" />
 
             <select name="contact[collection]" required className="w-full bg-[#181818] text-amber-400 border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-amber-400">
               <option value="" className="text-amber-300">Select Collection</option>
@@ -137,7 +137,7 @@ const Footer = () => {
               <option>Bamboo Baby Swings</option>
             </select>
 
-            <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-white border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white not-empty:bg-white hover:border-white"></textarea>
+            <textarea name="contact[body]" placeholder="Your Message (Optional)" rows="4" className="w-full bg-[#181818] text-[rgb(184,134,11,1)] border border-[#333] rounded px-4 py-2 focus:outline-none focus:border-white focus:text-[rgb(184,134,11,1)] placeholder:text-white hover:border-white"></textarea>
             <button type="submit" className=" text-black font-semibold px-6 py-2 rounded shadow bg-[#F5C240] transition-all">BOOK NOW →</button>
           </form>
         </div>
