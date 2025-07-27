@@ -32,7 +32,7 @@ Material:100% sustainable, hand-woven bamboo (stronger than plastic alternatives
 Finish & Protection:UV-stable varnish, waterproof sealant, anti-insect chemical treatment (longer life, high gloss)
 Weather Resistance:Fade-proof colour; safe from rain, sun (-5°C to 45°C) and high humidity
 Dimensions / Size Options:Ø 25 cm x H 60 cm (Large), Ø 20 cm x H 45 cm (Medium)
-Colour Choices:Natural Bamboo, Honey, Caramel
+Colour Choices:Natural Bamboo, Honey, Caramel ,Red , Yellow , Half White
 Package Includes:1 x Bamboo Planter, 1 x Detachable Stand, Optional Artificial Lucky Bamboo Stems`,
     warrantySupport: `To return, email order number + issue proof (photo/video) to ecobambooarts@gmail.com.
 Items returned without approval won't be accepted.

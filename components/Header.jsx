@@ -77,7 +77,7 @@ const menu = [
 
 const socialLinks = [
   {
-    href: "https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr",
+    href: "https://www.facebook.com/ecobambo0/?rdid=z5QewtB13VPrwVHp",
     label: "Facebook",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

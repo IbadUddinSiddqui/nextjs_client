@@ -200,7 +200,7 @@ const Footer = () => {
         <div className="footer-block--newsletter flex flex-col sm:flex-row justify-center items-center sm:space-x-6 space-y-4 sm:space-y-0 mb-8 text-left">
           <ul className="list-none p-0 flex flex-wrap justify-center items-center gap-4 sm:gap-6" role="list">
             <li className="list-social__item">
-              <a href="https://www.facebook.com/share/1EVwQs5T9X/?mibextid=wwXIfr" className="link list-social__link text-[rgb(184,134,11,1)]" aria-label="Facebook">
+              <a href="https://www.facebook.com/ecobambo0/?rdid=z5QewtB13VPrwVHp" className="link list-social__link text-[rgb(184,134,11,1)]" aria-label="Facebook">
                 <span className="svg-wrapper"><svg className="icon icon-facebook w-6 h-6" viewBox="0 0 20 20"><path fill="currentColor" d="M18 10.049C18 5.603 14.419 2 10 2s-8 3.603-8 8.049C2 14.067 4.925 17.396 8.75 18v-5.624H6.719v-2.328h2.03V8.275c0-2.017 1.195-3.132 3.023-3.132.874 0 1.79.158 1.79.158v1.98h-1.009c-.994 0-1.303.621-1.303 1.258v1.51h2.219l-.355 2.326H11.25V18c3.825-.604 6.75-3.933 6.75-7.951"></path></svg></span>
                 <span className="sr-only">Facebook</span>
               </a>
@@ -237,32 +237,49 @@ const Footer = () => {
           </div>
 
           <div className="footer_content-bottom-wrapper max-w-6xl md-mr-3 mx-auto px-4 pl-0">
-            <div className="footer__copyright caption text-center flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:items-center gap-0 lg:gap-x-4 lg:gap-y-0 text-center">
-              <div className="w-full flex flex-wrap flex-col mb-1 lg:flex-row lg:items-center lg:justify-center lg:gap-x-4 mb-2">
-                <div className="flex flex-row flex-wrap justify-center w-full gap-x-2">
-                  <small className="copyright__content text-amber-300">
-                    © 2025, <a href="https://ecobambo.com/" className="text-amber-300 hover:text-amber-400">ECO BAMBO.</a>
-                  </small>
-                  <small className="copyright__content">
-                    <a href="https://ecobambo.com/policies/refund-policy" className="text-amber-300 hover:text-amber-400">Refund policy.</a>
-                  </small>
-                </div>
-                <div className="flex flex-row flex-wrap justify-center w-full gap-x-2">
-                  <small className="copyright__content">
-                    <a href="https://ecobambo.com/policies/terms-of-service" className="text-amber-300 hover:text-amber-400">Terms of service.</a>
-                  </small>
-                  <small className="copyright__content">
-                    <a href="https://ecobambo.com/policies/shipping-policy" className="text-amber-300 hover:text-amber-400">Shipping policy.</a>
-                  </small>
-                </div>
-                <div className="flex flex-row flex-wrap justify-center w-full gap-x-2">
-                  <small className="copyright__content">
-                    <a href="https://ecobambo.com/policies/contact-information" className="text-amber-300 hover:text-amber-400">Contact information.</a>
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div className="footer__copyright caption text-center flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:items-center gap-0 lg:gap-x-4 lg:gap-y-0 text-center">
+    
+    {/* This container will control the wrapping for all copyright/policy links */}
+    {/* On mobile: flex-wrap allows groups to stack. On desktop: lg:flex-nowrap forces single line. */}
+    {/* gap-x-4 on this container adds horizontal space between the 'lines' (groups) on desktop. */}
+    <div className="w-full flex flex-wrap justify-center gap-x-4 
+                    lg:flex-nowrap lg:gap-x-4 lg:gap-y-0 lg:mb-0">
+      
+      {/* Group for the first line on mobile: "© 2025, ECO BAMBO. Refund policy." */}
+      {/* mb-2 adds vertical space below this group on mobile. */}
+      {/* gap-x-4 adds horizontal space between "ECO BAMBO" and "Refund policy" on mobile. */}
+      <div className="flex flex-wrap justify-center mb-2 lg:mb-0 lg:flex-nowrap gap-x-4">
+        <small className="copyright__content text-amber-300 whitespace-nowrap">
+          © 2025, <a href="https://ecobambo.com/" className="text-amber-300 hover:text-amber-400">ECO BAMBO.</a>
+        </small>
+        <small className="copyright__content whitespace-nowrap">
+          <a href="https://ecobambo.com/policies/refund-policy" className="text-amber-300 hover:text-amber-400">Refund policy.</a>
+        </small>
+      </div>
+
+      {/* Group for the second line on mobile: "Terms of service. Shipping policy." */}
+      {/* mb-2 adds vertical space below this group on mobile. */}
+      {/* gap-x-4 adds horizontal space between "Terms of service" and "Shipping policy" on mobile. */}
+      <div className="flex flex-wrap justify-center mb-2 lg:mb-0 lg:flex-nowrap gap-x-4">
+        <small className="copyright__content whitespace-nowrap">
+          <a href="https://ecobambo.com/policies/terms-of-service" className="text-amber-300 hover:text-amber-400">Terms of service.</a>
+        </small>
+        <small className="copyright__content whitespace-nowrap">
+          <a href="https://ecobambo.com/policies/shipping-policy" className="text-amber-300 hover:text-amber-400">Shipping policy.</a>
+        </small>
+      </div>
+
+      {/* Group for the third line on mobile: "Contact information." */}
+      {/* No mb-2 needed as it's the last group. */}
+      <div className="flex flex-wrap justify-center lg:flex-nowrap">
+        <small className="copyright__content whitespace-nowrap">
+          <a href="https://ecobambo.com/policies/contact-information" className="text-amber-300 hover:text-amber-400">Contact information.</a>
+        </small>
+      </div>
+      
+    </div>
+  </div>
+</div>
         </div>
       </footer>
     </div>
