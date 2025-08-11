@@ -168,7 +168,7 @@ export const ProductsGlider = () => {
     const currentProduct = products[startIndex];
 
     return (
-      <div className="w-full flex flex-col items-center justify-center space-y-4">
+      <div className="w-full flex flex-col items-center justify-center space-y-4 mr-[3rem]">
         <motion.div
           key={currentProduct.id}
           initial={{ opacity: 0 }}
