@@ -61,6 +61,7 @@ export const ProductsGlider = () => {
   const containerRef = useRef(null);
   const prevBtnRef = useRef(null);
   const nextBtnRef = useRef(null);
+  const [hasMounted, setHasMounted] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
   const [buttonLefts, setButtonLefts] = useState({ prev: 0, next: 0 });
 
@@ -74,7 +75,11 @@ export const ProductsGlider = () => {
     }
   };
 
-  const visibleCount = getVisibleCount(windowWidth);
+  // Use a safe fallback width so first render is never 0px (e.g., SSR or before mount)
+  const DEFAULT_WW = 375;
+  const ww = windowWidth > 0 ? windowWidth : DEFAULT_WW;
+
+  const visibleCount = getVisibleCount(ww);
 
   const handleNext = () => {
     setStartIndex((prev) => (prev + 1) % products.length);
@@ -101,13 +106,16 @@ export const ProductsGlider = () => {
     return { x, z, rotateY, scale };
   };
 
-  const cardW = windowWidth / (visibleCount === 1 ? 1.2 : visibleCount === 3 ? 3.5 : 6.5);
+  const cardW = ww / (visibleCount === 1 ? 1.2 : visibleCount === 3 ? 3.5 : 6.5);
   const gap = cardW * 0.3;
   const buttonSpacing = 16;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const onResize = () => setWindowWidth(window.innerWidth);
+    // Seed initial width on mount so the first paint uses a real width
+    setWindowWidth(window.innerWidth);
+    setHasMounted(true);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -143,7 +151,7 @@ export const ProductsGlider = () => {
 
     return (
       <div style={{ width: '100%', height: '100%', padding: '2px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        <img src={product.image} alt={`${product.name} image`} style={{ width: '100%', maxHeight: '55%', objectFit: 'cover', borderRadius: '1px' }} />
+        <img src={product.image} alt={`${product.name} image`} style={{ width: '100%', height: '55%', display: 'block', objectFit: 'cover' }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <img src={product.avatar} alt={`${product.name} avatar`} width={32} height={32} style={{ borderRadius: '9999px' }} />
           <div style={{ fontWeight: 600, fontSize: `${nameFontPx}px` }}>{product.name}</div>
@@ -164,7 +172,8 @@ export const ProductsGlider = () => {
   }
 
   const renderMobileView = () => {
-    const mobileCardW = windowWidth * 0.8;
+    // Static initial size before mount, responsive afterwards
+    const mobileCardW = hasMounted ? ww * 0.8 : 320;
     const currentProduct = products[startIndex];
 
     return (
@@ -174,7 +183,7 @@ export const ProductsGlider = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="rounded-xl shadow-2xl bg-white text-gray-900 border border-gray-200"
+          className="rounded-xl overflow-hidden shadow-2xl bg-white text-gray-900 border border-gray-200"
           style={{ width: `${mobileCardW}px`, height: `${mobileCardW * 1.36}px` }}
         >
           {renderCardContent(currentProduct, mobileCardW)}
