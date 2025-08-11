@@ -1,0 +1,204 @@
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from "framer-motion";
+const products = [
+  {
+    id: 1,
+    name: "Kingsley Chandler",
+    image: "/images/image4.png",
+    avatar: "/images/user4.png",
+    text:
+      "It's elegant, eco-friendly, and far better than any regular décor!!",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Martha Lewis",
+    image: "/images/image3.png",
+    avatar: "/images/user3.png",
+    text:
+      "Absolutely love the craftsmanship! Delivery was on time and packaging was perfect.",
+    rating: 4,
+  },
+  {
+    id: 3,
+    name: "Daniel Cooper",
+    image: "/images/image2.png",
+    avatar: "/images/user2.png",
+    text:
+      "Looks amazing on my wall, totally worth the price. Highly recommend!",
+    rating: 5,
+  },
+  {
+    id: 4,
+    name: "Sophie Turner",
+    image: "/images/image7.png",
+    avatar: "/images/user1.png",
+    text: "It's eco-friendly and looks premium. Happy with the purchase.",
+    rating: 4,
+  },
+  {
+    id: 5,
+    name: "Michael Scott",
+    image: "/images/image5.png",
+    avatar: "/images/user5.png",
+    text:
+      "Very unique design. My friends keep asking where I bought it from!",
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: "Emma Watson",
+    image: "/images/image6.png",
+    avatar: "/images/user.png",
+    text: "Great product and excellent customer service!",
+    rating: 4,
+  },
+  ];
+  
+
+
+export const ProductsGlider = () => {
+    const [startIndex, setStartIndex] = useState(0);
+    const visibleCount = 5;
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const prevBtnRef = useRef<HTMLButtonElement | null>(null);
+    const nextBtnRef = useRef<HTMLButtonElement | null>(null);
+    const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
+    const [buttonLefts, setButtonLefts] = useState<{ prev: number; next: number }>({ prev: 0, next: 0 });
+  
+    const handleNext = () => {
+      setStartIndex((prev) => (prev + 1) % products.length);
+    };
+  
+    const handlePrev = () => {
+      setStartIndex((prev) => (prev - 1 + products.length) % products.length);
+    };
+  
+    const visibleProducts = Array.from({ length: visibleCount }, (_, i) => {
+      return products[(startIndex + i) % products.length];
+    });
+  
+    const getCardProps = (pos: number, cardW: number, gap: number) => {
+      const totalWidth = cardW + gap;
+      const centerIndex = Math.floor(visibleCount / 2);
+      const offsetFromCenter = pos - centerIndex;
+  
+      const x = offsetFromCenter * totalWidth;
+      const z = -Math.abs(offsetFromCenter) * 140 + (offsetFromCenter === 0 ? 120 : 0);
+      const rotateY = offsetFromCenter * -20;
+      const scale = offsetFromCenter === 0 ? 1.15 : 0.92;
+  
+      return { x, z, rotateY, scale };
+    };
+  
+  // Compute responsive sizing once for consistent card and button placement
+  const cardW =
+    typeof window !== "undefined"
+      ? Math.min(window.innerWidth / 6.5, 240)
+      : 210;
+  const gap = cardW * 0.3;
+  const totalWidth = cardW + gap;
+  const buttonSpacing = 16; // space between extreme card edge and button
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const onResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const prevBtn = prevBtnRef.current;
+    const nextBtn = nextBtnRef.current;
+    if (!container || !prevBtn || !nextBtn) return;
+    const leftCard = container.querySelector('[data-pos="0"]') as HTMLElement | null;
+    const rightCard = container.querySelector('[data-pos="4"]') as HTMLElement | null;
+    if (!leftCard || !rightCard) return;
+    const cRect = container.getBoundingClientRect();
+    const lRect = leftCard.getBoundingClientRect();
+    const rRect = rightCard.getBoundingClientRect();
+    const prevLeft = lRect.left - cRect.left - buttonSpacing - prevBtn.offsetWidth;
+    const nextLeft = rRect.right - cRect.left + buttonSpacing;
+    setButtonLefts({ prev: prevLeft, next: nextLeft });
+  }, [windowWidth, totalWidth, startIndex]);
+  
+  return (
+    <div className="w-full py-12 px-4 md:px-8 flex justify-center">
+      <div ref={containerRef} className="relative w-full max-w-7xl mx-auto mr-[250px]">
+        {/* Carousel */}
+        <div className="relative mx-auto w-full  h-[320px] sm:h-[380px] md:h-[440px] lg:h-[520px] perspective-[1500px] overflow-visible grid place-items-center pointer-events-none">
+          <AnimatePresence initial={false}>
+            {visibleProducts.map((product, index) => {
+              const { rotateY, scale, x, z } = getCardProps(index, cardW, gap);
+              const nameFontPx = Math.max(12, Math.min(19, Math.round(cardW * 0.068)));
+              const ratingFontPx = Math.max(11, Math.min(17, Math.round(cardW * 0.058)));
+              const textFontPx = Math.max(11, Math.min(17, Math.round(cardW * 0.056)));
+
+              return (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { type: "spring", stiffness: 100, damping: 15 },
+                  }}
+                  exit={{ opacity: 0 }}
+                  data-pos={index}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl flex items-center justify-center shadow-2xl bg-white text-gray-900 border border-gray-200 will-change-transform pointer-events-auto"
+                  style={{
+                    width: `${cardW}px`,
+                    height: `${cardW * 1.36}px`,
+                    transformStyle: "preserve-3d",
+                    transform: `perspective(1500px) translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`,
+                  }}
+                >
+                  <div style={{ width: '100%', height: '100%', padding: '2px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <img src={product.image} alt={`${product.name} image`} style={{ width: '100%', maxHeight: '55%', objectFit: 'cover', borderRadius: '1px' }} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <img src={product.avatar} alt={`${product.name} avatar`} width={32} height={32} style={{ borderRadius: '9999px' }} />
+                      <div style={{ fontWeight: 600, fontSize: `${nameFontPx}px` }}>{product.name}</div>
+                    </div>
+                    <div style={{ fontSize: `${ratingFontPx}px` }}>
+                      <span style={{ color: '#854d0e' }}>
+                        {`Rating: ${'★'.repeat(product.rating)}`}
+                      </span>
+                      {`${
+                        '☆'.repeat(Math.max(0, 5 - product.rating))
+                      }`}
+                    </div>
+                    <div style={{ fontSize: `${textFontPx}px`, lineHeight: 1.4 }}>
+                      {product.text}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* Prev */}
+        <button
+          onClick={handlePrev}
+          ref={prevBtnRef}
+          className="absolute top-[75%] -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900/70 hover:bg-gray-900 text-white flex items-center justify-center shadow-xl ring-1 ring-white/20 hover:ring-white/40 backdrop-blur focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          style={{ left: `${buttonLefts.prev}px` }}
+          aria-label="Previous"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 md:w-6 md:h-6"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+
+        {/* Next */}
+        <button
+          onClick={handleNext}
+          ref={nextBtnRef}
+          className="absolute top-[75%] -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900/70 hover:bg-gray-900 text-white flex items-center justify-center shadow-xl ring-1 ring-white/20 hover:ring-white/40 backdrop-blur focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          style={{ left: `${buttonLefts.next}px` }}
+          aria-label="Next"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 md:w-6 md:h-6"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  )
+}

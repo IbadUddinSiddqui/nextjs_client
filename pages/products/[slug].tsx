@@ -13,8 +13,9 @@ import FSlider from "../../components/FSlider";
 import FeatureHighlights from "../../components/FeatureHighlights";
 import RelatedProducts from "../../components/RelatedProducts";
 import { FaShippingFast } from "react-icons/fa";
-import DownloadGuide from "../../components/GuideImage";
 import Head from "next/head";
+import ScrollReviews from "../../components/ScrollReviews";
+import ReviewCheck from "@/components/ReviewCheck";
 
 function toTitleCase(str: string) {
   return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -359,7 +360,11 @@ export default function ProductPage() {
 
       {/* Additional Sections */}
       <PromoBanner />
-      <Reviews />
+      <ReviewCheck />
+      {/* <Reviews /> */}
+   
+      <ScrollReviews />
+  
       <FAQSection />
       <FSlider />
       <FeatureHighlights />

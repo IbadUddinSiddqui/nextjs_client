@@ -16,6 +16,27 @@
   animation: scroll-right 20s linear infinite;
   align-items: center;
 }
+.carousel {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  perspective: 1000px;
+}
+
+.card {
+  width: 120px;
+  height: 180px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition: transform 0.3s ease;
+}
+
 
 .text-slide {
   display: inline-flex;
