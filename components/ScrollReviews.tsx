@@ -164,11 +164,11 @@ export default function App() {
             <div className={`w-full overflow-x-auto scroll-smooth snap-x snap-mandatory  ${reviewsOpacity > 0.9 ? 'block' : 'hidden'}`}>
                 {/* The card container itself. 'gap-8' for spacing.
                     The 'transform' property is now controlled by the `currentSlide` state. */}
-                <div className="flex gap-8 px-4 py-8 " style={{ transform: `translateX(-${currentSlide * 22}rem)` }}>
+                <div className="flex gap-8 px-4 py-8  " style={{ transform: `translateX(-${currentSlide * 22}rem)` }}>
                     {reviews.map((review, index) => (
                       <div
                         key={review.id}
-                        className="flex-shrink-0 snap-center  bg-white rounded-lg shadow-xl border border-gray-600 w-80 h-[350px] flex flex-col"
+                        className="flex-shrink-0 snap-center  bg-white rounded-lg shadow-xl border border-gray-600 w-[20rem] md:w-80 h-[350px] flex flex-col"
                         style={{
                           transitionDelay: `${index * 100}ms`
                         }}
@@ -249,12 +249,12 @@ export default function App() {
       
       
       {/* Debug indicator to help visualize scroll progress and animation values. */}
-      <div className="fixed top-4 right-4 bg-black bg-opacity-70 p-3 rounded text-sm text-white">
+      {/* <div className="fixed top-4 right-4 bg-black bg-opacity-70 p-3 rounded text-sm text-white">
         <div>Scroll Progress: {Math.round(scrollProgress * 150)}%</div>
         <div>Text Opacity: {textOpacity.toFixed(2)}</div>
         <div>Cards Opacity: {reviewsOpacity.toFixed(2)}</div>
         <div>Scale: {(0.1 + (finalProgress * 1.5)).toFixed(2)}</div>
-      </div>
+      </div> */}
     </div>
   );
 }
