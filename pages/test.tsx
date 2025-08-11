@@ -12,7 +12,7 @@ import PromoBanner2 from "@/components/PromoBanner2";
 export default function ProductCarousel() {
 
   return (
-    <div className=" ">
+    <div className="mt-36 ">
      
         <ProductsGlider></ProductsGlider>
       <div className="my-36">
