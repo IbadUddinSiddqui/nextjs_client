@@ -161,7 +161,7 @@ export const ProductsGlider = () => {
         </div>
       </div>
     );
-  };
+  }
 
   const renderMobileView = () => {
     const mobileCardW = windowWidth * 0.8;
