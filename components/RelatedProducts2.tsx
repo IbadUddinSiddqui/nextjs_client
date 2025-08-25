@@ -9,44 +9,81 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import useEmblaCarousel from 'embla-carousel-react';
-// Sample product data
-const products = [
-  { id: 1, name: 'Elegant Watch', price: '$199.99', image: 'https://placehold.co/250x350/FF5733/FFFFFF?text=Watch+1' },
-  { id: 2, name: 'Stylish Backpack', price: '$79.99', image: 'https://placehold.co/250x350/C70039/FFFFFF?text=Backpack+2' },
-  { id: 3, name: 'Wireless Headphones', price: '$129.99', image: 'https://placehold.co/250x350/900C3F/FFFFFF?text=Headphones+3' },
-  { id: 4, name: 'Smart Fitness Tracker', price: '$49.99', image: 'https://placehold.co/250x350/581845/FFFFFF?text=Tracker+4' },
-  { id: 5, name: 'Vintage Camera', price: '$299.99', image: 'https://placehold.co/250x350/FFC300/000000?text=Camera+5' },
-  { id: 6, name: 'Noise-Cancelling Earbuds', price: '$99.99', image: 'https://placehold.co/250x350/DAF7A6/000000?text=Earbuds+6' },
-  { id: 7, name: 'Portable Bluetooth Speaker', price: '$69.99', image: 'https://placehold.co/250x350/FF5733/FFFFFF?text=Speaker+7' },
-  { id: 8, name: 'Classic Sunglasses', price: '$89.99', image: 'https://placehold.co/250x350/C70039/FFFFFF?text=Sunglasses+8' },
-];
+import { shopifyFetch } from "../lib/shopify";
+import Link from "next/link";
 
-// ProductCard Component - Basic styling for each product item
-type Product = {
-  id: number;
+
+// Transformed product interface for display
+interface Product {
+  id: string;
   name: string;
+  handle: string;
   price: string;
   image: string;
-};
+  description: string;
+  tags: string[];
+  productType?: string;
+}
 
+// ProductCard Component - Basic styling for each product item
 interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
-  <div className="bg-white rounded-xl shadow-lg overflow-hidden text-center my-2 mx-4
-                  w-[250px] h-[350px] flex flex-col justify-between">
-    <img
-      src={product.image}
-      alt={product.name}
-      className="w-full h-3/4 object-cover rounded-t-xl"
-    />
-    <div className="p-4">
-      <h3 className="text-xl font-semibold mb-1 text-gray-800">{product.name}</h3>
-      <p className="text-lg text-gray-600">{product.price}</p>
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // Generate random rating for demo (in real app, fetch from review system)
+  const rating = Math.floor(Math.random() * 2) + 4; // 4-5 stars
+  const reviewCount = Math.floor(Math.random() * 30) + 15; // 15-45 reviews
+
+  return (
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden text-center my-2 mx-4
+                    w-[250px] h-[380px] flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+      <Link href={`/products/${product.handle}`}>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 object-cover rounded-t-xl cursor-pointer hover:scale-105 transition-transform duration-300"
+        />
+      </Link>
+      <div className="p-4 flex-1 flex flex-col">
+        <Link href={`/products/${product.handle}`}>
+          <h3 className="text-lg font-semibold mb-2 text-gray-800 hover:text-blue-600 transition-colors cursor-pointer line-clamp-2">
+            {product.name}
+          </h3>
+        </Link>
+        
+        {/* Star Rating */}
+        <div className="flex items-center justify-center mb-3">
+          <div className="flex text-yellow-400 text-sm">
+            {Array(5).fill(null).map((_, i) => (
+              <span key={i} className={i < rating ? 'text-yellow-400' : 'text-gray-300'}>
+                ★
+              </span>
+            ))}
+          </div>
+          <span className="text-xs text-gray-600 ml-2">({reviewCount})</span>
+        </div>
+        
+        {/* Price */}
+        <p className="text-lg font-bold text-green-600 mb-3">{product.price}</p>
+        
+        {/* Product Type Badge */}
+        {product.productType && (
+          <span className="text-xs text-gray-600 bg-gray-100 px-3 py-1 rounded-full mt-auto">
+            {product.productType}
+          </span>
+        )}
+        
+        {/* View Details Button */}
+        <Link href={`/products/${product.handle}`} className="mt-3">
+          <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 text-sm font-medium">
+            View Product
+          </button>
+        </Link>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // AnimatedProductCard Component - Applies opacity and scale animation based on position
 interface AnimatedProductCardProps {
@@ -92,18 +129,9 @@ const AnimatedProductCard: React.FC<AnimatedProductCardProps> = ({ product, inde
     scale = 0.8; // Smallest
   }
 
-  // Define variants for the animation
-  const cardVariants = {
-    visible: { 
-      opacity: opacity, 
-      scale: scale,
-      transition: { duration: 0.5, ease: "easeOut" } 
-    },
-  };
-
   return (
     <motion.div
-      className="flex justify-center items-center h-full" // Ensure height is full to align vertically
+      className="flex justify-center items-center h-full"
       style={{ opacity, scale }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
@@ -112,13 +140,16 @@ const AnimatedProductCard: React.FC<AnimatedProductCardProps> = ({ product, inde
   );
 };
 
-// Main App Component (Embla Carousel)
-const App = () => {
+// Main Component
+const RelatedProducts2 = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: 'center',
     slidesToScroll: 1,
-    startIndex: 0, // Start at the first slide
+    startIndex: 0,
     breakpoints: {
       '(min-width: 1024px)': { slidesToScroll: 1 },
       '(min-width: 768px) and (max-width: 1023px)': { slidesToScroll: 1 },
@@ -127,6 +158,119 @@ const App = () => {
   });
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  // Fetch products from Shopify
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const data = await shopifyFetch({
+          query: `
+            query GetProducts($first: Int!) {
+              products(first: $first) {
+                edges {
+                  node {
+                    id
+                    title
+                    handle
+                    description
+                    images(first: 1) {
+                      edges {
+                        node {
+                          src
+                          altText
+                        }
+                      }
+                    }
+                    variants(first: 1) {
+                      edges {
+                        node {
+                          priceV2 {
+                            amount
+                            currencyCode
+                          }
+                        }
+                      }
+                    }
+                    tags
+                    productType
+                  }
+                }
+              }
+            }
+          `,
+          variables: { first: 20 },
+        });
+
+        if (!data.products || !data.products.edges) {
+          throw new Error("No products data received");
+        }
+
+        // Transform Shopify data to our Product interface
+        const transformedProducts = data.products.edges
+          .map((edge: { node: {
+            id: string;
+            title: string;
+            handle: string;
+            description: string;
+            images: {
+              edges: Array<{
+                node: {
+                  src: string;
+                  altText?: string;
+                };
+              }>;
+            };
+            variants: {
+              edges: Array<{
+                node: {
+                  priceV2: {
+                    amount: string;
+                    currencyCode: string;
+                  };
+                };
+              }>;
+            };
+            tags?: string[];
+            productType?: string;
+          }; }) => {
+            const node = edge.node;
+            return {
+              id: node.id,
+              name: node.title,
+              handle: node.handle,
+              price: `${node.variants.edges[0]?.node.priceV2.currencyCode || ""} ${node.variants.edges[0]?.node.priceV2.amount || "N/A"}`,
+              image: node.images.edges[0]?.node.src || "/images/placeholder.jpg",
+              description: node.description,
+              tags: node.tags || [],
+              productType: node.productType
+            };
+          })
+          .filter((product: { image: string; price: string | string[]; }) => {
+            // Filter out products without images or prices
+            if (!product.image || product.image === "/images/placeholder.jpg") return false;
+            if (product.price.includes("N/A")) return false;
+            return true;
+          })
+          .slice(0, 8); // Limit to 8 products for the carousel
+
+        setProducts(transformedProducts);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Callback to update currentSlideIndex
   const onSelect = useCallback(() => {
@@ -138,7 +282,6 @@ const App = () => {
   useEffect(() => {
     if (!emblaApi) return;
     emblaApi.on('select', onSelect);
-    // Initialize currentSlideIndex on mount
     onSelect(); 
     return () => {
       emblaApi.off('select', onSelect);
@@ -153,16 +296,47 @@ const App = () => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white 
+                      flex flex-col items-center justify-center p-4 font-inter">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-800 mx-auto mb-4"></div>
+          <p className="text-lg text-gray-700">Loading products from Shopify...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || products.length === 0) {
+    return (
+      <div className="min-h-screen bg-white
+                      flex flex-col items-center justify-center p-4 font-inter">
+        <div className="text-center">
+          <p className="text-lg text-red-600 mb-4">
+            {error || "No products available"}
+          </p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-red-200 
+    <div className="min-h-screen bg-white
                     flex flex-col items-center justify-center p-4 font-inter">
       <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 
                      text-center leading-tight rounded-lg p-3">
         Featured Products ✨
       </h1>
-      <div className="w-full max-w-7xl relative"> {/* Added relative for arrow positioning */}
+      <div className="w-full max-w-7xl relative">
         <div className="embla" ref={emblaRef}>
-          <div className="embla__container flex"> {/* Ensure flex for horizontal layout */}
+          <div className="embla__container flex">
             {products.map((product, index) => (
               <div key={product.id} className="embla__slide flex justify-center items-center">
                 <AnimatedProductCard 
@@ -180,7 +354,7 @@ const App = () => {
         <button 
           className="embla__button embla__button--prev bg-gray-700 hover:bg-gray-900 text-white rounded-full p-3 shadow-lg 
                      absolute top-1/2 -left-12 -translate-y-1/2 z-10 
-                     transition-colors duration-300 transform -translate-x-full md:translate-x-0" // Responsive positioning
+                     transition-colors duration-300 transform -translate-x-full md:translate-x-0"
           onClick={scrollPrev}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left">
@@ -190,7 +364,7 @@ const App = () => {
         <button 
           className="embla__button embla__button--next bg-gray-700 hover:bg-gray-900 text-white rounded-full p-3 shadow-lg 
                      absolute top-1/2 -right-12 -translate-y-1/2 z-10 
-                     transition-colors duration-300 transform translate-x-full md:translate-x-0" // Responsive positioning
+                     transition-colors duration-300 transform translate-x-full md:translate-x-0"
           onClick={scrollNext}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right">
@@ -198,7 +372,7 @@ const App = () => {
           </svg>
         </button>
 
-        {/* Embla dots (optional, Embla doesn't come with built-in dot components) */}
+        {/* Embla dots */}
         <div className="embla__dots flex justify-center mt-4">
           {products.map((_, idx) => (
             <button
@@ -214,4 +388,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default RelatedProducts2;

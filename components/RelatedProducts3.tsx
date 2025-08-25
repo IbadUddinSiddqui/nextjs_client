@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { shopifyFetch } from "../lib/shopify";
+import Link from "next/link";
 
 // Custom Typewriter component (reused for consistency)
 type CustomTypewriterProps = {
@@ -20,7 +22,7 @@ const CustomTypewriter: React.FC<CustomTypewriterProps> = ({
 
   useEffect(() => {
     const currentString = strings[stringIndex];
-    let timeout;
+    let timeout: NodeJS.Timeout;
 
     if (isDeleting) {
       timeout = setTimeout(() => {
@@ -49,6 +51,45 @@ const CustomTypewriter: React.FC<CustomTypewriterProps> = ({
   return <span>{text}</span>;
 };
 
+// Product interface for Shopify data
+interface ShopifyProduct {
+  id: string;
+  title: string;
+  handle: string;
+  description: string;
+  images: {
+    edges: Array<{
+      node: {
+        src: string;
+        altText?: string;
+      };
+    }>;
+  };
+  variants: {
+    edges: Array<{
+      node: {
+        priceV2: {
+          amount: string;
+          currencyCode: string;
+        };
+      };
+    }>;
+  };
+  tags: string[];
+  productType?: string;
+}
+
+// Transformed product interface for display
+interface Product {
+  id: string;
+  name: string;
+  handle: string;
+  description: string;
+  price: string;
+  image: string;
+  productType?: string;
+}
+
 // Animation Variants for initial product card entrance
 const cardEntranceVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -57,69 +98,126 @@ const cardEntranceVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: [0.42, 0, 0.58, 1],
     },
   },
 };
 
-const App = () => {
-  const scrollRef = useRef(null);
+const RelatedProducts3 = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+  const [refReady, setRefReady] = useState(false);
 
-  // Use useScroll to track horizontal scroll progress of the container
-  const { scrollXProgress } = useScroll({ container: scrollRef });
+  // Set client state after component mounts to prevent hydration mismatch
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-  // Dummy product data
-  const products = [
-    {
-      id: 1,
-      name: "Elegant Ceramic Vase",
-      description: "Hand-crafted for modern interiors.",
-      price: "$49.99",
-      image: "https://placehold.co/300x400/FF5733/FFFFFF?text=Vase",
-      link: "#"
-    },
-    {
-      id: 2,
-      name: "Lush Green Plant",
-      description: "Brings natural beauty to any room.",
-      price: "$29.99",
-      image: "https://placehold.co/300x400/33FF57/FFFFFF?text=Plant",
-      link: "#"
-    },
-    {
-      id: 3,
-      name: "Minimalist Wall Art",
-      description: "Abstract design for contemporary spaces.",
-      price: "$79.99",
-      image: "https://placehold.co/300x400/3357FF/FFFFFF?text=Art",
-      link: "#"
-    },
-    {
-      id: 4,
-      name: "Cozy Throw Blanket",
-      description: "Soft and warm, perfect for relaxation.",
-      price: "$39.99",
-      image: "https://placehold.co/300x400/FFC300/FFFFFF?text=Blanket",
-      link: "#"
-    },
-    {
-      id: 5,
-      name: "Scented Candle Set",
-      description: "Creates a calming and inviting atmosphere.",
-      price: "$24.99",
-      image: "https://placehold.co/300x400/DAF7A6/000000?text=Candle",
-      link: "#"
-    },
-    {
-      id: 6,
-      name: "Geometric Planter",
-      description: "Modern design for your favorite plants.",
-      price: "$34.99",
-      image: "https://placehold.co/300x400/C70039/FFFFFF?text=Planter",
-      link: "#"
-    },
-  ];
+  // Check if ref is ready after client mount
+  useEffect(() => {
+    if (isClient && scrollRef.current) {
+      setRefReady(true);
+    }
+  }, [isClient]);
+
+  // Only use useScroll when both client is mounted AND ref is ready
+  const scrollData = useScroll({ 
+    container: refReady ? scrollRef : undefined 
+  });
+
+  // Safely destructure scrollXProgress with fallback
+  const scrollXProgress = scrollData?.scrollXProgress || { current: 0 };
+
+  // Fetch products from Shopify
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const data = await shopifyFetch({
+          query: `
+            query GetProducts($first: Int!) {
+              products(first: $first) {
+                edges {
+                  node {
+                    id
+                    title
+                    handle
+                    description
+                    images(first: 1) {
+                      edges {
+                        node {
+                          src
+                          altText
+                        }
+                      }
+                    }
+                    variants(first: 1) {
+                      edges {
+                        node {
+                          priceV2 {
+                            amount
+                            currencyCode
+                          }
+                        }
+                      }
+                    }
+                    tags
+                    productType
+                  }
+                }
+              }
+            }
+          `,
+          variables: { first: 20 },
+        });
+
+        if (!data.products || !data.products.edges) {
+          throw new Error("No products data received");
+        }
+
+        // Transform Shopify data to our Product interface
+        const transformedProducts = data.products.edges
+          .map((edge: { node: ShopifyProduct }) => {
+            const node = edge.node;
+            return {
+              id: node.id,
+              name: node.title,
+              handle: node.handle,
+              description: node.description,
+              price: `${node.variants.edges[0]?.node.priceV2.currencyCode || ""} ${node.variants.edges[0]?.node.priceV2.amount || "N/A"}`,
+              image: node.images.edges[0]?.node.src || "/images/placeholder.jpg",
+              productType: node.productType
+            };
+          })
+          .filter((product: { image: string; price: string | string[]; }) => {
+            // Filter out products without images or prices
+            if (!product.image || product.image === "/images/placeholder.jpg") return false;
+            if (product.price.includes("N/A")) return false;
+            return true;
+          })
+          .slice(0, 6); // Limit to 6 products for the slider
+
+        setProducts(transformedProducts);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Define the scale transform for the animated text div
   // It scales from 1 (full size) down to 0 (disappears)
@@ -139,7 +237,7 @@ const App = () => {
 
   useEffect(() => {
     const element = scrollRef.current;
-    if (!element) return;
+    if (!element || !isClient || !refReady) return;
 
     const handleScroll = () => {
       const el = element as HTMLElement;
@@ -173,7 +271,37 @@ const App = () => {
     return () => {
       (element as HTMLElement).removeEventListener('scroll', handleScroll);
     };
-  }, [products]); // Recalculate if products change
+  }, [products, isClient, refReady]); // Recalculate if products change, client state changes, or ref becomes ready
+
+  // Show loading state during SSR or initial client render
+  if (!isClient || loading) {
+    return (
+      <section className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 font-sans">
+        <div className="max-w-6xl mx-auto w-full text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+          <p className="text-lg text-gray-700">Loading products from Shopify...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || products.length === 0) {
+    return (
+      <section className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 font-sans">
+        <div className="max-w-6xl mx-auto w-full text-center">
+          <p className="text-lg text-red-600 mb-4">
+            {error || "No products available"}
+          </p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 font-sans">
@@ -184,12 +312,21 @@ const App = () => {
           className="flex overflow-x-scroll snap-x snap-mandatory pb-8 space-x-6 md:space-x-8 lg:space-x-10 px-4 scrollbar-hide"
           style={{ scrollBehavior: 'smooth' }}
         >
-          {/* Animated Title as the first item in the slider */}
+          {/* Static Title as the first item in the slider - always visible */}
+          <div className="flex-none w-64 md:w-72 lg:w-80 bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden snap-start flex items-center justify-center p-6 text-center">
+            <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight drop-shadow-sm">
+              <CustomTypewriter
+                strings={["Explore Our Latest Products!", "Handpicked for Your Home!", "Shop Unique Decor & Plants!"]}
+                delay={80}
+                loop={true}
+              />
+            </h2>
+          </div>
+
+          {/* Animated Title that scales and fades with scroll */}
           <motion.div
             className="flex-none w-64 md:w-72 lg:w-80 bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden snap-start flex items-center justify-center p-6 text-center"
-            // Removed initial and animate x transforms
             transition={{ duration: 0.8, ease: "easeOut" }}
-            // Apply the animated scale and opacity transforms
             style={{ scale: textScale, opacity: textOpacity }}
           >
             <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight drop-shadow-sm">
@@ -203,46 +340,43 @@ const App = () => {
 
           {/* Product Cards - NO X TRANSFORM FROM SCROLL */}
           {products.map((product, index) => (
-            <motion.a
+            <motion.div
               key={product.id}
-              href={product.link}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex-none w-64 md:w-72 lg:w-80 bg-white rounded-xl shadow-xl overflow-hidden snap-center cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-              variants={{
-                hidden: { opacity: 0, y: 40 },
-                visible: { 
-                  opacity: 1, 
-                  y: 0, 
-                  transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } 
-                }
-              }}
-              initial="hidden"
-              animate="visible"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.05 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-64 object-cover rounded-t-xl"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = `https://placehold.co/300x400/CCCCCC/000000?text=Image+Error`;
-                }}
-              />
+              <Link href={`/products/${product.handle}`}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover rounded-t-xl"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = `https://placehold.co/300x400/CCCCCC/000000?text=Image+Error`;
+                  }}
+                />
+              </Link>
               <div className="p-5">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{product.description}</p>
+                <Link href={`/products/${product.handle}`}>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-indigo-600 transition-colors">
+                    {product.name}
+                  </h3>
+                </Link>
+                <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold text-indigo-600">{product.price}</span>
-                  <button className="bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-600 transition-colors duration-200 shadow-md">
-                    View Product
-                  </button>
+                  <Link href={`/products/${product.handle}`}>
+                    <button className="bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-600 transition-colors duration-200 shadow-md">
+                      View Product
+                    </button>
+                  </Link>
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
 
@@ -260,4 +394,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default RelatedProducts3;

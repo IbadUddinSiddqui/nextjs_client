@@ -67,21 +67,21 @@ const App = () => {
   const images = [
     {
       id: 1,
-      src: '/images/b-g1.png',
+      src: '/images/banner-3-1.jpeg',
       alt: 'Bamboo Flower Pot Collection',
       link: "https://ecobambo.com/products/small-bamboo-flower-pot-with-stand-stylish-indoor-artificial-pot",
       buttonText: "Shop Now"
     },
     {
       id: 2,
-      src: '/images/b-g2.png',
+      src: '/images/banner-3-2.jpeg',
       alt: 'Bamboo Hanging Decor',
       link: "https://ecobambo.com/products/small-bamboo-hanging-with-stand-stylish-home-wall-art-decor",
       buttonText: "Shop Now"
     },
     {
       id: 3,
-      src: '/images/b-g3.png',
+      src: '/images/banner-3-3.jpeg',
       alt: 'Unique Bamboo Wall Hanging',
       link: "https://ecobambo.com/products/1-unique-bamboo-wall-hanging-affordable-home-wall-art-decor-in-small-sizes-for-living-areas",
       buttonText: "Shop Now"

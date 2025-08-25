@@ -7,26 +7,26 @@ const App = () => {
   const images = [
     {
       id: 1,
-      src: 'https://placehold.co/800x400/FF5733/FFFFFF?text=Big+Photo+1', // Wider aspect ratio
-      alt: 'Vast Mountain Ranges',
+      src: '/images/banner-2-1.jpeg', // Wider aspect ratio
+      alt: 'Big Yellow Bamboo Flower Pot',
       size: 'big', // This image will appear larger
     },
     {
       id: 2,
-      src: 'https://placehold.co/400x200/33FF57/FFFFFF?text=Small+Photo+1', // Wider aspect ratio
-      alt: 'Delicate Forest Ferns',
+      src: '/images/banner-2-2.jpeg', // Wider aspect ratio
+      alt: 'Large Hanging Vase',
       size: 'small', // This image will appear smaller
     },
     {
       id: 4, // Original ID 4 moved here
-      src: 'https://placehold.co/400x200/FFC300/FFFFFF?text=Small+Photo+2', // Wider aspect ratio
-      alt: 'Sparkling River Stream',
+      src: '/images/banner-2-3.jpeg', // Wider aspect ratio
+      alt: 'Big Bamboo Pot',
       size: 'small', // This image will appear smaller
     },
     {
       id: 3, // Original ID 3 moved here
-      src: 'https://placehold.co/800x400/3357FF/FFFFFF?text=Big+Photo+2', // Wider aspect ratio
-      alt: 'Serene Lake Reflection',
+      src: '/images/banner-3-3.jpeg', // Wider aspect ratio
+      alt: 'Big Red Bamboo Flower Pot',
       size: 'big', // This image will appear larger
     },
   ];
@@ -57,10 +57,10 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center p-4 font-sans">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4 font-sans">
       <div className="container mx-auto max-w-6xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-12 text-center drop-shadow-lg leading-tight">
-          Our Dynamic Photo Grid
+        <h1 className="text-4xl md:text-5xl font-extrabold text-black mb-12 text-center drop-shadow-lg leading-tight">
+        Coastal Farmhouse Decor House Plants for Sale!
         </h1>
 
         <motion.div
@@ -73,7 +73,7 @@ const App = () => {
             <motion.div
               key={image.id}
               className={`
-                relative overflow-hidden shadow-2xl cursor-pointer group bg-gray-800 border-2 border-gray-600
+                relative overflow-hidden shadow-2xl cursor-pointer group bg-white border-2 border-white
                 ${image.size === 'big' ? 'md:col-span-2' : 'md:col-span-1'}
                 h-48 md:h-64 lg:h-72 // Consistent height for horizontal feel
               `}

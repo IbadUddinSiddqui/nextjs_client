@@ -1,27 +1,39 @@
 import React from "react";
-import { ProductsGlider } from "@/components/ProductsGlider";
-import RelatedProducts2 from "@/components/RelatedProducts2";
-import RelatedProducts3 from "@/components/RelatedProducts3";
-import ScrollReviews from "@/components/ScrollReviews";
-
 import PromoBanner1 from "@/components/PromoBanner1";
 import PromoBanner2 from "@/components/PromoBanner2";
-// import FSlider1 from "@/components/FSlider1";
+import dynamic from "next/dynamic";
 
+// Dynamically import components that have client-side dependencies
+const DynamicProductsGlider = dynamic(() => import("@/components/ProductsGlider").then(mod => ({ default: mod.ProductsGlider })), {
+  ssr: false,
+  loading: () => <div className="w-full py-12 px-4 md:px-8 flex justify-center">Loading...</div>
+});
+
+const DynamicRelatedProducts2 = dynamic(() => import("@/components/RelatedProducts2"), {
+  ssr: false,
+  loading: () => <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-red-200 flex flex-col items-center justify-center p-4">Loading...</div>
+});
+
+const DynamicRelatedProducts3 = dynamic(() => import("@/components/RelatedProducts3"), {
+  ssr: false,
+  loading: () => <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-red-200 flex flex-col items-center justify-center p-4">Loading...</div>
+});
+
+const DynamicScrollReviews = dynamic(() => import("@/components/ScrollReviews"), {
+  ssr: false,
+  loading: () => <div className="w-full py-12 px-4 md:px-8 flex justify-center">Loading...</div>
+});
 
 export default function ProductCarousel() {
-
   return (
-    <div className="mt-36 ">
-     
-        <ProductsGlider></ProductsGlider>
+    <div className="mt-36">
+      <DynamicProductsGlider />
       <div className="my-36">
-      {/* <FSlider1></FSlider1> */}
-        <RelatedProducts2></RelatedProducts2>
-        <RelatedProducts3></RelatedProducts3>
-        <PromoBanner1></PromoBanner1>
-        <PromoBanner2></PromoBanner2>
-        <ScrollReviews></ScrollReviews>
+        <DynamicRelatedProducts2 />
+        <DynamicRelatedProducts3 />
+        <PromoBanner1 />
+        <PromoBanner2 />
+        <DynamicScrollReviews />
       </div>
     </div>
   );
