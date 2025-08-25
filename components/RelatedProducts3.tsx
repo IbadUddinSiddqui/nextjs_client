@@ -313,7 +313,7 @@ const RelatedProducts3 = () => {
           style={{ scrollBehavior: 'smooth' }}
         >
           {/* Static Title as the first item in the slider - always visible */}
-          <div className="flex-none w-64 md:w-72 lg:w-80 bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden snap-start flex items-center justify-center p-6 text-center">
+          <div className="flex-none w-64 md:w-72 lg:w-80 bg-black text-white rounded-xl shadow-xl overflow-hidden snap-start flex items-center justify-center p-6 text-center">
             <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight drop-shadow-sm">
               <CustomTypewriter
                 strings={["Explore Our Latest Products!", "Handpicked for Your Home!", "Shop Unique Decor & Plants!"]}
@@ -324,8 +324,8 @@ const RelatedProducts3 = () => {
           </div>
 
           {/* Animated Title that scales and fades with scroll */}
-          <motion.div
-            className="flex-none w-64 md:w-72 lg:w-80 bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden snap-start flex items-center justify-center p-6 text-center"
+          {/* <motion.div
+            className="flex-none w-64 md:w-72 lg:w-[0px] bg-indigo-700 text-white rounded-xl shadow-xl overflow-hidden snap-start flex items-center justify-center p-6 text-center"
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{ scale: textScale, opacity: textOpacity }}
           >
@@ -336,7 +336,7 @@ const RelatedProducts3 = () => {
                 loop={true}
               />
             </h2>
-          </motion.div>
+          </motion.div> */}
 
           {/* Product Cards - NO X TRANSFORM FROM SCROLL */}
           {products.map((product, index) => (
@@ -368,9 +368,9 @@ const RelatedProducts3 = () => {
                 </Link>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold text-indigo-600">{product.price}</span>
+                  <span className="text-lg font-bold text-yellow-500">{product.price}</span>
                   <Link href={`/products/${product.handle}`}>
-                    <button className="bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-600 transition-colors duration-200 shadow-md">
+                    <button className="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors duration-200 shadow-md">
                       View Product
                     </button>
                   </Link>
@@ -383,7 +383,7 @@ const RelatedProducts3 = () => {
         {/* Progress Bar */}
         <div className="w-full bg-gray-300 rounded-full h-2.5 mt-8 overflow-hidden">
           <motion.div
-            className="bg-indigo-500 h-full rounded-full"
+            className="bg-yellow-500 h-full rounded-full"
             initial={{ width: "0%" }}
             animate={{ width: `${scrollProgress}%` }}
             transition={{ duration: 0.2, ease: "easeOut" }}
