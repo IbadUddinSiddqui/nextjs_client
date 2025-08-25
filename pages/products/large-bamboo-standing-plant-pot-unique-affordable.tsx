@@ -5,17 +5,17 @@ import AddToCart from "../../components/AddToCart";
 import TextSlider from "../../components/TextSlider";
 import Accordion from "../../components/Accordion";
 import DynamicTutorialSection from "../../components/DynamicTutorialSection";
-import PromoBanner from "../../components/PromoBanner";
+
 import FAQSection from "../../components/FAQ";
-import FSlider from "../../components/FSlider";
+
 import FeatureHighlights from "../../components/FeatureHighlights";
 import RelatedProducts from "../../components/RelatedProducts";
 import { FaShippingFast } from "react-icons/fa";
 import Head from "next/head";
 import ScrollReviews from "../../components/ScrollReviews";
-import ReviewCheck from "@/components/ReviewCheck";
+
 import PromoBanner2 from "@/components/PromoBanner2";
-import RelatedProducts3 from "@/components/RelatedProducts3";
+
 import RelatedProducts2 from "@/components/RelatedProducts2";
 
 function toTitleCase(str: string) {

@@ -7,12 +7,12 @@ import Accordion from "../../components/Accordion";
 import DynamicTutorialSection from "../../components/DynamicTutorialSection";
 import PromoBanner1 from "../../components/PromoBanner1";
 import FAQSection from "../../components/FAQ";
-import FSlider from "../../components/FSlider";
+
 import FeatureHighlights from "../../components/FeatureHighlights";
 import RelatedProducts from "../../components/RelatedProducts";
 import { FaShippingFast } from "react-icons/fa";
 import Head from "next/head";
-import ScrollReviews from "../../components/ScrollReviews";
+
 import ReviewCheck from "@/components/ReviewCheck";
 import RelatedProducts2 from "@/components/RelatedProducts2";
 
