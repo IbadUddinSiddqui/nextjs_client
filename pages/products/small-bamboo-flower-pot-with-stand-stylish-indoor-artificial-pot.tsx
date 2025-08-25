@@ -12,7 +12,9 @@ import FeatureHighlights from "../../components/FeatureHighlights";
 import RelatedProducts from "../../components/RelatedProducts";
 import { FaShippingFast } from "react-icons/fa";
 import Head from "next/head";
+
 import ReviewCheck from "@/components/ReviewCheck";
+import RelatedProducts3 from "@/components/RelatedProducts3";
 
 function toTitleCase(str: string) {
   return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -299,7 +301,7 @@ export default function SmallBambooFlowerPotPage() {
       <ReviewCheck />
      
       <FAQSection />
-      <FSlider />
+      <RelatedProducts3/>
       <FeatureHighlights />
     </div>
     </>
